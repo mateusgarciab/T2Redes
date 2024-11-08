@@ -1,6 +1,7 @@
 import envioRecebido as enre
 
-UDP_IP = "192.168.15.14"
+# IP meu, do anterior ou do proximo ?
+UDP_IP = input("Digigite o ip")   #"192.168.15.14"
 UDP_PORT = 5005
 mensagem = b"ola"
 
