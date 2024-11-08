@@ -8,7 +8,7 @@ class Mensagem():
         self.bloco2 = bloco2
         self.bloco3 = bloco3
 
-def enviaMensagem(mensagem, UPD_IP, UDP_PORT):
+def enviaMensagem(mensagem: Mensagem, UPD_IP, UDP_PORT):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     soquete.sendto(mensagem, (UPD_IP, UDP_PORT))
     
