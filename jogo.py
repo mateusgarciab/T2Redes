@@ -1,11 +1,12 @@
+import socket
 import envioRecebido as enre
 
 # IP meu, do anterior ou do proximo ?
 ipChegada = input("Digigite o ip de chegada ")   #"192.168.15.14"  lab4 13 10.254.225.17 
-portaChegada = input("Digite a porta de entrada ")  #5005
+portaChegada = int(input("Digite a porta de entrada "))  #5005
 mensagem = b"ola"
 
-ordem = int(input("Digite sua ordem na rodada (0 a 3)"))
+ordem = int(input("Digite sua ordem na rodada (0 a 3) "))
 
 # Garante a conecção 
 if ordem == 0:

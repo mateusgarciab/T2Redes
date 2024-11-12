@@ -7,12 +7,15 @@ class Mensagem():
         self.bloco1 = bloco1
         self.bloco2 = bloco2
         self.bloco3 = bloco3
+        
+"""     def __str__(self):
+        return str(self.__dict__) """
 
-    def enviaMensagem(self, UPD_IP, UDP_PORT):
-        soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        soquete.sendto(str(self), (UPD_IP, UDP_PORT))
+def enviaMensagem(mensagem, UPD_IP, UDP_PORT):
+    soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    soquete.sendto(str(mensagem).encode("utf-8"), (UPD_IP, UDP_PORT))
     
-        soquete.close()
+    soquete.close()
 
 def recebeMensagem(UPD_IP, UDP_PORT):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -28,7 +31,7 @@ def recebeMensagem(UPD_IP, UDP_PORT):
 
 def enviaConfirma(ordem, UPD_IP, UDP_PORT):
     mensagem = Mensagem(1, 0, 0, 0, 0)
-    mensagem.enviaMensagem(UPD_IP, UDP_PORT)
+    enviaMensagem(mensagem, UPD_IP, UDP_PORT)
     
 
 def passaConfirma(ordem, UPD_IP, UDP_PORT):
