@@ -16,7 +16,7 @@ if ordem == 0:
     enre.enviaConfirma(ordem, ipChegada, portaChegada) #envia confirmação
     enre.recebeConfirma(ipChegada, portaChegada)
 else:
-    enre.passaConfirma(ordem, ipChegada, portaChegada)
+    enre.passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida)
 
 
 #sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

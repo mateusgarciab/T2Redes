@@ -1,4 +1,5 @@
 import socket
+import pickle
 
 class Mensagem():
     def __init__(self, tipo, bloco0, bloco1, bloco2, bloco3):
@@ -8,35 +9,35 @@ class Mensagem():
         self.bloco2 = bloco2
         self.bloco3 = bloco3
         
-"""     def __str__(self):
-        return str(self.__dict__) """
 
-def enviaMensagem(mensagem, UPD_IP, UDP_PORT):
+def enviaMensagem(mensagem, ipSaida, portaSaida):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    soquete.sendto(str(mensagem).encode("utf-8"), (UPD_IP, UDP_PORT))
+    #soquete.sendto(str(mensagem).encode("utf-8"), (ipSaida, portaSaida))
+    soquete.sendto(pickle.dumps(mensagem), (ipSaida, portaSaida))
     
     soquete.close()
 
-def recebeMensagem(UPD_IP, UDP_PORT):
+def recebeMensagem(ipChegada, portaChegada):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    soquete.bind((UPD_IP, UDP_PORT))
+    soquete.bind((ipChegada, portaChegada))
 
     #recebe
     while True:
         dados, addr = soquete.recvfrom(1024) 
-        mensagem = Mensagem(dados)
-        #print("received message: %s" % mensagem)
+        #mensagem = Mensagem(dados.decode())
+        mensagem = pickle.loads(dados)
+        print("received message: ", mensagem.tipo, )
         soquete.close()
         return mensagem
 
-def enviaConfirma(ordem, UPD_IP, UDP_PORT):
+def enviaConfirma(ordem, ipSaida, portaSaida):
     mensagem = Mensagem(1, 0, 0, 0, 0)
-    enviaMensagem(mensagem, UPD_IP, UDP_PORT)
+    enviaMensagem(mensagem, ipSaida, portaSaida)
     
 
-def passaConfirma(ordem, UPD_IP, UDP_PORT):
+def passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida):
     #recebe
-    mensagem = recebeMensagem(UPD_IP, UDP_PORT)
+    mensagem = recebeMensagem(ipChegada, portaChegada)
     if ordem == 1:
         #adiciona na 1
         mensagem.bloco1 = 1
@@ -49,13 +50,13 @@ def passaConfirma(ordem, UPD_IP, UDP_PORT):
     else:
         print("Valor invalido")
     #envia
-        enviaMensagem(mensagem, UPD_IP, UDP_PORT)
+    enviaMensagem(mensagem, ipSaida, portaSaida)
 
 # Verifica se a mensagem passou pela rede e todos digitaram numeros diferentes de rodada
-def recebeConfirma(UPD_IP, UDP_PORT):
+def recebeConfirma(ipChegada, portaChegada):
     #verifica todas as posições 
     #retorna se todos conectados ou não
-    mensagem = recebeMensagem(UPD_IP, UDP_PORT)
+    mensagem = recebeMensagem(ipChegada, portaChegada)
     if mensagem.tipo == 1 and mensagem.bloco0 == 0 and mensagem.bloco1 == 1 and mensagem.bloco2 == 2 and mensagem.bloco3 == 3:
         return True
     return False
