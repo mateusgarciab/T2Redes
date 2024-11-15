@@ -8,7 +8,6 @@ class Mensagem():
         self.bloco1 = bloco1
         self.bloco2 = bloco2
         self.bloco3 = bloco3
-        
 
 def enviaMensagem(mensagem, ipSaida, portaSaida):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -28,7 +27,7 @@ def recebeMensagem(ipChegada, portaChegada):
         #mensagem = Mensagem(dados.decode())
         mensagem = pickle.loads(dados)
         print("recebido ")
-        print("received message: ", mensagem.tipo)
+        print("received message: ", mensagem.tipo, " ", mensagem.bloco0, " ", mensagem.bloco1, " ", mensagem.bloco2, " ", mensagem.bloco3)
         soquete.close()
         return mensagem
 
