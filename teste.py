@@ -9,5 +9,5 @@ op = int(input("chega(0) sai (1)"))
 if op == 0:
     enre.recebeMensagem(ipChegada, portaChegada)
 else:
-    mensagem = input("mensagem")
+    mensagem = enre.Mensagem(1, 0, 0, 0, 0)
     enre.enviaMensagem(mensagem, ipChegada, portaChegada)
