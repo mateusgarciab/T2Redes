@@ -14,6 +14,7 @@ def enviaMensagem(mensagem, ipSaida, portaSaida):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     #soquete.sendto(str(mensagem).encode("utf-8"), (ipSaida, portaSaida))
     soquete.sendto(pickle.dumps(mensagem), (ipSaida, portaSaida))
+    print("enviado ")
     
     soquete.close()
 
@@ -26,7 +27,8 @@ def recebeMensagem(ipChegada, portaChegada):
         dados, addr = soquete.recvfrom(1024) 
         #mensagem = Mensagem(dados.decode())
         mensagem = pickle.loads(dados)
-        print("received message: ", mensagem.tipo, )
+        print("recebido ")
+        print("received message: ", mensagem.tipo)
         soquete.close()
         return mensagem
 
@@ -58,5 +60,7 @@ def recebeConfirma(ipChegada, portaChegada):
     #retorna se todos conectados ou não
     mensagem = recebeMensagem(ipChegada, portaChegada)
     if mensagem.tipo == 1 and mensagem.bloco0 == 0 and mensagem.bloco1 == 1 and mensagem.bloco2 == 2 and mensagem.bloco3 == 3:
+        print("True ")
         return True
+    
     return False
