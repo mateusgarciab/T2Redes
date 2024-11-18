@@ -1,3 +1,5 @@
+import random
+
 class Carta:
     def __init__(self, naipe, simbolo):
         self.naipe = naipe
@@ -30,3 +32,27 @@ def criaBaralho():
     baralho.append(Carta("Paus", "Dama"))
 
     return baralho
+
+def cartaAleatoria(baralho):
+    random.shuffle(baralho)
+    cartaEscolhida = baralho[0]
+    baralho.remove(cartaEscolhida)
+
+    return cartaEscolhida
+
+def valorMao(mao):
+    valor = 0
+    numAs = 0
+    numReiDamVal = 0
+    for i in range(len(mao)):
+        if i.simbolo == "Rei" or i.simbolo == "Valete" or i.simbolo == "Dama":
+            numReiDamVal += 1
+        elif i.simbolo == 1:
+            numAs += 1
+        else:
+            valor += i.simbolo
+        
+    if numAs > 0 and numReiDamVal > 0:
+        valor += 10*numAs
+
+    return valor
