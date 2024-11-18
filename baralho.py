@@ -5,6 +5,9 @@ class Carta:
         self.naipe = naipe
         self.simbolo = simbolo
 
+def imprimeCarta(carta):
+    print(carta.simbolo, "de", carta.naipe)
+
 def criaBaralho():
     baralho = []
     for i in range(10):
@@ -45,14 +48,21 @@ def valorMao(mao):
     numAs = 0
     numReiDamVal = 0
     for i in range(len(mao)):
-        if i.simbolo == "Rei" or i.simbolo == "Valete" or i.simbolo == "Dama":
+        if mao[i].simbolo == "Rei" or mao[i].simbolo == "Valete" or mao[i].simbolo == "Dama":
             numReiDamVal += 1
-        elif i.simbolo == 1:
+            valor += 10
+        elif mao[i].simbolo == 1:
             numAs += 1
+            valor += 1
         else:
-            valor += i.simbolo
+            valor += mao[i].simbolo
         
     if numAs > 0 and numReiDamVal > 0:
         valor += 10*numAs
 
     return valor
+
+def verificaMao(mao):
+    if valorMao(mao) > 21:
+        return False
+    return True

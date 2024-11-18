@@ -3,12 +3,27 @@ import random
 
 baralho = br.criaBaralho()
 
-for i in baralho:
-    print(i.simbolo, i.naipe)
+mao = []
+mao.append(br.cartaAleatoria(baralho))
+br.imprimeCarta(mao[0])
+teste = br.verificaMao(mao)
+print(teste)
+print(br.valorMao(mao))
 
-cartaEscolhida = br.cartaAleatoria(baralho)
+mao.append(br.cartaAleatoria(baralho))
+br.imprimeCarta(mao[1])
+teste = br.verificaMao(mao)
+print(teste)
+print(br.valorMao(mao))
 
-print("você recebeu", cartaEscolhida.simbolo, "de", cartaEscolhida.naipe)
+mao.append(br.cartaAleatoria(baralho))
+br.imprimeCarta(mao[2])
+teste = br.verificaMao(mao)
+print(teste)
+print(br.valorMao(mao))
 
-for i in baralho:
-    print(i.simbolo, i.naipe)
+mao.append(br.cartaAleatoria(baralho))
+br.imprimeCarta(mao[3])
+teste = br.verificaMao(mao)
+print(teste)
+print(br.valorMao(mao))
