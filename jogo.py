@@ -22,8 +22,10 @@ mao_0 = []
 mao_1 = []
 mao_2 = []
 mao_3 = []
-verifica_0 = True
-verifica_1 = True
-verifica_2 = True
-verifica_3 = True
+verificaJogadores = [True, True, True, True]
+verificaJogo = True
 
+while verificaJogo:
+    for i in range(4):
+        if verificaJogadores[i]:
+            print("teste")
