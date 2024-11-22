@@ -1,29 +1,15 @@
 import baralho as br
 import random
 
-baralho = br.criaBaralho()
+mao_0 = []
+mao_1 = []
+mao_2 = []
+mao_3 = []
+verificaJogadores = [True, True, True, True]
+verificaJogo = True
 
-mao = []
-mao.append(br.cartaAleatoria(baralho))
-br.imprimeCarta(mao[0])
-teste = br.verificaMao(mao)
-print(teste)
-print(br.valorMao(mao))
-
-mao.append(br.cartaAleatoria(baralho))
-br.imprimeCarta(mao[1])
-teste = br.verificaMao(mao)
-print(teste)
-print(br.valorMao(mao))
-
-mao.append(br.cartaAleatoria(baralho))
-br.imprimeCarta(mao[2])
-teste = br.verificaMao(mao)
-print(teste)
-print(br.valorMao(mao))
-
-mao.append(br.cartaAleatoria(baralho))
-br.imprimeCarta(mao[3])
-teste = br.verificaMao(mao)
-print(teste)
-print(br.valorMao(mao))
+while verificaJogo:
+    for i in range(4):
+        if verificaJogadores[i]:
+            print("teste", i)
+    verificaJogo = False
