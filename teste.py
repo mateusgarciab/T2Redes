@@ -1,15 +1,17 @@
 import baralho as br
 import random
 
-mao_0 = []
-mao_1 = []
-mao_2 = []
-mao_3 = []
-verificaJogadores = [True, True, True, True]
-verificaJogo = True
+maos = [[], [], [], []]
+maos[0].append(1)
+maos[0].append(2)
+maos[0].append(3)
 
-while verificaJogo:
-    for i in range(4):
-        if verificaJogadores[i]:
-            print("teste", i)
-    verificaJogo = False
+maos[1].append(1)
+maos[1].append(2)
+
+maos[3].append(1)
+
+for i in range(len(maos)):
+    for j in range(len(maos[i])):
+        print(maos[i][j])
+        

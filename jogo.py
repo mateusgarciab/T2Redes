@@ -19,19 +19,20 @@ while not(todosApostos):
     else:
         enre.passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida)
 
-mao_0 = []
-mao_1 = []
-mao_2 = []
-mao_3 = []
+maos = [[], [], [], []]
 verificaJogadores = [True, True, True, True]
 verificaJogo = True
 bastao = False
 if ordem == 0:
     bastao = True
+baralho = br.criaBaralho()
+mensagem = enre.Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
 
 if bastao:
+    verificaJogadores[0] = False # O Dealer não joga
     while verificaJogo:
         for i in range(4):
             if verificaJogadores[i]:
-                print("teste")
+                maos[i].append(br.cartaAleatoria(baralho))
+            enre.enviaMensagem()
         verificaJogo = False

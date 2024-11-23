@@ -2,10 +2,10 @@ import socket
 import pickle
 
 class Bloco():
-    def __init__(self, carta, acao, valorDaMao, aposta):
+    def __init__(self, carta, valorDaMao, acao, aposta):
         self.carta = carta
-        self.acao = acao
         self.valorDaMao = valorDaMao
+        self.acao = acao
         self.aposta = aposta
         
 class Mensagem():
