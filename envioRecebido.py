@@ -1,5 +1,6 @@
 import socket
 import pickle
+import baralho as br
 
 class Bloco():
     def __init__(self, carta, valorDaMao, acao, aposta):
@@ -70,3 +71,57 @@ def recebeConfirma(ipChegada, portaChegada):
         return True
     
     return False
+
+def distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
+    maos = [[], [], [], []]
+    baralho = br.criaBaralho()
+    carta = br.Carta(0,0)
+    bloco = Bloco(carta, 0, 0, 0)
+
+    if verificaJogadores[0]:
+        carta = br.cartaAleatoria(baralho)
+        maos[0].append(carta)
+        bloco.carta = carta
+        mensagem.bloco0 = bloco
+
+    if verificaJogadores[1]:
+        carta = br.cartaAleatoria(baralho)
+        maos[1].append(carta)
+        bloco.carta = carta
+        mensagem.bloco1 = bloco
+
+    if verificaJogadores[2]:
+        carta = br.cartaAleatoria(baralho)
+        maos[2].append(carta)
+        bloco.carta = carta
+        mensagem.bloco2 = bloco
+
+    if verificaJogadores[3]:
+        carta = br.cartaAleatoria(baralho)
+        maos[3].append(carta)
+        bloco.carta = carta
+        mensagem.bloco3 = bloco
+
+        mensagem.tipo = 2 # Mensagem normal de jogo
+        enviaMensagem(mensagem, ipSaida, portaSaida)
+        mensagem = recebeMensagem(ipChegada, portaChegada)
+        return mensagem
+    
+def verificaDesistencia(verificaJogadores, mensagem):
+    if mensagem.bloco0.acao == 3:
+            verificaJogadores[0] = False
+
+    if mensagem.bloco1.acao == 3:
+            verificaJogadores[1] = False
+
+    if mensagem.bloco2.acao == 3:
+            verificaJogadores[2] = False
+
+    if mensagem.bloco3.acao == 3:
+            verificaJogadores[3] = False
+
+def verificaJogo(verificaJogadores):
+    verificaJogadores.count(True)
+    # dai a gente tem que ver o que vamos fazer
+    
+             

@@ -1,11 +1,10 @@
-import socket
 import envioRecebido as enre
 import baralho as br
 
 ipChegada = input("Digigite o ip de chegada ")   #"192.168.15.14"  lab4 13 10.254.225.17 
 portaChegada = int(input("Digite a porta de entrada "))
 
-ipSaida = input("Digigite o ip de saida ")   #"192.168.15.14"  lab4 13 10.254.225.17 
+ipSaida = input("Digigite o ip de saida ") 
 portaSaida = int(input("Digite a porta de saida "))  
 
 todosApostos = False
@@ -19,20 +18,20 @@ while not(todosApostos):
     else:
         enre.passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida)
 
-maos = [[], [], [], []]
+""" mensagem = enre.Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))  """
 verificaJogadores = [True, True, True, True]
 verificaJogo = True
 bastao = False
 if ordem == 0:
     bastao = True
-baralho = br.criaBaralho()
-mensagem = enre.Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
 
-if bastao:
-    verificaJogadores[0] = False # O Dealer não joga
-    while verificaJogo:
-        for i in range(4):
-            if verificaJogadores[i]:
-                maos[i].append(br.cartaAleatoria(baralho))
-            enre.enviaMensagem()
-        verificaJogo = False
+while verificaJogo:
+    if bastao:
+        verificaJogadores[ordem] = False # O Dealer não joga
+
+        mensagem = enre.distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
+        mensagem = enre.distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+        enre.verificaDesistencia(verificaJogadores, mensagem)
+        
+
+        """     verificaJogo = False """
