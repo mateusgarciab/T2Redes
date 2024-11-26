@@ -19,7 +19,6 @@ class Mensagem():
 
 def enviaMensagem(mensagem, ipSaida, portaSaida):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    #soquete.sendto(str(mensagem).encode("utf-8"), (ipSaida, portaSaida))
     soquete.sendto(pickle.dumps(mensagem), (ipSaida, portaSaida))
     print("enviado ")
     
@@ -45,7 +44,6 @@ def enviaConfirma(ordem, ipSaida, portaSaida):
     
 
 def passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida):
-    #recebe
     mensagem = recebeMensagem(ipChegada, portaChegada)
     if ordem == 1:
         #adiciona na 1
@@ -72,8 +70,14 @@ def recebeConfirma(ipChegada, portaChegada):
     
     return False
 
-def distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
-    maos = [[], [], [], []]
+def passaBastao(ipChegada, portaChegada, ipSaida, portaSaida):
+    mensagem = Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
+    enviaMensagem(mensagem, ipSaida, portaSaida) # Passagem de bastão, tipo 0
+    mensagem = recebeMensagem(ipChegada, portaChegada)
+    enviaMensagem(mensagem, ipSaida, portaSaida) # Confirmação de passagem, tipo 6
+
+
+def distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
     baralho = br.criaBaralho()
     carta = br.Carta(0,0)
     bloco = Bloco(carta, 0, 0, 0)
@@ -82,24 +86,28 @@ def distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSa
         carta = br.cartaAleatoria(baralho)
         maos[0].append(carta)
         bloco.carta = carta
+        bloco.valorDaMao = br.valorMao(maos[0])
         mensagem.bloco0 = bloco
 
     if verificaJogadores[1]:
         carta = br.cartaAleatoria(baralho)
         maos[1].append(carta)
         bloco.carta = carta
+        bloco.valorDaMao = br.valorMao(maos[1])
         mensagem.bloco1 = bloco
 
     if verificaJogadores[2]:
         carta = br.cartaAleatoria(baralho)
         maos[2].append(carta)
         bloco.carta = carta
+        bloco.valorDaMao = br.valorMao(maos[2])
         mensagem.bloco2 = bloco
 
     if verificaJogadores[3]:
         carta = br.cartaAleatoria(baralho)
         maos[3].append(carta)
         bloco.carta = carta
+        bloco.valorDaMao = br.valorMao(maos[3])
         mensagem.bloco3 = bloco
 
         mensagem.tipo = 2 # Mensagem normal de jogo
@@ -107,20 +115,49 @@ def distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSa
         mensagem = recebeMensagem(ipChegada, portaChegada)
         return mensagem
     
-def verificaDesistencia(verificaJogadores, mensagem):
+def recebeAcoes(mensagem, verificaJogadores, apostas):
+    if verificaJogadores[0]:
+        if mensagem.bloco0.acao == 2:
+            apostas[0] += 1
+        elif mensagem.bloco0.acao == 3:
+            verificaJogadores[0] = False
+
+    if verificaJogadores[1]:
+        if mensagem.bloco1.acao == 2:
+            apostas[1] += 1
+        elif mensagem.bloco1.acao == 3:
+            verificaJogadores[1] = False
+
+    if verificaJogadores[2]:
+        if mensagem.bloco2.acao == 2:
+            apostas[2] += 1
+        elif mensagem.bloco2.acao == 3:
+            verificaJogadores[2] = False
+
+    if verificaJogadores[3]:
+        if mensagem.bloco3.acao == 2:
+            apostas[3] += 1
+        elif mensagem.bloco3.acao == 3:
+            verificaJogadores[3] = False
+
+
+def verificaDesistencia(verificaJogadores, mensagem, apostas):
     if mensagem.bloco0.acao == 3:
             verificaJogadores[0] = False
+            apostas[0] = 0
 
     if mensagem.bloco1.acao == 3:
             verificaJogadores[1] = False
+            apostas[1] = 0
 
     if mensagem.bloco2.acao == 3:
             verificaJogadores[2] = False
+            apostas[2] = 0
 
     if mensagem.bloco3.acao == 3:
             verificaJogadores[3] = False
+            apostas[3] = 0
 
 def quantosJogando(verificaJogadores):
     alguemVivo = verificaJogadores.count(True)
     return alguemVivo
-    

@@ -18,27 +18,35 @@ while not(todosApostos):
     else:
         enre.passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida)
 
-""" mensagem = enre.Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))  """
-verificaJogadores = [True, True, True, True]
+mensagem = enre.Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
+emExecucao = True
+apostas = [0, 0, 0, 0]
 verificaJogo = True
 bastao = False
 if ordem == 0:
     bastao = True
 
-while verificaJogo:
+while emExecucao:
     if bastao:
+        maos = [[], [], [], []]
+        verificaJogadores = [True, True, True, True]
         verificaJogadores[ordem] = False # O Dealer não joga
-        mensagem = enre.distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
-        mensagem = enre.distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
 
-        enre.verificaDesistencia(verificaJogadores, mensagem)
-        quantosVivos = enre.quantosJogando(verificaJogadores)
-        if quantosVivos == 0:
-            verificaJogo = False
-            # Ninguem ganhou, passa o bastão
-        elif quantosVivos == 1:
-            verificaJogo = False
-            # um jogador ganhou, passa o bastão
-        else:
-            # segue o jogo
-        
+        mensagem = enre.distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
+        mensagem = enre.distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+        enre.verificaDesistencia(verificaJogadores, mensagem, apostas)
+
+        while verificaJogo:
+            enre.recebeAcoes(mensagem, verificaJogadores, apostas)
+            quantosVivos = enre.quantosJogando(verificaJogadores)
+            if quantosVivos == 0:
+                verificaJogo = False
+                enre.passaBastao(ipChegada, portaChegada, ipSaida, portaSaida)
+                # Ninguem ganhou, passa o bastão ou termina execução
+            elif quantosVivos == 1:
+                verificaJogo = False
+                # um jogador ganhou, passa o bastão ou termina execução
+            else:
+                # segue o jogo
+    else:
+        # Voce é um jogador
