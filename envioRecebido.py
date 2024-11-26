@@ -120,8 +120,7 @@ def verificaDesistencia(verificaJogadores, mensagem):
     if mensagem.bloco3.acao == 3:
             verificaJogadores[3] = False
 
-def verificaJogo(verificaJogadores):
-    verificaJogadores.count(True)
-    # dai a gente tem que ver o que vamos fazer
+def quantosJogando(verificaJogadores):
+    alguemVivo = verificaJogadores.count(True)
+    return alguemVivo
     
-             

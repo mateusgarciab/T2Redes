@@ -28,10 +28,17 @@ if ordem == 0:
 while verificaJogo:
     if bastao:
         verificaJogadores[ordem] = False # O Dealer não joga
-
         mensagem = enre.distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
         mensagem = enre.distribuiCartas(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
-        enre.verificaDesistencia(verificaJogadores, mensagem)
-        
 
-        """     verificaJogo = False """
+        enre.verificaDesistencia(verificaJogadores, mensagem)
+        quantosVivos = enre.quantosJogando(verificaJogadores)
+        if quantosVivos == 0:
+            verificaJogo = False
+            # Ninguem ganhou, passa o bastão
+        elif quantosVivos == 1:
+            verificaJogo = False
+            # um jogador ganhou, passa o bastão
+        else:
+            # segue o jogo
+        
