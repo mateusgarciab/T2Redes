@@ -40,6 +40,7 @@ while emExecucao:
         while verificaJogo:
             enre.recebeAcoes(mensagem, verificaJogadores, apostas)
             quantosVivos = enre.quantosJogando(verificaJogadores)
+            
             if quantosVivos == 0: # Ninguem ganhou, passa o bastão ou termina execução
                 verificaJogo = False
                 if enre.decideExecucao():

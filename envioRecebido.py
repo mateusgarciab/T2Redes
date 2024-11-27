@@ -167,3 +167,6 @@ def decideExecucao():
     if decisao == 0:
         return True
     return False
+
+def enviaFimJogo():
+    Mensagem = Mensagem(4, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))  # Continuyar
