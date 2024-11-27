@@ -161,3 +161,9 @@ def verificaDesistencia(verificaJogadores, mensagem, apostas):
 def quantosJogando(verificaJogadores):
     alguemVivo = verificaJogadores.count(True)
     return alguemVivo
+
+def decideExecucao():
+    decisao = int(input("Passar bastão (0) ou terminar execução (1) "))
+    if decisao == 0:
+        return True
+    return False

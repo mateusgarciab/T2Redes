@@ -21,7 +21,7 @@ while not(todosApostos):
 mensagem = enre.Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
 emExecucao = True
 apostas = [0, 0, 0, 0]
-verificaJogo = True
+
 bastao = False
 if ordem == 0:
     bastao = True
@@ -35,18 +35,25 @@ while emExecucao:
         mensagem = enre.distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
         mensagem = enre.distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
         enre.verificaDesistencia(verificaJogadores, mensagem, apostas)
-
+        
+        verificaJogo = True
         while verificaJogo:
             enre.recebeAcoes(mensagem, verificaJogadores, apostas)
             quantosVivos = enre.quantosJogando(verificaJogadores)
-            if quantosVivos == 0:
+            if quantosVivos == 0: # Ninguem ganhou, passa o bastão ou termina execução
                 verificaJogo = False
-                enre.passaBastao(ipChegada, portaChegada, ipSaida, portaSaida)
-                # Ninguem ganhou, passa o bastão ou termina execução
+                if enre.decideExecucao():
+                    enre.passaBastao(ipChegada, portaChegada, ipSaida, portaSaida)
+                else:
+                    emExecucao = False
+
             elif quantosVivos == 1:
                 verificaJogo = False
-                # um jogador ganhou, passa o bastão ou termina execução
+                # um jogador ganhou, passa o bastão ou termina execução, verificar isso tambem
             else:
                 # segue o jogo
+                mensagem = enre.distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+                enre.recebeAcoes(mensagem, verificaJogadores, apostas) #verificar isso aqui
     else:
         # Voce é um jogador
+        fichas = 10
