@@ -39,7 +39,7 @@ def recebeMensagem(ipChegada, portaChegada):
         return mensagem
 
 def enviaConfirma(ordem, ipSaida, portaSaida):
-    mensagem = Mensagem(1, 0, 0, 0, 0)
+    mensagem = Mensagem(1, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
     enviaMensagem(mensagem, ipSaida, portaSaida)
     
 
@@ -77,33 +77,32 @@ def passaBastao(ipChegada, portaChegada, ipSaida, portaSaida):
     enviaMensagem(mensagem, ipSaida, portaSaida) # Confirmação de passagem, tipo 6
 
 
-def distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
-    baralho = br.criaBaralho()
+def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
     carta = br.Carta(0,0)
     bloco = Bloco(carta, 0, 0, 0)
 
-    if verificaJogadores[0]:
+    if verificaJogadores[0] and quemQuerMais[0]:
         carta = br.cartaAleatoria(baralho)
         maos[0].append(carta)
         bloco.carta = carta
         bloco.valorDaMao = br.valorMao(maos[0])
         mensagem.bloco0 = bloco
 
-    if verificaJogadores[1]:
+    if verificaJogadores[1] and quemQuerMais[1]:
         carta = br.cartaAleatoria(baralho)
         maos[1].append(carta)
         bloco.carta = carta
         bloco.valorDaMao = br.valorMao(maos[1])
         mensagem.bloco1 = bloco
 
-    if verificaJogadores[2]:
+    if verificaJogadores[2] and quemQuerMais[2]:
         carta = br.cartaAleatoria(baralho)
         maos[2].append(carta)
         bloco.carta = carta
         bloco.valorDaMao = br.valorMao(maos[2])
         mensagem.bloco2 = bloco
 
-    if verificaJogadores[3]:
+    if verificaJogadores[3] and quemQuerMais[3]:
         carta = br.cartaAleatoria(baralho)
         maos[3].append(carta)
         bloco.carta = carta
@@ -115,30 +114,30 @@ def distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, 
         mensagem = recebeMensagem(ipChegada, portaChegada)
         return mensagem
     
-def recebeAcoes(mensagem, verificaJogadores, apostas):
+def recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas):
     if verificaJogadores[0]:
         if mensagem.bloco0.acao == 2:
             apostas[0] += 1
-        elif mensagem.bloco0.acao == 3:
-            verificaJogadores[0] = False
+        elif mensagem.bloco0.acao == 0:
+            quemQuerMais[0] = False
 
     if verificaJogadores[1]:
         if mensagem.bloco1.acao == 2:
             apostas[1] += 1
-        elif mensagem.bloco1.acao == 3:
-            verificaJogadores[1] = False
+        elif mensagem.bloco1.acao == 0:
+            quemQuerMais[1] = False
 
     if verificaJogadores[2]:
         if mensagem.bloco2.acao == 2:
             apostas[2] += 1
-        elif mensagem.bloco2.acao == 3:
-            verificaJogadores[2] = False
+        elif mensagem.bloco2.acao == 0:
+            quemQuerMais[2] = False
 
     if verificaJogadores[3]:
         if mensagem.bloco3.acao == 2:
             apostas[3] += 1
-        elif mensagem.bloco3.acao == 3:
-            verificaJogadores[3] = False
+        elif mensagem.bloco3.acao == 0:
+            quemQuerMais[3] = False
 
 
 def verificaDesistencia(verificaJogadores, mensagem, apostas):
@@ -168,5 +167,22 @@ def decideExecucao():
         return True
     return False
 
-def enviaFimJogo():
-    Mensagem = Mensagem(4, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))  # Continuyar
+def enviaFimExecucao(ipSaida, portaSaida):
+    mensagem = Mensagem(5, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
+    enviaMensagem(mensagem, ipSaida, portaSaida)
+
+def enviaFimJogo(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
+    if verificaJogadores[0] == True:
+        vencedor = 0
+    elif verificaJogadores[1] == True:
+        vencedor = 1
+    elif verificaJogadores[2] == True:
+        vencedor = 2
+    elif verificaJogadores[3] == True:
+        vencedor = 3
+    else:
+        vencedor = 4 # Ninguem
+
+    mensagem = Mensagem(4, ((0,0),vencedor,0,0), ((0,0),vencedor,0,0), ((0,0),vencedor,0,0), ((0,0),vencedor,0,0))
+    enviaMensagem(mensagem, ipSaida, portaSaida)
+    mensagem = recebeMensagem(ipChegada, portaChegada)

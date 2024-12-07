@@ -27,34 +27,36 @@ if ordem == 0:
     bastao = True
 
 while emExecucao:
-    if bastao:
+    if bastao: # Voce é o Dealer
         maos = [[], [], [], []]
         verificaJogadores = [True, True, True, True]
         verificaJogadores[ordem] = False # O Dealer não joga
+        quemQuerMais = [True, True, True, True]
+        quemQuerMais[ordem] = False
+        baralho = br.criaBaralho()
 
-        mensagem = enre.distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
-        mensagem = enre.distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+        mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
+        mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
         enre.verificaDesistencia(verificaJogadores, mensagem, apostas)
         
         verificaJogo = True
         while verificaJogo:
-            enre.recebeAcoes(mensagem, verificaJogadores, apostas)
+            enre.recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas)
             quantosVivos = enre.quantosJogando(verificaJogadores)
             
-            if quantosVivos == 0: # Ninguem ganhou, passa o bastão ou termina execução
+            if quantosVivos == 0 or quantosVivos == 1: # Fim de Jogo, passa o bastão ou termina execução
                 verificaJogo = False
+                enre.enviaFimJogo(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+
                 if enre.decideExecucao():
                     enre.passaBastao(ipChegada, portaChegada, ipSaida, portaSaida)
                 else:
                     emExecucao = False
-
-            elif quantosVivos == 1:
-                verificaJogo = False
-                # um jogador ganhou, passa o bastão ou termina execução, verificar isso tambem
+                    enre.enviaFimExecucao(ipSaida, portaSaida)
             else:
                 # segue o jogo
-                mensagem = enre.distribuiCartas(maos, mensagem, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
-                enre.recebeAcoes(mensagem, verificaJogadores, apostas) #verificar isso aqui
+                mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+
     else:
         # Voce é um jogador
         fichas = 10
