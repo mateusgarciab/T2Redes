@@ -179,6 +179,13 @@ def decideExecucao():
         return True
     return False
 
+def enviaFimRodada(maos, apostas, ipChegada, portaChegada, ipSaida, portaSaida):
+    mensagem = Mensagem(3, ((0,0),br.valorMao(maos[0]),0,apostas[0]), ((0,0),br.valorMao(maos[1]),0,apostas[1]), 
+                        ((0,0),br.valorMao(maos[2]),0,apostas[2]), ((0,0),br.valorMao(maos[3]),0,apostas[3]))
+    enviaMensagem(mensagem, ipSaida, portaSaida)
+    mensagem = recebeMensagem(ipChegada, portaChegada)
+
+
 def enviaFimExecucao(ipSaida, portaSaida):
     mensagem = Mensagem(5, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
     enviaMensagem(mensagem, ipSaida, portaSaida)

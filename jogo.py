@@ -51,7 +51,7 @@ while emExecucao:
                 quantosVivos = enre.quantosJogando(verificaJogadores)
 
                 # Lidar com o fim de rodada
-
+                enre.enviaFimRodada(maos, apostas, ipChegada, portaChegada, ipSaida, portaSaida)
 
 
                 if quantosVivos == 0 or quantosVivos == 1: # Fim de Jogo, passa o bastão ou termina execução
