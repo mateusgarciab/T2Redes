@@ -19,43 +19,54 @@ while not(todosApostos):
         enre.passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida)
 
 mensagem = enre.Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
-emExecucao = True
-apostas = [0, 0, 0, 0]
 
 bastao = False
 if ordem == 0:
     bastao = True
 
+emExecucao = True
 while emExecucao:
     if bastao: # Voce é o Dealer
         maos = [[], [], [], []]
-        verificaJogadores = [True, True, True, True]
+        verificaJogadores = [True, True, True, True] # Responsavel pelo jogo inteiro, Jogo acaba quando no maximo um tiver True
         verificaJogadores[ordem] = False # O Dealer não joga
-        quemQuerMais = [True, True, True, True]
-        quemQuerMais[ordem] = False
-        baralho = br.criaBaralho()
 
-        mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
-        mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
-        enre.verificaDesistencia(verificaJogadores, mensagem, apostas)
-        
-        verificaJogo = True
-        while verificaJogo:
-            enre.recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas)
-            quantosVivos = enre.quantosJogando(verificaJogadores)
-            
-            if quantosVivos == 0 or quantosVivos == 1: # Fim de Jogo, passa o bastão ou termina execução
-                verificaJogo = False
-                enre.enviaFimJogo(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+        while enre.quantosJogando(verificaJogadores) > 1:
+            quemQuerMais = [True, True, True, True]
+            quemQuerMais[ordem] = False
+            baralho = br.criaBaralho()
+            apostas = [1, 1, 1, 1]
+            fichas = [9, 9, 9, 9]
+            fichas[ordem] = 0
 
-                if enre.decideExecucao():
-                    enre.passaBastao(ipChegada, portaChegada, ipSaida, portaSaida)
+            mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
+            mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+            enre.verificaDesistencia(quemQuerMais, mensagem, apostas)
+
+            verificaRodada = True
+            while verificaRodada:
+                enre.recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas, fichas)
+                enre.removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas)
+
+                quantosVivos = enre.quantosJogando(verificaJogadores)
+
+                # Lidar com o fim de rodada
+
+
+
+                if quantosVivos == 0 or quantosVivos == 1: # Fim de Jogo, passa o bastão ou termina execução
+                    verificaRodada = False
+                    enre.enviaFimJogo(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+
+                    if enre.decideExecucao():
+                        enre.passaBastao(ipChegada, portaChegada, ipSaida, portaSaida)
+                    else:
+                        emExecucao = False
+                        quemQuerMais = [False, False, False, False]
+                        enre.enviaFimExecucao(ipSaida, portaSaida)
                 else:
-                    emExecucao = False
-                    enre.enviaFimExecucao(ipSaida, portaSaida)
-            else:
-                # segue o jogo
-                mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+                    # segue o jogo
+                    mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
 
     else:
         # Voce é um jogador

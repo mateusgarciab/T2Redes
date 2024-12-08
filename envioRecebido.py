@@ -114,47 +114,59 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         mensagem = recebeMensagem(ipChegada, portaChegada)
         return mensagem
     
-def recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas):
+def recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas, fichas):
     if verificaJogadores[0]:
         if mensagem.bloco0.acao == 2:
             apostas[0] += 1
+            fichas[0] -= 1
         elif mensagem.bloco0.acao == 0:
             quemQuerMais[0] = False
 
     if verificaJogadores[1]:
         if mensagem.bloco1.acao == 2:
             apostas[1] += 1
+            fichas[1] -= 1
         elif mensagem.bloco1.acao == 0:
             quemQuerMais[1] = False
 
     if verificaJogadores[2]:
         if mensagem.bloco2.acao == 2:
             apostas[2] += 1
+            fichas[2] -= 1
         elif mensagem.bloco2.acao == 0:
             quemQuerMais[2] = False
 
     if verificaJogadores[3]:
         if mensagem.bloco3.acao == 2:
             apostas[3] += 1
+            fichas[3] -= 1
         elif mensagem.bloco3.acao == 0:
             quemQuerMais[3] = False
 
+def removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas):
+    for i in range(4):
+        if verificaJogadores[i]:
+            if not br.verificaMao(maos[i]):
+                quemQuerMais[i] = False
+                apostas[i] = 0
+            if fichas[i] == 0 and apostas[i] == 0:
+                verificaJogadores = False
 
-def verificaDesistencia(verificaJogadores, mensagem, apostas):
+def verificaDesistencia(quemQuerMais, mensagem, apostas):
     if mensagem.bloco0.acao == 3:
-            verificaJogadores[0] = False
+            quemQuerMais[0] = False
             apostas[0] = 0
 
     if mensagem.bloco1.acao == 3:
-            verificaJogadores[1] = False
+            quemQuerMais[1] = False
             apostas[1] = 0
 
     if mensagem.bloco2.acao == 3:
-            verificaJogadores[2] = False
+            quemQuerMais[2] = False
             apostas[2] = 0
 
     if mensagem.bloco3.acao == 3:
-            verificaJogadores[3] = False
+            quemQuerMais[3] = False
             apostas[3] = 0
 
 def quantosJogando(verificaJogadores):
