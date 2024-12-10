@@ -96,6 +96,7 @@ while emExecucao:
                     mao.append(minhaCarta)
                     if primeiraRodada:
                         primeiraRodada = False
+                        acao = 1
                     else:
                         print("Suas cartas são:")
                         br.imprimeMao(mao)
