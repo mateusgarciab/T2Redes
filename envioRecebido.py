@@ -33,8 +33,7 @@ def recebeMensagem(ipChegada, portaChegada):
         dados, addr = soquete.recvfrom(1024) 
         #mensagem = Mensagem(dados.decode())
         mensagem = pickle.loads(dados)
-        print("recebido ")
-        print("received message: ", mensagem.tipo, """ " ", mensagem.bloco0, " ", mensagem.bloco1, " ", mensagem.bloco2, " ", mensagem.bloco3 """)
+        print("Recebido mensagem de tipo: ", mensagem.tipo)
         soquete.close()
         return mensagem
 
@@ -59,12 +58,9 @@ def passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida):
     #envia
     enviaMensagem(mensagem, ipSaida, portaSaida)
 
-# Verifica se a mensagem passou pela rede e todos digitaram numeros diferentes de rodada
 def recebeConfirma(ipChegada, portaChegada):
-    #verifica todas as posições 
-    #retorna se todos conectados ou não
     mensagem = recebeMensagem(ipChegada, portaChegada)
-    if mensagem.tipo == 1 and mensagem.bloco0 == 0 and mensagem.bloco1 == 1 and mensagem.bloco2 == 2 and mensagem.bloco3 == 3:
+    if mensagem.tipo == 1:
         print("True ")
         return True
     
