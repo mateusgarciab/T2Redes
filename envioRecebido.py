@@ -1,6 +1,7 @@
 import socket
 import pickle
 import baralho as br
+import time
 
 class Bloco():
     def __init__(self, carta, valorDaMao, acao, aposta):
@@ -18,6 +19,7 @@ class Mensagem():
         self.bloco3 = bloco3
 
 def enviaMensagem(mensagem, ipSaida, portaSaida):
+    time.sleep(3)
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     soquete.sendto(pickle.dumps(mensagem), (ipSaida, portaSaida))
     print("enviado ")
@@ -123,7 +125,9 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         mensagem.bloco3 = bloco
 
         mensagem.tipo = 2 # Mensagem normal de jogo
+        print("mandar cartas")
         enviaMensagem(mensagem, ipSaida, portaSaida)
+        print("esperar resposta")
         mensagem = recebeMensagem(ipChegada, portaChegada)
         return mensagem
     

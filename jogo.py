@@ -27,6 +27,7 @@ if ordem == 0:
 emExecucao = True
 while emExecucao:
     if bastao: # Voce é o Dealer
+        print("Vove tem o bastao")
         maos = [[], [], [], []]
         verificaJogadores = [True, True, True, True] # Responsavel pelo jogo inteiro, Jogo acaba quando no maximo um tiver True
         verificaJogadores[ordem] = False # O Dealer não joga
