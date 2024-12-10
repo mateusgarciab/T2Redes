@@ -60,6 +60,7 @@ while emExecucao:
 
                     if enre.decideExecucao():
                         enre.passaBastao(ipChegada, portaChegada, ipSaida, portaSaida)
+                        bastao = False
                     else:
                         emExecucao = False
                         quemQuerMais = [False, False, False, False]
@@ -70,4 +71,20 @@ while emExecucao:
 
     else:
         # Voce é um jogador
-        fichas = 10
+        jogoAtivo =True
+        while jogoAtivo:
+            fichas = 10
+            mao = []
+            rodadaAtiva = True
+            while rodadaAtiva:
+                # receber a mensagem, tratar cada caso, 
+                mensagem = enre.recebeMensagem(ipChegada, portaChegada)
+                if mensagem.tipo == 0: # Recebeu o bastao
+                    rodadaAtiva = False
+                    bastao = True
+                elif mensagem.tipo == 2:
+                    print("Jogo ")
+                    #continuar
+                elif mensagem.tipo == 3:
+                    print("fim de rodada")
+                    rodadaAtiva = False

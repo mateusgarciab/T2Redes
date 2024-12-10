@@ -34,7 +34,7 @@ def recebeMensagem(ipChegada, portaChegada):
         #mensagem = Mensagem(dados.decode())
         mensagem = pickle.loads(dados)
         print("recebido ")
-        print("received message: ", mensagem.tipo, " ", mensagem.bloco0, " ", mensagem.bloco1, " ", mensagem.bloco2, " ", mensagem.bloco3)
+        print("received message: ", mensagem.tipo, """ " ", mensagem.bloco0, " ", mensagem.bloco1, " ", mensagem.bloco2, " ", mensagem.bloco3 """)
         soquete.close()
         return mensagem
 
@@ -75,6 +75,23 @@ def passaBastao(ipChegada, portaChegada, ipSaida, portaSaida):
     enviaMensagem(mensagem, ipSaida, portaSaida) # Passagem de bastão, tipo 0
     mensagem = recebeMensagem(ipChegada, portaChegada)
     enviaMensagem(mensagem, ipSaida, portaSaida) # Confirmação de passagem, tipo 6
+
+
+#Verificar essas duas
+
+def recebeBastao(ipChegada, portaChegada, ipSaida, portaSaida):
+    mensagem = Mensagem(6, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
+    enviaMensagem(mensagem, ipSaida, portaSaida)
+    mensagem = recebeMensagem(ipChegada, portaChegada)
+    enviaMensagem(mensagem, ipSaida, portaSaida)
+
+def passaConfBastao(ipSaida, portaSaida):
+    mensagem = Mensagem(6, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
+    enviaMensagem(mensagem, ipSaida, portaSaida)
+
+
+
+
 
 
 def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
