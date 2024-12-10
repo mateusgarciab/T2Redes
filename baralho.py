@@ -8,6 +8,11 @@ class Carta:
 def imprimeCarta(carta):
     print(carta.simbolo, "de", carta.naipe)
 
+def imprimeMao(mao):
+    for i in range(len(mao)):
+        imprimeCarta(mao[i])
+    print("Valor da mao", valorMao(mao))
+
 def criaBaralho():
     baralho = []
     for i in range(10):

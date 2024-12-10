@@ -72,19 +72,68 @@ while emExecucao:
     else:
         # Voce é um jogador
         jogoAtivo =True
+        fichas = 9
+        mao = []
+        minhaAposta = 1
         while jogoAtivo:
-            fichas = 10
-            mao = []
+            
             rodadaAtiva = True
+            primeiraRodada = True
+            podeDobra = True
+            podeDesistir = True
+
             while rodadaAtiva:
-                # receber a mensagem, tratar cada caso, 
                 mensagem = enre.recebeMensagem(ipChegada, portaChegada)
                 if mensagem.tipo == 0: # Recebeu o bastao
                     rodadaAtiva = False
                     bastao = True
+                    enre.recebeBastao(ipChegada, portaChegada, ipSaida, portaSaida)
+
                 elif mensagem.tipo == 2:
-                    print("Jogo ")
-                    #continuar
+                    minhaCarta = enre.devolveCarta(mensagem, ordem)
+                    mao.append(minhaCarta)
+                    if primeiraRodada:
+                        primeiraRodada = False
+                    else:
+                        print("Suas cartas são:")
+                        br.imprimeMao(mao)
+                        print("Sua aposta atual é:", minhaAposta)
+                        print("Suas açoes possiveis são:")
+                        print("0 - Parar")
+                        print("1 - Mais uma carta")
+                        if podeDobra:
+                            print("2 - Dobra (Apenas uma vez por jogo)")
+                        if podeDesistir:
+                            print("Desistir (Apenas esssa rodada)")
+                        podeDesistir = False
+                        acao = int(input())
+                        if acao == 2:
+                            podeDobra = False
+                            minhaAposta += 1
+                            fichas -= 1
+                        if acao == 3:
+                            minhaAposta = 0
+                            fichas += 1
+                        enre.mensagemDeJogo(mensagem, acao, minhaAposta, ordem, mao, ipSaida, portaSaida)
+                        
+
+
                 elif mensagem.tipo == 3:
-                    print("fim de rodada")
+                    print("Fim de rodada")
+                    #imprimir premio
                     rodadaAtiva = False
+
+                elif mensagem.tipo == 4:
+                    jogoAtivo = False
+                    rodadaAtiva = False
+                    print("Fim de Jogo")
+                    #imprimir vencedor
+
+                elif mensagem.tipo == 5:
+                    emExecucao =False
+                    jogoAtivo = False
+                    rodadaAtiva = False
+
+                elif mensagem.tipo == 6:
+                    enre.passaConfBastao(ipSaida, portaSaida)
+                    print("Bastão foi passado para outro jogador")

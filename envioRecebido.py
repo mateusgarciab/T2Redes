@@ -73,8 +73,8 @@ def recebeConfirma(ipChegada, portaChegada):
 def passaBastao(ipChegada, portaChegada, ipSaida, portaSaida):
     mensagem = Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
     enviaMensagem(mensagem, ipSaida, portaSaida) # Passagem de bastão, tipo 0
-    mensagem = recebeMensagem(ipChegada, portaChegada)
-    enviaMensagem(mensagem, ipSaida, portaSaida) # Confirmação de passagem, tipo 6
+    """  mensagem = recebeMensagem(ipChegada, portaChegada)
+    enviaMensagem(mensagem, ipSaida, portaSaida) # Confirmação de passagem, tipo 6 """
 
 
 #Verificar essas duas
@@ -222,3 +222,27 @@ def enviaFimJogo(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida
     mensagem = Mensagem(4, ((0,0),vencedor,0,0), ((0,0),vencedor,0,0), ((0,0),vencedor,0,0), ((0,0),vencedor,0,0))
     enviaMensagem(mensagem, ipSaida, portaSaida)
     mensagem = recebeMensagem(ipChegada, portaChegada)
+
+def devolveCarta(mensagem, ordem):
+    if ordem == 0:
+        return mensagem.bloco0.carta
+    elif ordem == 1:
+        return mensagem.bloco1.carta
+    elif ordem == 2:
+        return mensagem.bloco2.carta
+    else:
+        return mensagem.bloco3.carta
+    
+def mensagemDeJogo(mensagem, acao, aposta, ordem, mao, ipSaida, portaSaida):
+    carta = devolveCarta(mensagem, ordem)
+    meuBloco = Bloco(carta, br.valorMao(mao), acao, aposta)
+    if ordem == 0:
+        mensagem.bloco0 = meuBloco
+    elif ordem == 1:
+        mensagem.bloco1 = meuBloco
+    elif ordem == 2:
+        mensagem.bloco2 = meuBloco
+    elif ordem == 3:
+        mensagem.bloco3 = meuBloco
+
+    enviaMensagem(mensagem, ipSaida, portaSaida)

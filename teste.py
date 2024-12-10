@@ -1,6 +1,9 @@
 import baralho as br
 import random
 
+acao = int(input())
+print(acao)
+
 maos = [[], [], [], []]
 maos[0].append(1)
 maos[0].append(2)
