@@ -7,16 +7,16 @@ portaChegada = int(input("Digite a porta de entrada "))
 ipSaida = input("Digigite o ip de saida ") 
 portaSaida = int(input("Digite a porta de saida "))  
 
+ordem = int(input("Digite sua ordem na rodada (0 a 3) "))
+
 todosApostos = False
-while not(todosApostos):
-    ordem = int(input("Digite sua ordem na rodada (0 a 3) "))
-    if ordem == 0:
-        enre.enviaConfirma(ordem, ipSaida, portaSaida) 
-        todosApostos = enre.recebeConfirma(ipChegada, portaChegada)
-        if not(todosApostos):
-            print("Não foi possível realizar a conexão corretamente, verifique se todos os jogadores tem uma posição diferente")
-    else:
-        enre.passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida)
+if ordem == 0:
+    enre.enviaConfirma(ordem, ipSaida, portaSaida) 
+    todosApostos = enre.recebeConfirma(ipChegada, portaChegada)
+    if not(todosApostos):
+        print("Não foi possível realizar a conexão corretamente, verifique se todos os jogadores tem uma posição diferente")
+else:
+    enre.passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida)
 
 mensagem = enre.Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
 
