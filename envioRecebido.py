@@ -11,7 +11,7 @@ class Bloco():
         self.aposta = aposta
         
 class Mensagem():
-    def __init__(self, tipo, bloco0, bloco1, bloco2, bloco3):
+    def __init__(self, tipo, bloco0 : Bloco, bloco1 : Bloco, bloco2 : Bloco, bloco3 : Bloco):
         self.tipo = tipo
         self.bloco0 = bloco0
         self.bloco1 = bloco1
@@ -19,7 +19,7 @@ class Mensagem():
         self.bloco3 = bloco3
 
 def enviaMensagem(mensagem, ipSaida, portaSaida):
-    time.sleep(2)
+    """ time.sleep(2) """
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     soquete.sendto(pickle.dumps(mensagem), (ipSaida, portaSaida))
     print("Enviando mensagem de tipo: ", mensagem.tipo)
