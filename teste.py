@@ -1,20 +1,27 @@
 import baralho as br
 import random
+import envioRecebido as enre
 
-acao = int(input())
-print(acao)
+ipChegada = input("Digigite o ip de chegada ")   #"192.168.15.14"  lab4 13 10.254.225.17 
+portaChegada = int(input("Digite a porta de entrada "))
 
-maos = [[], [], [], []]
-maos[0].append(1)
-maos[0].append(2)
-maos[0].append(3)
+ipSaida = input("Digigite o ip de saida ") 
+portaSaida = int(input("Digite a porta de saida "))  
 
-maos[1].append(1)
-maos[1].append(2)
+numero = int(input("Manda "))
+val = int(input("val "))
 
-maos[3].append(1)
+if val == 1:
+    mensagem = enre.Mensagem(numero, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
+    print("numero enviado", mensagem.tipo)
+    enre.enviaMensagem(mensagem, ipSaida, portaSaida)
 
-for i in range(len(maos)):
-    for j in range(len(maos[i])):
-        print(maos[i][j])
-        
+    mensagem = enre.recebeMensagem(ipChegada, portaChegada)
+    print("numero recebido", mensagem.tipo)
+else:
+    mensagem = enre.recebeMensagem(ipChegada, portaChegada)
+    print("numero recebido", mensagem.tipo)
+
+    mensagem = enre.Mensagem(numero, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
+    print("numero enviado", mensagem.tipo)
+    enre.enviaMensagem(mensagem, ipSaida, portaSaida)

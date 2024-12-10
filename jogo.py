@@ -116,23 +116,27 @@ while emExecucao:
                             fichas += 1
                         enre.mensagemDeJogo(mensagem, acao, minhaAposta, ordem, mao, ipSaida, portaSaida)
                         
-
-
                 elif mensagem.tipo == 3:
                     print("Fim de rodada")
-                    #imprimir premio
+                    meuBloco = enre.devolveBloco(mensagem, ordem)
+                    print("Seu premio foi de", meuBloco.aposta)
                     rodadaAtiva = False
+                    enre.enviaMensagem(mensagem, ipSaida, portaSaida)
 
                 elif mensagem.tipo == 4:
                     jogoAtivo = False
                     rodadaAtiva = False
-                    print("Fim de Jogo")
+                    print("Fim de Jogo") 
+                    enre.enviaMensagem(mensagem, ipSaida, portaSaida)
+                    meuBloco = enre.devolveBloco(mensagem, ordem)
+                    print("O vencedor foi o", meuBloco.valorDaMao)
                     #imprimir vencedor
 
                 elif mensagem.tipo == 5:
                     emExecucao =False
                     jogoAtivo = False
                     rodadaAtiva = False
+                    enre.enviaMensagem(mensagem, ipSaida, portaSaida)
 
                 elif mensagem.tipo == 6:
                     enre.passaConfBastao(ipSaida, portaSaida)

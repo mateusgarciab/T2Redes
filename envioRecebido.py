@@ -217,11 +217,20 @@ def enviaFimJogo(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida
     elif verificaJogadores[3] == True:
         vencedor = 3
     else:
-        vencedor = 4 # Ninguem
-
+        vencedor = 4 # Ninguem 
     mensagem = Mensagem(4, ((0,0),vencedor,0,0), ((0,0),vencedor,0,0), ((0,0),vencedor,0,0), ((0,0),vencedor,0,0))
     enviaMensagem(mensagem, ipSaida, portaSaida)
     mensagem = recebeMensagem(ipChegada, portaChegada)
+
+def devolveBloco(mensagem, ordem):
+    if ordem == 0:
+        return mensagem.bloco0
+    elif ordem == 1:
+        return mensagem.bloco1
+    elif ordem == 2:
+        return mensagem.bloco2
+    else:
+        return mensagem.bloco3 
 
 def devolveCarta(mensagem, ordem):
     if ordem == 0:
