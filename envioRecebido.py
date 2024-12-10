@@ -19,10 +19,10 @@ class Mensagem():
         self.bloco3 = bloco3
 
 def enviaMensagem(mensagem, ipSaida, portaSaida):
-    time.sleep(3)
+    time.sleep(2)
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     soquete.sendto(pickle.dumps(mensagem), (ipSaida, portaSaida))
-    print("enviado ")
+    print("Enviando mensagem de tipo: ", mensagem.tipo)
     
     soquete.close()
 
@@ -169,7 +169,7 @@ def removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas):
             if fichas[i] == 0 and apostas[i] == 0:
                 verificaJogadores = False
 
-def verificaDesistencia(quemQuerMais, mensagem, apostas):
+def verificaDesistencia(quemQuerMais, mensagem : Mensagem, apostas):
     if mensagem.bloco0.acao == 3:
             quemQuerMais[0] = False
             apostas[0] = 0
