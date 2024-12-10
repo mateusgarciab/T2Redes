@@ -11,7 +11,7 @@ class Bloco():
         self.aposta = aposta
         
 class Mensagem():
-    def __init__(self, tipo, bloco0 : Bloco, bloco1 : Bloco, bloco2 : Bloco, bloco3 : Bloco):
+    def __init__(self, tipo, bloco0, bloco1, bloco2, bloco3):
         self.tipo = tipo
         self.bloco0 = bloco0
         self.bloco1 = bloco1
@@ -169,7 +169,7 @@ def removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas):
             if fichas[i] == 0 and apostas[i] == 0:
                 verificaJogadores = False
 
-def verificaDesistencia(quemQuerMais, mensagem : Mensagem, apostas):
+def verificaDesistencia(quemQuerMais, mensagem, apostas):
     if mensagem.bloco0.acao == 3:
             quemQuerMais[0] = False
             apostas[0] = 0

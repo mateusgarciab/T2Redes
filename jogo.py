@@ -116,7 +116,7 @@ while emExecucao:
                         if acao == 3:
                             minhaAposta = 0
                             fichas += 1
-                        enre.mensagemDeJogo(mensagem, acao, minhaAposta, ordem, mao, ipSaida, portaSaida)
+                    enre.mensagemDeJogo(mensagem, acao, minhaAposta, ordem, mao, ipSaida, portaSaida)
                         
                 elif mensagem.tipo == 3:
                     print("Fim de rodada")
