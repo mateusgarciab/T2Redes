@@ -19,7 +19,6 @@ class Mensagem():
         self.bloco3 = bloco3
 
 def enviaMensagem(mensagem, ipSaida, portaSaida):
-    """ time.sleep(2) """
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     soquete.sendto(pickle.dumps(mensagem), (ipSaida, portaSaida))
     print("Enviando mensagem de tipo: ", mensagem.tipo)
@@ -34,7 +33,7 @@ def recebeMensagem(ipChegada, portaChegada):
     while True:
         dados, addr = soquete.recvfrom(1024) 
         #mensagem = Mensagem(dados.decode())
-        mensagem = Mensagem(pickle.loads(dados))
+        mensagem = pickle.loads(dados)
         print("Recebido mensagem de tipo: ", mensagem.tipo)
         soquete.close()
         return mensagem
@@ -46,18 +45,6 @@ def enviaConfirma(ordem, ipSaida, portaSaida):
 
 def passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida):
     mensagem = recebeMensagem(ipChegada, portaChegada)
-    if ordem == 1:
-        #adiciona na 1
-        mensagem.bloco1 = 1
-    elif ordem == 2:
-        #adiciona na 2
-        mensagem.bloco2 = 2
-    elif ordem == 3:
-        #adiciona na 3
-        mensagem.bloco3 = 3
-    else:
-        print("Valor invalido")
-    #envia
     enviaMensagem(mensagem, ipSaida, portaSaida)
 
 def recebeConfirma(ipChegada, portaChegada):
@@ -71,11 +58,7 @@ def recebeConfirma(ipChegada, portaChegada):
 def passaBastao(ipChegada, portaChegada, ipSaida, portaSaida):
     mensagem = Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
     enviaMensagem(mensagem, ipSaida, portaSaida) # Passagem de bastão, tipo 0
-    """  mensagem = recebeMensagem(ipChegada, portaChegada)
-    enviaMensagem(mensagem, ipSaida, portaSaida) # Confirmação de passagem, tipo 6 """
 
-
-#Verificar essas duas
 
 def recebeBastao(ipChegada, portaChegada, ipSaida, portaSaida):
     mensagem = Mensagem(6, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
@@ -86,10 +69,6 @@ def recebeBastao(ipChegada, portaChegada, ipSaida, portaSaida):
 def passaConfBastao(ipSaida, portaSaida):
     mensagem = Mensagem(6, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
     enviaMensagem(mensagem, ipSaida, portaSaida)
-
-
-
-
 
 
 def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
