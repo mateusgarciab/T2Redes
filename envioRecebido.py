@@ -127,8 +127,8 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         mensagem.tipo = 2 # Mensagem normal de jogo
         print("mandar cartas")
         enviaMensagem(mensagem, ipSaida, portaSaida)
-        """ print("esperar") """
-        """ mensagem = recebeMensagem(ipChegada, portaChegada) """
+        print("esperar")
+        mensagem = recebeMensagem(ipChegada, portaChegada)
         return mensagem
     
 def recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas, fichas):

@@ -42,7 +42,7 @@ while emExecucao:
 
             mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
             mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
-            mensagem = enre.recebeMensagem(ipChegada, portaChegada)
+            """ mensagem = enre.recebeMensagem(ipChegada, portaChegada) """
             enre.verificaDesistencia(quemQuerMais, mensagem, apostas)
 
             verificaRodada = True
