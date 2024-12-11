@@ -133,31 +133,31 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
     
 def recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas, fichas):
     if verificaJogadores[0]:
-        if mensagem.bloco0.acao == 2:
+        if mensagem.bloco0[2] == 2:
             apostas[0] += 1
             fichas[0] -= 1
-        elif mensagem.bloco0.acao == 0:
+        elif mensagem.bloco0[2] == 0:
             quemQuerMais[0] = False
 
     if verificaJogadores[1]:
-        if mensagem.bloco1.acao == 2:
+        if mensagem.bloco1[2] == 2:
             apostas[1] += 1
             fichas[1] -= 1
-        elif mensagem.bloco1.acao == 0:
+        elif mensagem.bloco1[2] == 0:
             quemQuerMais[1] = False
 
     if verificaJogadores[2]:
-        if mensagem.bloco2.acao == 2:
+        if mensagem.bloco2[2] == 2:
             apostas[2] += 1
             fichas[2] -= 1
-        elif mensagem.bloco2.acao == 0:
+        elif mensagem.bloco2[2] == 0:
             quemQuerMais[2] = False
 
     if verificaJogadores[3]:
-        if mensagem.bloco3.acao == 2:
+        if mensagem.bloco3[2] == 2:
             apostas[3] += 1
             fichas[3] -= 1
-        elif mensagem.bloco3.acao == 0:
+        elif mensagem.bloco3[2] == 0:
             quemQuerMais[3] = False
 
 def removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas):
@@ -170,19 +170,19 @@ def removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas):
                 verificaJogadores = False
 
 def verificaDesistencia(quemQuerMais, mensagem : Mensagem, apostas):
-    if mensagem.bloco0.acao == 3:
+    if mensagem.bloco0[2] == 3:
             quemQuerMais[0] = False
             apostas[0] = 0
 
-    if mensagem.bloco1.acao == 3:
+    if mensagem.bloco1[2] == 3:
             quemQuerMais[1] = False
             apostas[1] = 0
 
-    if mensagem.bloco2.acao == 3:
+    if mensagem.bloco2[2] == 3:
             quemQuerMais[2] = False
             apostas[2] = 0
 
-    if mensagem.bloco3.acao == 3:
+    if mensagem.bloco3[2] == 3:
             quemQuerMais[3] = False
             apostas[3] = 0
 
