@@ -133,31 +133,31 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
     
 def recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas, fichas):
     if verificaJogadores[0]:
-        if mensagem.bloco0[2] == 2:
+        if mensagem.bloco0.acao == 2:
             apostas[0] += 1
             fichas[0] -= 1
-        elif mensagem.bloco0[2] == 0:
+        elif mensagem.bloco0.acao == 0:
             quemQuerMais[0] = False
 
     if verificaJogadores[1]:
-        if mensagem.bloco1[2] == 2:
+        if mensagem.bloco1.acao == 2:
             apostas[1] += 1
             fichas[1] -= 1
-        elif mensagem.bloco1[2] == 0:
+        elif mensagem.bloco1.acao == 0:
             quemQuerMais[1] = False
 
     if verificaJogadores[2]:
-        if mensagem.bloco2[2] == 2:
+        if mensagem.bloco2.acao == 2:
             apostas[2] += 1
             fichas[2] -= 1
-        elif mensagem.bloco2[2] == 0:
+        elif mensagem.bloco2.acao == 0:
             quemQuerMais[2] = False
 
     if verificaJogadores[3]:
-        if mensagem.bloco3[2] == 2:
+        if mensagem.bloco3.acao == 2:
             apostas[3] += 1
             fichas[3] -= 1
-        elif mensagem.bloco3[2] == 0:
+        elif mensagem.bloco3.acao == 0:
             quemQuerMais[3] = False
 
 def removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas):
@@ -169,24 +169,20 @@ def removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas):
             if fichas[i] == 0 and apostas[i] == 0:
                 verificaJogadores = False
 
-def verificaDesistencia(quemQuerMais, mensagem : Mensagem, apostas):
-    print(mensagem.bloco0[2])
-    if mensagem.bloco0[2] == 3:
+def verificaDesistencia(quemQuerMais, mensagem, apostas):
+    if mensagem.bloco0.acao == 3:
             quemQuerMais[0] = False
             apostas[0] = 0
 
-    print(mensagem.bloco1[2])
-    if mensagem.bloco1[2] == 3:
+    if mensagem.bloco1.acao == 3:
             quemQuerMais[1] = False
             apostas[1] = 0
 
-    print(mensagem.bloco2[2])
-    if mensagem.bloco2[2] == 3:
+    if mensagem.bloco2.acao == 3:
             quemQuerMais[2] = False
             apostas[2] = 0
 
-    print(mensagem.bloco3[2])
-    if mensagem.bloco3[2] == 3:
+    if mensagem.bloco3.acao == 3:
             quemQuerMais[3] = False
             apostas[3] = 0
 
@@ -236,20 +232,15 @@ def devolveBloco(mensagem, ordem):
     else:
         return mensagem.bloco3 
 
-def devolveCarta(mensagem : Mensagem, ordem):
-    br.imprimeCarta(mensagem.bloco0[0])
-    br.imprimeCarta(mensagem.bloco1[0])
-    br.imprimeCarta(mensagem.bloco2[0])
-    br.imprimeCarta(mensagem.bloco3[0])
-
+def devolveCarta(mensagem, ordem):
     if ordem == 0:
-        return mensagem.bloco0[0]
+        return mensagem.bloco0.carta
     elif ordem == 1:
-        return mensagem.bloco1[0]
+        return mensagem.bloco1.carta
     elif ordem == 2:
-        return mensagem.bloco2[0]
+        return mensagem.bloco2.carta
     else:
-        return mensagem.bloco3[0]
+        return mensagem.bloco3.carta
     
 def mensagemDeJogo(mensagem, acao, aposta, ordem, mao, ipSaida, portaSaida):
     carta = devolveCarta(mensagem, ordem)

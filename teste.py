@@ -4,4 +4,4 @@ import envioRecebido as enre
 
 mensagem = enre.Mensagem(5, ((0,0),0,1,0), ((0,0),0,2,0), ((0,0),0,3,0), ((0,0),0,4,0))
 bloco = mensagem.bloco2
-print(bloco[2])
+br.imprimeCarta(mensagem.bloco0.carta)
