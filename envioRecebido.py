@@ -34,7 +34,7 @@ def recebeMensagem(ipChegada, portaChegada):
     while True:
         dados, addr = soquete.recvfrom(1024) 
         #mensagem = Mensagem(dados.decode())
-        mensagem = pickle.loads(dados)
+        mensagem = Mensagem(pickle.loads(dados))
         print("Recebido mensagem de tipo: ", mensagem.tipo)
         soquete.close()
         return mensagem
