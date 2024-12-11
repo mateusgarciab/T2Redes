@@ -107,7 +107,7 @@ while emExecucao:
                         if podeDobra:
                             print("2 - Dobra (Apenas uma vez por jogo)")
                         if podeDesistir:
-                            print("Desistir (Apenas esssa rodada)")
+                            print("3 - Desistir (Apenas esssa rodada)")
                         podeDesistir = False
                         acao = int(input())
                         if acao == 2:
