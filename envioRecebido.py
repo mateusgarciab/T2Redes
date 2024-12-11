@@ -236,15 +236,16 @@ def devolveBloco(mensagem, ordem):
     else:
         return mensagem.bloco3 
 
-def devolveCarta(mensagem, ordem):
+def devolveCarta(mensagem : Mensagem, ordem):
     if ordem == 0:
-        return mensagem.bloco0[0]
+        bloco = mensagem.bloco0
     elif ordem == 1:
-        return mensagem.bloco1[0]
+        bloco = mensagem.bloco1
     elif ordem == 2:
-        return mensagem.bloco2[0]
+        bloco = mensagem.bloco2
     else:
-        return mensagem.bloco3[0]
+        bloco = mensagem.bloco3
+    return bloco[0]
     
 def mensagemDeJogo(mensagem, acao, aposta, ordem, mao, ipSaida, portaSaida):
     carta = devolveCarta(mensagem, ordem)
