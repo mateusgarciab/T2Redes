@@ -237,15 +237,19 @@ def devolveBloco(mensagem, ordem):
         return mensagem.bloco3 
 
 def devolveCarta(mensagem : Mensagem, ordem):
+    br.imprimeCarta(mensagem.bloco0[0])
+    br.imprimeCarta(mensagem.bloco1[0])
+    br.imprimeCarta(mensagem.bloco2[0])
+    br.imprimeCarta(mensagem.bloco3[0])
+
     if ordem == 0:
-        bloco = mensagem.bloco0
+        return mensagem.bloco0[0]
     elif ordem == 1:
-        bloco = mensagem.bloco1
+        return mensagem.bloco1[0]
     elif ordem == 2:
-        bloco = mensagem.bloco2
+        return mensagem.bloco2[0]
     else:
-        bloco = mensagem.bloco3
-    return bloco[0]
+        return mensagem.bloco3[0]
     
 def mensagemDeJogo(mensagem, acao, aposta, ordem, mao, ipSaida, portaSaida):
     carta = devolveCarta(mensagem, ordem)
