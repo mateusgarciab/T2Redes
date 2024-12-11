@@ -170,18 +170,22 @@ def removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas):
                 verificaJogadores = False
 
 def verificaDesistencia(quemQuerMais, mensagem : Mensagem, apostas):
+    print(mensagem.bloco0[2])
     if mensagem.bloco0[2] == 3:
             quemQuerMais[0] = False
             apostas[0] = 0
 
+    print(mensagem.bloco1[2])
     if mensagem.bloco1[2] == 3:
             quemQuerMais[1] = False
             apostas[1] = 0
 
+    print(mensagem.bloco2[2])
     if mensagem.bloco2[2] == 3:
             quemQuerMais[2] = False
             apostas[2] = 0
 
+    print(mensagem.bloco3[2])
     if mensagem.bloco3[2] == 3:
             quemQuerMais[3] = False
             apostas[3] = 0
@@ -234,13 +238,13 @@ def devolveBloco(mensagem, ordem):
 
 def devolveCarta(mensagem, ordem):
     if ordem == 0:
-        return mensagem.bloco0.carta
+        return mensagem.bloco0[0]
     elif ordem == 1:
-        return mensagem.bloco1.carta
+        return mensagem.bloco1[0]
     elif ordem == 2:
-        return mensagem.bloco2.carta
+        return mensagem.bloco2[0]
     else:
-        return mensagem.bloco3.carta
+        return mensagem.bloco3[0]
     
 def mensagemDeJogo(mensagem, acao, aposta, ordem, mao, ipSaida, portaSaida):
     carta = devolveCarta(mensagem, ordem)
