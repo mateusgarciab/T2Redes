@@ -129,6 +129,8 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         return mensagem
     
 def recebeAcoes(mensagem : Mensagem, quemQuerMais, verificaJogadores, apostas, fichas):
+    print("recebe acoes")
+    imprimeMensagem(mensagem)
     if verificaJogadores[0]:
         if mensagem.bloco0.acao == 2:
             apostas[0] += 1
