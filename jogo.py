@@ -105,6 +105,7 @@ while emExecucao:
                         print("Suas cartas são:")
                         br.imprimeMao(mao)
                         print("Sua aposta atual é:", minhaAposta)
+                        print("Voce tem", fichas, "fichas")
                         if not parei:
                             print("Suas açoes possiveis são:")
                             print("0 - Parar")
@@ -126,6 +127,7 @@ while emExecucao:
                         if acao == 3:
                             minhaAposta = 0
                             fichas += 1
+                            parei = True
                     enre.mensagemDeJogo(mensagem, acao, minhaAposta, ordem, mao, ipSaida, portaSaida)
                         
                 elif mensagem.tipo == 3:

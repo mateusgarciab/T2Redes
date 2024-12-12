@@ -128,7 +128,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         mensagem = recebeMensagem(ipChegada, portaChegada)
         return mensagem
     
-def recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas, fichas):
+def recebeAcoes(mensagem : Mensagem, quemQuerMais, verificaJogadores, apostas, fichas):
     if verificaJogadores[0]:
         if mensagem.bloco0.acao == 2:
             apostas[0] += 1
