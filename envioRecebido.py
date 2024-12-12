@@ -1,5 +1,6 @@
 import socket
 import pickle
+import copy
 import baralho as br
 
 class Bloco():
@@ -80,7 +81,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
     if verificaJogadores[0] and quemQuerMais[0]:
         carta = br.cartaAleatoria(baralho)
         maos[0].append(carta)
-        bloco.carta = carta
+        bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[0])
         mensagem.bloco0 = bloco
         print("Jogador 0 recebeu ")
@@ -89,7 +90,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
     if verificaJogadores[1] and quemQuerMais[1]:
         carta = br.cartaAleatoria(baralho)
         maos[1].append(carta)
-        bloco.carta = carta
+        bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[1])
         mensagem.bloco1 = bloco
         print("Jogador 1 recebeu ")
@@ -98,7 +99,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
     if verificaJogadores[2] and quemQuerMais[2]:
         carta = br.cartaAleatoria(baralho)
         maos[2].append(carta)
-        bloco.carta = carta
+        bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[2])
         mensagem.bloco2 = bloco
         print("Jogador 2 recebeu ")
@@ -107,7 +108,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
     if verificaJogadores[3] and quemQuerMais[3]:
         carta = br.cartaAleatoria(baralho)
         maos[3].append(carta)
-        bloco.carta = carta
+        bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[3])
         mensagem.bloco3 = bloco
         print("Jogador 3 recebeu ")
