@@ -90,7 +90,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         maos[0].append(carta)
         bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[0])
-        mensagem.bloco0 = bloco
+        mensagem.bloco0 = copy.deepcopy(bloco)
         print("Jogador 0 recebeu ")
         br.imprimeCarta(carta)
 
@@ -99,7 +99,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         maos[1].append(carta)
         bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[1])
-        mensagem.bloco1 = bloco
+        mensagem.bloco1 = copy.deepcopy(bloco)
         print("Jogador 1 recebeu ")
         br.imprimeCarta(carta)
 
@@ -108,7 +108,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         maos[2].append(carta)
         bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[2])
-        mensagem.bloco2 = bloco
+        mensagem.bloco2 = copy.deepcopy(bloco)
         print("Jogador 2 recebeu ")
         br.imprimeCarta(carta)
 
@@ -117,7 +117,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         maos[3].append(carta)
         bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[3])
-        mensagem.bloco3 = bloco
+        mensagem.bloco3 = copy.deepcopy(bloco)
         print("Jogador 3 recebeu ")
         br.imprimeCarta(carta)
 
