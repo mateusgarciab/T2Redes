@@ -1,7 +1,7 @@
 import envioRecebido as enre
 import baralho as br
 
-ipChegada = input("Digigite o ip de chegada ")   #"192.168.15.14"  lab4 13 10.254.225.17 
+ipChegada = input("Digigite o ip de chegada ")
 portaChegada = int(input("Digite a porta de entrada "))
 
 ipSaida = input("Digigite o ip de saida ") 
@@ -18,7 +18,8 @@ if ordem == 0:
 else:
     enre.passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida)
 
-mensagem = enre.Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
+blocoZerado = enre.Bloco(br.Carta(0,0), 0, 0, 0)
+mensagem = enre.Mensagem(0, blocoZerado, blocoZerado, blocoZerado, blocoZerado) 
 
 bastao = False
 if ordem == 0:
@@ -133,7 +134,6 @@ while emExecucao:
                     enre.enviaMensagem(mensagem, ipSaida, portaSaida)
                     meuBloco = enre.devolveBloco(mensagem, ordem)
                     print("O vencedor foi o", meuBloco.valorDaMao)
-                    #imprimir vencedor
 
                 elif mensagem.tipo == 5:
                     emExecucao =False

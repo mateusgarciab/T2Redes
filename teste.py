@@ -2,6 +2,7 @@ import baralho as br
 import random
 import envioRecebido as enre
 
-mensagem = enre.Mensagem(5, ((0,0),0,1,0), ((0,0),0,2,0), ((0,0),0,3,0), ((0,0),0,4,0))
-bloco = mensagem.bloco2
-br.imprimeCarta(mensagem.bloco0.carta)
+carta = br.Carta("ouros",2)
+bloco = enre.Bloco(carta, 0, 1, 0)
+mensagem = enre.Mensagem(5, bloco, enre.Bloco(br.Carta("Espada", 15), 1, 2, 3), ((0,0),0,3,0), ((0,0),0,4,0))
+br.imprimeCarta(mensagem.bloco1.carta)

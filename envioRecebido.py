@@ -1,7 +1,6 @@
 import socket
 import pickle
 import baralho as br
-import time
 
 class Bloco():
     def __init__(self, carta, valorDaMao, acao, aposta):
@@ -32,14 +31,14 @@ def recebeMensagem(ipChegada, portaChegada):
     #recebe
     while True:
         dados, addr = soquete.recvfrom(1024) 
-        #mensagem = Mensagem(dados.decode())
         mensagem = pickle.loads(dados)
         print("Recebido mensagem de tipo: ", mensagem.tipo)
         soquete.close()
         return mensagem
 
 def enviaConfirma(ordem, ipSaida, portaSaida):
-    mensagem = Mensagem(1, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
+    blocoZerado = Bloco(br.Carta(0,0), 0, 0,0)
+    mensagem = Mensagem(1, blocoZerado, blocoZerado, blocoZerado, blocoZerado)
     enviaMensagem(mensagem, ipSaida, portaSaida)
     
 
@@ -56,18 +55,21 @@ def recebeConfirma(ipChegada, portaChegada):
     return False
 
 def passaBastao(ipChegada, portaChegada, ipSaida, portaSaida):
-    mensagem = Mensagem(0, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0)) 
+    blocoZerado = Bloco(br.Carta(0,0), 0, 0,0)
+    mensagem = Mensagem(0, blocoZerado, blocoZerado, blocoZerado, blocoZerado) 
     enviaMensagem(mensagem, ipSaida, portaSaida) # Passagem de bastão, tipo 0
 
 
 def recebeBastao(ipChegada, portaChegada, ipSaida, portaSaida):
-    mensagem = Mensagem(6, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
+    blocoZerado = Bloco(br.Carta(0,0), 0, 0,0)
+    mensagem = Mensagem(6, blocoZerado, blocoZerado, blocoZerado, blocoZerado)
     enviaMensagem(mensagem, ipSaida, portaSaida)
     mensagem = recebeMensagem(ipChegada, portaChegada)
     enviaMensagem(mensagem, ipSaida, portaSaida)
 
 def passaConfBastao(ipSaida, portaSaida):
-    mensagem = Mensagem(6, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
+    blocoZerado = Bloco(br.Carta(0,0), 0, 0,0)
+    mensagem = Mensagem(6, blocoZerado, blocoZerado, blocoZerado, blocoZerado)
     enviaMensagem(mensagem, ipSaida, portaSaida)
 
 
@@ -176,14 +178,16 @@ def decideExecucao():
     return False
 
 def enviaFimRodada(maos, apostas, ipChegada, portaChegada, ipSaida, portaSaida):
-    mensagem = Mensagem(3, ((0,0),br.valorMao(maos[0]),0,apostas[0]), ((0,0),br.valorMao(maos[1]),0,apostas[1]), 
-                        ((0,0),br.valorMao(maos[2]),0,apostas[2]), ((0,0),br.valorMao(maos[3]),0,apostas[3]))
+    cartaZero = br.Carta(0,0)
+    mensagem = Mensagem(3, Bloco(cartaZero, br.valorMao(maos[0]),0,apostas[0]), Bloco(cartaZero,br.valorMao(maos[1]),0,apostas[1]), 
+                        Bloco(cartaZero,br.valorMao(maos[2]),0,apostas[2]), Bloco(cartaZero,br.valorMao(maos[3]),0,apostas[3]))
     enviaMensagem(mensagem, ipSaida, portaSaida)
     mensagem = recebeMensagem(ipChegada, portaChegada)
 
 
 def enviaFimExecucao(ipSaida, portaSaida):
-    mensagem = Mensagem(5, ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0), ((0,0),0,0,0))
+    blocoZerado = Bloco(br.Carta(0,0), 0, 0,0)
+    mensagem = Mensagem(5, blocoZerado, blocoZerado, blocoZerado, blocoZerado)
     enviaMensagem(mensagem, ipSaida, portaSaida)
 
 def enviaFimJogo(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
@@ -197,7 +201,8 @@ def enviaFimJogo(verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida
         vencedor = 3
     else:
         vencedor = 4 # Ninguem 
-    mensagem = Mensagem(4, ((0,0),vencedor,0,0), ((0,0),vencedor,0,0), ((0,0),vencedor,0,0), ((0,0),vencedor,0,0))
+    blocoVencedor = Bloco(br.Carta(0,0), vencedor, 0, 0)
+    mensagem = Mensagem(4, blocoVencedor, blocoVencedor, blocoVencedor, blocoVencedor)
     enviaMensagem(mensagem, ipSaida, portaSaida)
     mensagem = recebeMensagem(ipChegada, portaChegada)
 
