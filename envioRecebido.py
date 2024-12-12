@@ -18,6 +18,12 @@ class Mensagem():
         self.bloco2 = bloco2
         self.bloco3 = bloco3
 
+def imprimeMensagem(mensagem):
+    print("tipo", mensagem.tipo, "(", mensagem.bloco0.carta.naipe, ",", mensagem.bloco0.carta.simbolo, ")", mensagem.bloco0.valorDaMao, mensagem.bloco0.acao, mensagem.bloco0.aposta,
+        "(", mensagem.bloco1.carta.naipe, ",", mensagem.bloco1.carta.simbolo, ")", mensagem.bloco1.valorDaMao, mensagem.bloco1.acao, mensagem.bloco1.aposta,
+          "(", mensagem.bloco2.carta.naipe, ",", mensagem.bloco2.carta.simbolo, ")", mensagem.bloco2.valorDaMao, mensagem.bloco2.acao, mensagem.bloco2.aposta,
+            "(", mensagem.bloco3.carta.naipe, ",", mensagem.bloco3.carta.simbolo, ")", mensagem.bloco3.valorDaMao, mensagem.bloco3.acao, mensagem.bloco3.aposta  )
+
 def enviaMensagem(mensagem, ipSaida, portaSaida):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     soquete.sendto(pickle.dumps(mensagem), (ipSaida, portaSaida))
@@ -33,7 +39,8 @@ def recebeMensagem(ipChegada, portaChegada):
     while True:
         dados, addr = soquete.recvfrom(1024) 
         mensagem = pickle.loads(dados)
-        print("Recebido mensagem de tipo: ", mensagem.tipo)
+        """ print("Recebido mensagem de tipo: ", mensagem.tipo) """
+        imprimeMensagem(mensagem)
         soquete.close()
         return mensagem
 

@@ -85,6 +85,7 @@ while emExecucao:
             primeiraRodada = True
             podeDobra = True
             podeDesistir = True
+            parei = False
 
             while rodadaAtiva:
                 mensagem = enre.recebeMensagem(ipChegada, portaChegada)
@@ -95,7 +96,8 @@ while emExecucao:
 
                 elif mensagem.tipo == 2:
                     minhaCarta = enre.devolveCarta(mensagem, ordem)
-                    mao.append(minhaCarta)
+                    if not parei:
+                        mao.append(minhaCarta)
                     if primeiraRodada:
                         primeiraRodada = False
                         acao = 1
@@ -103,15 +105,20 @@ while emExecucao:
                         print("Suas cartas são:")
                         br.imprimeMao(mao)
                         print("Sua aposta atual é:", minhaAposta)
-                        print("Suas açoes possiveis são:")
-                        print("0 - Parar")
-                        print("1 - Mais uma carta")
-                        if podeDobra:
-                            print("2 - Dobra (Apenas uma vez por jogo)")
-                        if podeDesistir:
-                            print("3 - Desistir (Apenas esssa rodada)")
-                        podeDesistir = False
-                        acao = int(input())
+                        if not parei:
+                            print("Suas açoes possiveis são:")
+                            print("0 - Parar")
+                            print("1 - Mais uma carta")
+                            if podeDobra:
+                                print("2 - Dobra (Apenas uma vez por jogo)")
+                            if podeDesistir:
+                                print("3 - Desistir (Apenas esssa rodada)")
+                            podeDesistir = False
+                            acao = int(input())
+                        else:
+                            print("Voce parou")
+                        if acao == 0:
+                            parei = True
                         if acao == 2:
                             podeDobra = False
                             minhaAposta += 1
