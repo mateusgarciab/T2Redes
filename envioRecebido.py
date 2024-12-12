@@ -83,6 +83,8 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         bloco.carta = carta
         bloco.valorDaMao = br.valorMao(maos[0])
         mensagem.bloco0 = bloco
+        print("Jogador 0 recebeu ")
+        br.imprimeCarta(carta)
 
     if verificaJogadores[1] and quemQuerMais[1]:
         carta = br.cartaAleatoria(baralho)
@@ -90,6 +92,8 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         bloco.carta = carta
         bloco.valorDaMao = br.valorMao(maos[1])
         mensagem.bloco1 = bloco
+        print("Jogador 1 recebeu ")
+        br.imprimeCarta(carta)
 
     if verificaJogadores[2] and quemQuerMais[2]:
         carta = br.cartaAleatoria(baralho)
@@ -97,6 +101,8 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         bloco.carta = carta
         bloco.valorDaMao = br.valorMao(maos[2])
         mensagem.bloco2 = bloco
+        print("Jogador 2 recebeu ")
+        br.imprimeCarta(carta)
 
     if verificaJogadores[3] and quemQuerMais[3]:
         carta = br.cartaAleatoria(baralho)
@@ -104,11 +110,13 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         bloco.carta = carta
         bloco.valorDaMao = br.valorMao(maos[3])
         mensagem.bloco3 = bloco
+        print("Jogador 3 recebeu ")
+        br.imprimeCarta(carta)
 
         mensagem.tipo = 2 # Mensagem normal de jogo
-        print("mandar cartas")
+        print("mandando cartas")
         enviaMensagem(mensagem, ipSaida, portaSaida)
-        print("esperar")
+        print("esperando resposta")
         mensagem = recebeMensagem(ipChegada, portaChegada)
         return mensagem
     
@@ -152,20 +160,24 @@ def removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas):
 
 def verificaDesistencia(quemQuerMais, mensagem, apostas):
     if mensagem.bloco0.acao == 3:
-            quemQuerMais[0] = False
-            apostas[0] = 0
+        quemQuerMais[0] = False
+        apostas[0] = 0
+        print("Jogador 0 desistiu")
 
     if mensagem.bloco1.acao == 3:
-            quemQuerMais[1] = False
-            apostas[1] = 0
+        quemQuerMais[1] = False
+        apostas[1] = 0
+        print("Jogador 1 desistiu")
 
     if mensagem.bloco2.acao == 3:
-            quemQuerMais[2] = False
-            apostas[2] = 0
+        quemQuerMais[2] = False
+        apostas[2] = 0
+        print("Jogador 2 desistiu")
 
     if mensagem.bloco3.acao == 3:
-            quemQuerMais[3] = False
-            apostas[3] = 0
+        quemQuerMais[3] = False
+        apostas[3] = 0
+        print("Jogador 3 desistiu")
 
 def quantosJogando(verificaJogadores):
     alguemVivo = verificaJogadores.count(True)
