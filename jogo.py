@@ -1,5 +1,6 @@
 import envioRecebido as enre
 import baralho as br
+import copy
 
 ipChegada = input("Digigite o ip de chegada ")
 portaChegada = int(input("Digite a porta de entrada "))
@@ -43,12 +44,13 @@ while emExecucao:
 
             mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
             mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+            mensagemAux = copy.deepcopy(mensagem)
             """ mensagem = enre.recebeMensagem(ipChegada, portaChegada) """
-            enre.verificaDesistencia(quemQuerMais, mensagem, apostas)
+            enre.verificaDesistencia(quemQuerMais, mensagemAux, apostas)
 
             verificaRodada = True
             while verificaRodada:
-                enre.recebeAcoes(mensagem, quemQuerMais, verificaJogadores, apostas, fichas)
+                enre.recebeAcoes(mensagemAux, quemQuerMais, verificaJogadores, apostas, fichas)
                 enre.removeEliminados(maos, quemQuerMais, verificaJogadores, apostas, fichas)
 
                 quantosVivos = enre.quantosJogando(verificaJogadores)
@@ -72,6 +74,7 @@ while emExecucao:
                 else:
                     # segue o jogo
                     mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+                    mensagemAux = copy.deepcopy(mensagem)
 
     else:
         # Voce é um jogador
