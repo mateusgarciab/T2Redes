@@ -20,9 +20,9 @@ class Mensagem():
 
 def imprimeMensagem(mensagem):
     print("tipo", mensagem.tipo, "(", mensagem.bloco0.carta.naipe, ",", mensagem.bloco0.carta.simbolo, ")", mensagem.bloco0.valorDaMao, mensagem.bloco0.acao, mensagem.bloco0.aposta,
-        "(", mensagem.bloco1.carta.naipe, ",", mensagem.bloco1.carta.simbolo, ")", mensagem.bloco1.valorDaMao, mensagem.bloco1.acao, mensagem.bloco1.aposta,
-          "(", mensagem.bloco2.carta.naipe, ",", mensagem.bloco2.carta.simbolo, ")", mensagem.bloco2.valorDaMao, mensagem.bloco2.acao, mensagem.bloco2.aposta,
-            "(", mensagem.bloco3.carta.naipe, ",", mensagem.bloco3.carta.simbolo, ")", mensagem.bloco3.valorDaMao, mensagem.bloco3.acao, mensagem.bloco3.aposta  )
+        "| (", mensagem.bloco1.carta.naipe, ",", mensagem.bloco1.carta.simbolo, ")", mensagem.bloco1.valorDaMao, mensagem.bloco1.acao, mensagem.bloco1.aposta,
+          "| (", mensagem.bloco2.carta.naipe, ",", mensagem.bloco2.carta.simbolo, ")", mensagem.bloco2.valorDaMao, mensagem.bloco2.acao, mensagem.bloco2.aposta,
+            "| (", mensagem.bloco3.carta.naipe, ",", mensagem.bloco3.carta.simbolo, ")", mensagem.bloco3.valorDaMao, mensagem.bloco3.acao, mensagem.bloco3.aposta  )
 
 def enviaMensagem(mensagem, ipSaida, portaSaida):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -81,15 +81,17 @@ def passaConfBastao(ipSaida, portaSaida):
     enviaMensagem(mensagem, ipSaida, portaSaida)
 
 
-def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
+def distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida):
     carta = br.Carta(0,0)
     bloco = Bloco(carta, 0, 0, 0)
+    mensagem = Mensagem(2, bloco, bloco, bloco, bloco)
 
     if verificaJogadores[0] and quemQuerMais[0]:
         carta = br.cartaAleatoria(baralho)
         maos[0].append(carta)
         bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[0])
+        bloco.aposta = apostas[0]
         mensagem.bloco0 = copy.deepcopy(bloco)
         print("Jogador 0 recebeu ")
         br.imprimeCarta(carta)
@@ -126,6 +128,7 @@ def distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ip
         enviaMensagem(mensagem, ipSaida, portaSaida)
         print("esperando resposta")
         mensagem = recebeMensagem(ipChegada, portaChegada)
+
         return mensagem
     
 def recebeAcoes(mensagem : Mensagem, quemQuerMais, verificaJogadores, apostas, fichas):

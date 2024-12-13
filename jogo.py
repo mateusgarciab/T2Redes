@@ -42,8 +42,8 @@ while emExecucao:
             fichas = [9, 9, 9, 9]
             fichas[ordem] = 0
 
-            mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
-            mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+            mensagem = enre.distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida) 
+            mensagem = enre.distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
             mensagemAux = copy.deepcopy(mensagem)
             """ mensagem = enre.recebeMensagem(ipChegada, portaChegada) """
             enre.verificaDesistencia(quemQuerMais, mensagemAux, apostas)
@@ -73,7 +73,7 @@ while emExecucao:
                         enre.enviaFimExecucao(ipSaida, portaSaida)
                 else:
                     # segue o jogo
-                    mensagem = enre.distribuiCartas(baralho, maos, mensagem, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
+                    mensagem = enre.distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipChegada, portaChegada, ipSaida, portaSaida)
                     mensagemAux = copy.deepcopy(mensagem)
 
     else:
