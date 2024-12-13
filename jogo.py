@@ -137,6 +137,7 @@ while emExecucao:
                     print("Fim de rodada")
                     meuBloco = enre.devolveBloco(mensagem, ordem)
                     print("Seu premio foi de", meuBloco.aposta)
+                    br.imprimeMao(mao)
                     rodadaAtiva = False
                     enre.enviaMensagem(mensagem, ipSaida, portaSaida)
 

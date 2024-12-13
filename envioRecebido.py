@@ -93,8 +93,8 @@ def distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipC
         bloco.valorDaMao = br.valorMao(maos[0])
         bloco.aposta = apostas[0]
         mensagem.bloco0 = copy.deepcopy(bloco)
-        print("Jogador 0 recebeu ")
-        br.imprimeCarta(carta)
+        """ print("Jogador 0 recebeu ") """
+        """ br.imprimeCarta(carta) """
 
     if verificaJogadores[1] and quemQuerMais[1]:
         carta = br.cartaAleatoria(baralho)
@@ -102,8 +102,8 @@ def distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipC
         bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[1])
         mensagem.bloco1 = copy.deepcopy(bloco)
-        print("Jogador 1 recebeu ")
-        br.imprimeCarta(carta)
+        """ print("Jogador 1 recebeu ") """
+        """ br.imprimeCarta(carta) """
 
     if verificaJogadores[2] and quemQuerMais[2]:
         carta = br.cartaAleatoria(baralho)
@@ -111,8 +111,8 @@ def distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipC
         bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[2])
         mensagem.bloco2 = copy.deepcopy(bloco)
-        print("Jogador 2 recebeu ")
-        br.imprimeCarta(carta)
+        """ print("Jogador 2 recebeu ") """
+        """ br.imprimeCarta(carta) """
 
     if verificaJogadores[3] and quemQuerMais[3]:
         carta = br.cartaAleatoria(baralho)
@@ -120,8 +120,8 @@ def distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipC
         bloco.carta = copy.deepcopy(carta)
         bloco.valorDaMao = br.valorMao(maos[3])
         mensagem.bloco3 = copy.deepcopy(bloco)
-        print("Jogador 3 recebeu ")
-        br.imprimeCarta(carta)
+        """ print("Jogador 3 recebeu ") """
+        """ br.imprimeCarta(carta) """
 
         mensagem.tipo = 2 # Mensagem normal de jogo
         print("mandando cartas")
@@ -132,8 +132,9 @@ def distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipC
         return mensagem
     
 def recebeAcoes(mensagem : Mensagem, quemQuerMais, verificaJogadores, apostas, fichas):
-    print("recebe acoes")
-    imprimeMensagem(mensagem)
+    """ print("recebe acoes") """
+    """ imprimeMensagem(mensagem) """
+    print(mensagem[0], mensagem[2], mensagem[1][0], mensagem[1][1])
     if verificaJogadores[0]:
         if mensagem.bloco0.acao == 2:
             apostas[0] += 1
