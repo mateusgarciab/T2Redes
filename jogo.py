@@ -55,7 +55,7 @@ while emExecucao:
 
                 quantosVivos = enre.quantosJogando(verificaJogadores)
 
-                # Lidar com o fim de rodada
+                # Lida com o fim de rodada
                 if quemQuerMais.count(True) < 2:
                     enre.enviaFimRodada(maos, apostas, ipChegada, portaChegada, ipSaida, portaSaida)
 
