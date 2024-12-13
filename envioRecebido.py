@@ -19,7 +19,7 @@ class Mensagem():
         self.bloco3 = bloco3
 
 def imprimeMensagem(mensagem):
-    print("tipo", mensagem.tipo, "(", mensagem.bloco0.carta.naipe, ",", mensagem.bloco0.carta.simbolo, ")", mensagem.bloco0.valorDaMao, mensagem.bloco0.acao, mensagem.bloco0.aposta,
+    print("tipo", mensagem.tipo, "| (", mensagem.bloco0.carta.naipe, ",", mensagem.bloco0.carta.simbolo, ")", mensagem.bloco0.valorDaMao, mensagem.bloco0.acao, mensagem.bloco0.aposta,
         "| (", mensagem.bloco1.carta.naipe, ",", mensagem.bloco1.carta.simbolo, ")", mensagem.bloco1.valorDaMao, mensagem.bloco1.acao, mensagem.bloco1.aposta,
           "| (", mensagem.bloco2.carta.naipe, ",", mensagem.bloco2.carta.simbolo, ")", mensagem.bloco2.valorDaMao, mensagem.bloco2.acao, mensagem.bloco2.aposta,
             "| (", mensagem.bloco3.carta.naipe, ",", mensagem.bloco3.carta.simbolo, ")", mensagem.bloco3.valorDaMao, mensagem.bloco3.acao, mensagem.bloco3.aposta  )
@@ -57,7 +57,7 @@ def passaConfirma(ordem, ipChegada, portaChegada, ipSaida, portaSaida):
 def recebeConfirma(ipChegada, portaChegada):
     mensagem = recebeMensagem(ipChegada, portaChegada)
     if mensagem.tipo == 1:
-        print("True ")
+        print("Conexao realizada ")
         return True
     
     return False
@@ -124,9 +124,9 @@ def distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipC
         """ br.imprimeCarta(carta) """
 
         mensagem.tipo = 2 # Mensagem normal de jogo
-        print("mandando cartas")
+        print("Mandando cartas")
         enviaMensagem(mensagem, ipSaida, portaSaida)
-        print("esperando resposta")
+        print("Esperando resposta")
         mensagem = recebeMensagem(ipChegada, portaChegada)
 
         return mensagem
@@ -134,7 +134,6 @@ def distribuiCartas(baralho, maos, apostas, quemQuerMais, verificaJogadores, ipC
 def recebeAcoes(mensagem : Mensagem, quemQuerMais, verificaJogadores, apostas, fichas):
     """ print("recebe acoes") """
     """ imprimeMensagem(mensagem) """
-    print(mensagem[0], mensagem[2], mensagem[1][0], mensagem[1][1])
     if verificaJogadores[0]:
         if mensagem.bloco0.acao == 2:
             apostas[0] += 1
