@@ -16,10 +16,10 @@ comprimido = pickle.dumps(mensagem)
 descomprimido = pickle.loads(comprimido)
 br.imprimeCarta(descomprimido.bloco1.carta) """
 
-numero_maquina = print("numero da maquiina")
+numero_maquina = input("numero da maquina ")
 valores = info.obter_valores_maquina(numero_maquina)
 
-envia = print("envia ou recebe")
+envia = input("envia ou recebe ")
 
 if (envia == "e"):
     blocoZerado = enre.Bloco(br.Carta(0,0), 0, 0, 0)
