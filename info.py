@@ -17,4 +17,5 @@ numero_maquina = 2
 valores = obter_valores_maquina(numero_maquina)
 if valores:
     print(f"Valores da Máquina {numero_maquina}:")
+    print(valores[0])
     print(valores)
