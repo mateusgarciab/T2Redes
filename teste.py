@@ -2,6 +2,10 @@ import baralho as br
 import random
 import envioRecebido as enre
 import pickle
+import info
+
+#ss -tuln
+#ip a
 
 carta = br.Carta("ouros",2)
 bloco = enre.Bloco(carta, 0, 1, 0)
