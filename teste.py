@@ -16,7 +16,7 @@ comprimido = pickle.dumps(mensagem)
 descomprimido = pickle.loads(comprimido)
 br.imprimeCarta(descomprimido.bloco1.carta) """
 
-numero_maquina = input("numero da maquina ")
+numero_maquina = int(input("numero da maquina "))
 valores = info.obter_valores_maquina(numero_maquina)
 
 envia = input("envia ou recebe ")

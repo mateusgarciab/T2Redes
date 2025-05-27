@@ -26,14 +26,14 @@ def imprimeMensagem(mensagem):
 
 def enviaMensagem(mensagem, ipSaida, portaSaida):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    soquete.sendto(pickle.dumps(mensagem), (ipSaida, portaSaida))
+    soquete.sendto(pickle.dumps(mensagem), (ipSaida, int(portaSaida)))
     print("Enviando mensagem de tipo: ", mensagem.tipo)
     
     soquete.close()
 
 def recebeMensagem(ipChegada, portaChegada):
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    soquete.bind((ipChegada, portaChegada))
+    soquete.bind((ipChegada, int(portaChegada)))
 
     #recebe
     while True:
