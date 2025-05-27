@@ -28,7 +28,7 @@ if (envia == "e"):
 else:
  
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((valores[0], valores[2]))
+    sock.bind((valores[0], int(valores[2])))
  
     while True:
        data, addr = sock.recvfrom(1024) 
