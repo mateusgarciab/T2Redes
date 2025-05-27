@@ -6,12 +6,12 @@ class Carta: #revisado
         self.simbolo = simbolo
         self.valor = valor
 
-def imprimeCarta(carta): #revisado
-    print(carta.simbolo, "de", carta.naipe, "com valor", carta.valor)
+    def imprimeCarta(self): #revisado    
+        print(f"{self.simbolo} de {self.naipe} com valor {self.valor}")
 
 def imprimeMao(mao): #revisado
     for i in range(len(mao)):
-        imprimeCarta(mao[i])
+        mao[i].imprimeCarta()
     print("Valor da mao", valorMao(mao))
 
 def criaBaralho(): #revisado
