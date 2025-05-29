@@ -1,15 +1,19 @@
 import envioRecebido as enre
 import baralho as br
-import copy
+import info
+#import copy
 
-ipChegada = input("Digigite o ip de chegada ")
-portaChegada = int(input("Digite a porta de entrada "))
+ordem = int(input("Digite sua ordem na rodada (1 a 4) "))
 
-ipSaida = input("Digigite o ip de saida ") 
-portaSaida = int(input("Digite a porta de saida "))  
+valores = obter_valores_maquina(ordem - 1)
 
-ordem = int(input("Digite sua ordem na rodada (0 a 3) "))
+ipChegada = valores[0]
+ipEnvio =  valores[1]
+portaRecebe = valores[2]
+portaEnvia =   valores[3]
 
+
+"""
 todosApostos = False
 if ordem == 0:
     enre.enviaConfirma(ordem, ipSaida, portaSaida) 
@@ -157,4 +161,4 @@ while emExecucao:
 
                 elif mensagem.tipo == 6:
                     enre.passaConfBastao(ipSaida, portaSaida)
-                    print("Bastão foi passado para outro jogador")
+                    print("Bastão foi passado para outro jogador")"""
