@@ -8,7 +8,7 @@ class Carta: #revisado
         self.identificador = identificador
 
     def imprimeCarta(self): #revisado    
-        print(f"{self.simbolo} de {self.naipe} com valor {self.valor} e id {self.identificador}")
+        print(f"{self.simbolo} de {self.naipe} e id {self.identificador}")
 
 
 def imprimeMao(mao): #revisado
@@ -48,12 +48,12 @@ def criaBaralho(): #revisado
 
     return baralho
 
-def cartaAleatoria(baralho): 
+""" def cartaAleatoria(baralho): 
     random.shuffle(baralho)
     cartaEscolhida = baralho[0]
     baralho.remove(cartaEscolhida)
 
-    return cartaEscolhida
+    return cartaEscolhida """
 
 def valorMao(mao): #revisado
     valor = 0
@@ -61,12 +61,3 @@ def valorMao(mao): #revisado
         valor += mao[i].valor
 
     return valor
-
-def verificaMao(mao):
-    if valorMao(mao) > 21:
-        return False
-    return True
-
-
-baralho = criaBaralho()
-imprimeMao(baralho)
