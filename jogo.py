@@ -5,7 +5,8 @@ class Jogador:
     def __init__(self, nome):
         self.nome = nome
         self.mao = []
-        self.pontos = 0
+        self.pontosTotais = 0
+        self.pontosRodada = 0
     
     def receber_carta(self, carta):
         self.mao.append(carta)
@@ -18,7 +19,7 @@ class Jogador:
     
     def mostrar_mao(self):
         print(f"\nMão de {self.nome}:")
-        imprimeMao(self.mao)
+        """imprimeMao(self.mao)"""
 
 class JogoCopas:
     def __init__(self):
@@ -47,6 +48,13 @@ class JogoCopas:
         self.rodada += 1
         self.cartas_na_mesa = []
         print(f"\n=== Rodada {self.rodada} ===")
+
+    def iniciaMesa(self):
+        self.baralho = criaBaralho()
+        self.rodada = 0
+        self.cartas_na_mesa = []
+        self.jogador_iniciante = 0
+        self.copas_quebradas = False
     
     def validar_jogada(self, jogador_idx, carta_idx):
         carta = self.jogadores[jogador_idx].mao[carta_idx]
@@ -86,7 +94,7 @@ class JogoCopas:
         
         return random.choice(cartas_validas)
     
-    def jogar_rodada(self):
+    """    def jogar_rodada(self):
         for i in range(4):
             jogador_idx = (self.jogador_iniciante + i) % 4
             jogador = self.jogadores[jogador_idx]
@@ -104,7 +112,7 @@ class JogoCopas:
             # Marca se copas foram quebradas
             if carta_jogada.naipe == "Copas" and not self.copas_quebradas:
                 self.copas_quebradas = True
-                print("Copas foram quebradas!")
+                print("Copas foram quebradas!")"""
     
 
     
@@ -132,10 +140,10 @@ class JogoCopas:
     def determinar_vencedor_rodada(self):
         naipe_inicial = self.cartas_na_mesa[0].naipe
         print("\n---Fim de rodada---")
-        print(naipe_inicial)
+        """print(naipe_inicial)"""
 
         cartas_do_naipe = [c for c in self.cartas_na_mesa if c.naipe == naipe_inicial]
-        imprimeMao(cartas_do_naipe)
+        """imprimeMao(cartas_do_naipe)"""
 
         carta_vencedora = max(cartas_do_naipe, key=lambda x: x.identificador)
         carta_vencedora.imprimeCarta()
@@ -152,29 +160,49 @@ class JogoCopas:
             pontos_rodada += 13
             print("Dama de Espadas capturada! +13 pontos")
 
-        jogador_vencedor.pontos += pontos_rodada
+        jogador_vencedor.pontosRodada += pontos_rodada
         self.jogador_iniciante = self.jogadores.index(jogador_vencedor)
 
 
 
     
-    def verificar_fim_jogo(self):
+    def verificaFimMesa(self):
         return all(len(j.mao) == 0 for j in self.jogadores)
     
-    def determinar_vencedor(self):
-        menor_pontuacao = min(j.pontos for j in self.jogadores)
-        vencedores = [j for j in self.jogadores if j.pontos == menor_pontuacao]
+    def determinarVencedorJogo(self):
+        menor_pontuacao = min(j.pontosTotais for j in self.jogadores)
+        vencedores = [j for j in self.jogadores if j.pontosTotais == menor_pontuacao]
         
-
-
         if len(vencedores) == 1:
-            print(f"\n{vencedores[0].nome} venceu o jogo com {vencedores[0].pontos} pontos!")
+            print(f"\n{vencedores[0].nome} venceu o jogo com {vencedores[0].pontosTotais} pontos!")
         else:
             print("\nEmpate entre:")
             for v in vencedores:
-                print(f"{v.nome} com {v.pontos} pontos")
+                print(f"{v.nome} com {v.pontosTotais} pontos")
         
         return vencedores
+    
+    def somaPontos(self):
+        if all(j.pontosRodada == 26 for j in self.jogadores):
+            print("\nLua acertada")
+            for i in self.jogadores:
+                if i.pontosRodada == 26:
+                    i.pontosTotais += 0
+                else:
+                    print(f"Somado 26 em {i.nome}")
+                    i.pontosTotais += 26
+
+        else:
+            for i in self.jogadores:
+                i.pontosTotais += i.pontosRodada
+                
+        for i in self.jogadores:
+            i.pontosRodada = 0
+
+    def verificaFimJogo(self):
+        return any(j.pontosTotais >= 100 for j in self.jogadores)
+
+            
 
 def main():
     jogo = JogoCopas()
@@ -183,21 +211,27 @@ def main():
     for i in range(4):
         jogo.adicionar_jogador(f"Jogador {i+1}")
     
-    # Distribui cartas
-    jogo.distribuir_cartas()
-    
-    # Jogo principal
-    while not jogo.verificar_fim_jogo():
-        jogo.iniciar_rodada()
-        jogo.jogar_rodada()
-        jogo.determinar_vencedor_rodada()
+    while not jogo.verificaFimJogo():
+        jogo.iniciaMesa()
+            
+        # Distribui cartas
+        jogo.distribuir_cartas()
+        
+        # Jogo principal
+        while not jogo.verificaFimMesa():
+            jogo.iniciar_rodada()
+            jogo.jogar_rodada()
+            jogo.determinar_vencedor_rodada()
 
-
-    for i in jogo.jogadores:
-        print(i.pontos)
+        """jogo.jogadores[1].pontosRodada = 26"""
+        jogo.somaPontos()
+        for i in jogo.jogadores:
+            print(i.pontosRodada)
+        for i in jogo.jogadores:
+            print(i.pontosTotais)
 
     # Resultado final
-    jogo.determinar_vencedor()
+    jogo.determinarVencedorJogo()
 
 
 if __name__ == "__main__":
