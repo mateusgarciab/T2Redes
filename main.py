@@ -16,6 +16,7 @@ portaEnvio =   valores[3]
 if ordem == 0:
     mensagem = Mensagem(0, 1, 1) # Mesagem inicial para verifcar conexão
     mensagem.enviaMensagem(ipEnvio, portaEnvio)
+    print("Entre envia e recebe")
     mensagem = recebeMensagem(ipChegada, portaChegada)
 
 else: #Jogo o Jogo
