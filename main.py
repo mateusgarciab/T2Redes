@@ -5,7 +5,7 @@ import info
 
 ordem = int(input("Digite sua ordem na rodada (1 a 4) "))
 
-valores = info.obter_valores_maquina(ordem - 1)
+valores = info.obter_valores_maquina(ordem)
 
 ipChegada = valores[0]
 ipEnvio =  valores[1]

@@ -27,9 +27,10 @@ if (envia == "e"):
     enre.enviaMensagem(mensagem, valores[1], valores[3])
 else:
  
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    mensagem = enre.recebeMensagem(valores[0], int(valores[2]))
+    """ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((valores[0], int(valores[2])))
  
     while True:
        data, addr = sock.recvfrom(1024) 
-       print("received message: %s" % data)
+       print("received message: %s" % data) """
