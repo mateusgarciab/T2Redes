@@ -1,3 +1,5 @@
+#Para remover esse arquivo
+
 import socket
  
 UDP_IP = "192.168.15.14"

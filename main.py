@@ -1,5 +1,5 @@
-import envioRecebido as enre
-import baralho as br
+from mensagem import *
+from baralho import *
 import info
 #import copy
 
@@ -9,6 +9,19 @@ valores = info.obter_valores_maquina(ordem - 1)
 
 ipChegada = valores[0]
 ipEnvio =  valores[1]
-portaRecebe = valores[2]
-portaEnvia =   valores[3]
+portaChegada = valores[2]
+portaEnvio =   valores[3]
 
+# Maquina 1 controla o jogo 
+if ordem == 0:
+    mensagem = Mensagem(0, 1, 1) # Mesagem inicial para verifcar conexão
+    mensagem.enviaMensagem(ipEnvio, portaEnvio)
+    mensagem = recebeMensagem(ipChegada, portaChegada)
+
+else: #Jogo o Jogo
+    mensagem = recebeMensagem(ipChegada, portaChegada)
+    if mensagem.tipo == 0:
+        mensagem.enviaMensagem(ipEnvio, portaEnvio)
+    else:
+        print(f"Mesagem de tipo incorreto {mensagem.tipo}")
+        

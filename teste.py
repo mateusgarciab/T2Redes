@@ -1,6 +1,6 @@
 import baralho as br
 import random
-import envioRecebido as enre
+import mensagem as enre
 import pickle
 import info
 import socket

@@ -16,7 +16,7 @@ def obter_valores_maquina(numero):
         return None
     
 
-numero_maquina = 0
+""" numero_maquina = 0
 valores = obter_valores_maquina(numero_maquina)
 if valores:
     print(f"Valores da Máquina {numero_maquina}:")
@@ -25,3 +25,4 @@ if valores:
     print(type(valores[2]))
     print(type(valores[3]))
     print(valores)
+ """
