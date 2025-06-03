@@ -12,6 +12,8 @@ ipEnvio =  valores[1]
 portaChegada = valores[2]
 portaEnvio =   valores[3]
 
+print(f"ipChegada {ipChegada}  ipEnvio {ipEnvio}  portaChegada {portaChegada}  portaEnvio {portaEnvio}")
+
 # Maquina 1 controla o jogo 
 if ordem == 0:
     mensagem = Mensagem(0, 1, 1) # Mesagem inicial para verifcar conexão
