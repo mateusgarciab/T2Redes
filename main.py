@@ -14,12 +14,14 @@ portaEnvio =   valores[3]
 
 # Maquina 1 controla o jogo 
 if ordem == 0:
+    print("Sou zero")
     mensagem = Mensagem(0, 1, 1) # Mesagem inicial para verifcar conexão
     mensagem.enviaMensagem(ipEnvio, portaEnvio)
     print("Entre envia e recebe")
     mensagem = recebeMensagem(ipChegada, portaChegada)
 
 else: #Jogo o Jogo
+    print(f"Sou {ordem}")
     mensagem = recebeMensagem(ipChegada, portaChegada)
     if mensagem.tipo == 0:
         mensagem.enviaMensagem(ipEnvio, portaEnvio)

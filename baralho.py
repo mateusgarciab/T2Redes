@@ -1,22 +1,22 @@
 import random
 
-class Carta: #revisado
+class Carta: 
     def __init__(self, naipe, simbolo, valor, identificador):
         self.naipe = naipe
         self.simbolo = simbolo
         self.valor = valor
         self.identificador = identificador
 
-    def imprimeCarta(self): #revisado    
+    def imprimeCarta(self):     
         print(f"{self.simbolo} de {self.naipe} e id {self.identificador}")
 
 
-def imprimeMao(mao): #revisado
+def imprimeMao(mao): 
     for i in range(len(mao)):
         mao[i].imprimeCarta()
     print("Valor da mao", valorMao(mao))
 
-def criaBaralho(): #revisado
+def criaBaralho(): 
     baralho = []
     for i in range(9):
         baralho.append(Carta("Espada", i+2, 0, i))
@@ -55,9 +55,15 @@ def criaBaralho(): #revisado
 
     return cartaEscolhida """
 
-def valorMao(mao): #revisado
+def valorMao(mao): 
     valor = 0
     for i in range(len(mao)):
         valor += mao[i].valor
 
     return valor
+
+def buscarCartaPorId(identificador, baralho) -> Carta:
+    for carta in baralho:
+        if carta.identificador == identificador:
+            return carta
+    return None

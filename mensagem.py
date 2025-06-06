@@ -15,8 +15,9 @@ class Mensagem():
 
     def enviaMensagem(self, ipEnvio, portaEnvio):
         soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        soquete.sendto(pickle.dumps(self), (ipEnvio, int(portaEnvio)))
         print("Enviando mensagem de tipo: ", self.tipo)
+        soquete.sendto(pickle.dumps(self), (ipEnvio, int(portaEnvio)))
+        print("Enviado")
 
         soquete.close()
 
@@ -24,7 +25,7 @@ class Mensagem():
 def recebeMensagem(ipChegada, portaChegada) -> Mensagem:
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     soquete.bind((ipChegada, int(portaChegada)))
-
+    print("Esperar")
     #recebe
     while True:
         dados, addr = soquete.recvfrom(1024) 
