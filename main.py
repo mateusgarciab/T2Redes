@@ -15,8 +15,8 @@ portaEnvio =   valores[3]
 print(f"ipChegada {ipChegada}  ipEnvio {ipEnvio}  portaChegada {portaChegada}  portaEnvio {portaEnvio}")
 
 # Maquina 1 controla o jogo 
-if ordem == 0:
-    print("Sou zero")
+if ordem == 1:
+    print("Sou um")
     mensagem = Mensagem(0, 1, 1) # Mesagem inicial para verifcar conexão
     mensagem.enviaMensagem(ipEnvio, portaEnvio)
     print("Entre envia e recebe")

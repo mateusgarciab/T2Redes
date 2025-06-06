@@ -36,21 +36,16 @@ envia = input("envia ou recebe ")
 
 if (envia == "e"):
     msg = Mensagem(5, numero_maquina, 15)
-    comprimido = pickle.dumps(msg)
+    """ comprimido = pickle.dumps(msg)
+    comprimido.enviaMensagem(valores[1], valores[3]) """
     msg.enviaMensagem(valores[1], valores[3])
     msg.imprimeMensagem()
 
-    """ blocoZerado = enre.Bloco(br.Carta(0,0), 0, 0, 0)
-    mensagem = enre.Mensagem(0, blocoZerado, blocoZerado, blocoZerado, blocoZerado) 
-    enre.enviaMensagem(mensagem, valores[1], valores[3]) """
+
 else:
     msg = recebeMensagem(valores[0], int(valores[2]))
-    descomprimido = pickle.loads(msg)
-    descomprimido.imprimeMensagem()
+    """ descomprimido = pickle.loads(msg)
+    descomprimido.imprimeMensagem() """
 
-    """ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((valores[0], int(valores[2])))
- 
-    while True:
-       data, addr = sock.recvfrom(1024) 
-       print("received message: %s" % data) """
+
+    msg.imprimeMensagem()
