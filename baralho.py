@@ -66,5 +66,5 @@ def buscarCartaPorId(identificador, baralho) -> Carta:
     for carta in baralho:
         if carta.identificador == identificador:
             return carta
-    print("Nao achado carta")
+    print("Carta não identificada")
     return None

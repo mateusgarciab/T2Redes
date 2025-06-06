@@ -36,13 +36,20 @@ class JogoCopas:
             return True
         return False
     
+    
     def distribuir_cartas(self):
         random.shuffle(self.baralho)
         for i in range(len(self.baralho)):
             self.jogadores[i % 4].receber_carta(self.baralho[i])
+            """Mandar para o jogador a acrta dele e esperar resposta"""
+            """Quem tem o dois de copas"""
+            if self.baralho[i].identificador == 26: 
+                j = i
         
         for jogador in self.jogadores:
             jogador.ordenar_mao()
+        """Retorna o jogador que tem o dois de paus"""
+        return j
     
     def iniciar_rodada(self):
         self.rodada += 1
@@ -82,7 +89,7 @@ class JogoCopas:
         
     def simular_escolha(self, jogador):
         # Simula a escolha de carta pelo jogador
-        # Em uma implementação real, isso seria substituído pela entrada do jogador
+        # Isso será substituído pela entrada do jogador
         cartas_validas = []
         for i, carta in enumerate(jogador.mao):
             if self.validar_jogada(self.jogadores.index(jogador), i):
@@ -93,29 +100,7 @@ class JogoCopas:
             return 0
         
         return random.choice(cartas_validas)
-    
-    """    def jogar_rodada(self):
-        for i in range(4):
-            jogador_idx = (self.jogador_iniciante + i) % 4
-            jogador = self.jogadores[jogador_idx]
-            
-            jogador.mostrar_mao()
-            
-            # Simulação de escolha - em rede seria a escolha real do jogador
-            carta_idx = self.simular_escolha(jogador)
-            
-            carta_jogada = jogador.jogar_carta(carta_idx)
-            self.cartas_na_mesa.append(carta_jogada)
-            
-            print(f"{jogador.nome} jogou: {carta_jogada.simbolo} de {carta_jogada.naipe}")
-            
-            # Marca se copas foram quebradas
-            if carta_jogada.naipe == "Copas" and not self.copas_quebradas:
-                self.copas_quebradas = True
-                print("Copas foram quebradas!")"""
-    
-
-    
+        
     def jogar_rodada(self):
         self.cartas_na_mesa = []
         self.jogadores_na_rodada = {}  # Novo: mapeia carta -> jogador

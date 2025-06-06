@@ -34,4 +34,3 @@ def recebeMensagem(ipChegada, portaChegada) -> Mensagem:
         """ mensagem.imprimeMensagem() """
         soquete.close()
         return mensagem
-

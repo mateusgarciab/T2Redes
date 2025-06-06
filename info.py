@@ -6,7 +6,7 @@ def obter_valores_maquina(numero):
             conteudo = arquivo.read()
 
         maquinas = conteudo.strip().split('\n\n')  # Divide em blocos, separados por \n\n
-        dados_maquina = maquinas[numero - 1].split('\n')  # Seleciona o bloco correspondente à máquina
+        dados_maquina = maquinas[numero - 1].split('\n')  # Seleciona o bloco correspondente a máquina
         
         valores = [linha.split()[1] for linha in dados_maquina[1:]]
         return valores
