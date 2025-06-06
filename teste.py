@@ -29,13 +29,16 @@ comprimido = pickle.dumps(mensagem)
 descomprimido = pickle.loads(comprimido)
 br.imprimeCarta(descomprimido.bloco1.carta) """
 
+
+baralho = criaBaralho()
+
 numero_maquina = int(input("numero da maquina "))
 valores = info.obter_valores_maquina(numero_maquina)
 
 envia = input("envia ou recebe ")
 
 if (envia == "e"):
-    msg = Mensagem(5, numero_maquina, 15)
+    msg = Mensagem(5, numero_maquina, 15, 88)
     """ comprimido = pickle.dumps(msg)
     comprimido.enviaMensagem(valores[1], valores[3]) """
     msg.enviaMensagem(valores[1], valores[3])
@@ -49,3 +52,4 @@ else:
 
 
     msg.imprimeMensagem()
+    buscarCartaPorId(msg.cartaID, baralho)

@@ -17,12 +17,12 @@ print(f"ipChegada {ipChegada}  ipEnvio {ipEnvio}  portaChegada {portaChegada}  p
 # Maquina 1 controla o jogo 
 if ordem == 1:
     print("Sou um")
-    mensagem = Mensagem(0, 1, 1) # Mesagem inicial para verifcar conexão
+    mensagem = Mensagem(0, 1, 1, 50) # Mesagem inicial para verifcar conexão
     mensagem.enviaMensagem(ipEnvio, portaEnvio)
     print("Entre envia e recebe")
     mensagem = recebeMensagem(ipChegada, portaChegada)
 
-else: #Jogo o Jogo
+else: #Joga o Jogo
     print(f"Sou {ordem}")
     mensagem = recebeMensagem(ipChegada, portaChegada)
     if mensagem.tipo == 0:

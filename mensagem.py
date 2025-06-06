@@ -4,14 +4,14 @@ import copy
 from baralho import *
         
 class Mensagem():
-    def __init__(self, tipo, origem, destino):
+    def __init__(self, tipo, origem, destino, cartaId):
         self.tipo = tipo
-        self.carta = Carta(0,0,0,0)
+        self.cartaID = cartaId
         self.origem = origem
         self.destino = destino
 
     def imprimeMensagem(self):
-        print(f"Mensagem do tipo {self.tipo}")  
+        print(f"Mensagem do tipo {self.tipo}, origem {self.origem}, destino {self.destino} e carta ID {self.cartaID}")  
 
     def enviaMensagem(self, ipEnvio, portaEnvio):
         soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
