@@ -45,6 +45,11 @@ if (envia == "e"):
     msg.imprimeMensagem()
 
 
+    carta = buscarCartaPorId(msg.cartaID, baralho)
+    print(f"Id {msg.cartaID} {type(msg.cartaID)} {type(carta)}")
+    carta.imprimeCarta()
+
+
 else:
     msg = recebeMensagem(valores[0], int(valores[2]))
     """ descomprimido = pickle.loads(msg)
@@ -53,4 +58,5 @@ else:
 
     msg.imprimeMensagem()
     carta = buscarCartaPorId(msg.cartaID, baralho)
+    print(f"Id {msg.cartaID} {type(msg.cartaID)} {type(carta)}")
     carta.imprimeCarta()
