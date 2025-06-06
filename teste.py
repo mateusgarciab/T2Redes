@@ -52,4 +52,5 @@ else:
 
 
     msg.imprimeMensagem()
-    buscarCartaPorId(msg.cartaID, baralho)
+    carta = buscarCartaPorId(msg.cartaID, baralho)
+    carta.imprimeCarta()
