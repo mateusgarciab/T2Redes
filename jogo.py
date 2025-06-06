@@ -183,7 +183,7 @@ class JogoCopas:
         return vencedores
     
     def somaPontos(self):
-        if all(j.pontosRodada == 26 for j in self.jogadores):
+        if any(j.pontosRodada == 26 for j in self.jogadores): # Verificar
             print("\nLua acertada")
             for i in self.jogadores:
                 if i.pontosRodada == 26:
@@ -197,6 +197,7 @@ class JogoCopas:
                 i.pontosTotais += i.pontosRodada
                 
         for i in self.jogadores:
+            print(f"{i.nome} fez {i.pontosRodada}")
             i.pontosRodada = 0
 
     def verificaFimJogo(self):
@@ -225,8 +226,8 @@ def main():
 
         """jogo.jogadores[1].pontosRodada = 26"""
         jogo.somaPontos()
-        for i in jogo.jogadores:
-            print(i.pontosRodada)
+        """for i in jogo.jogadores:
+            print(i.pontosRodada)"""
         for i in jogo.jogadores:
             print(i.pontosTotais)
 
