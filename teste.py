@@ -1,6 +1,6 @@
 import baralho as br
 import random
-import mensagem as enre
+from mensagem import *
 import pickle
 import info
 import socket
@@ -8,7 +8,7 @@ from jogo import *
 #ss -tuln
 #ip a
 
-jogo = JogoCopas()
+""" jogo = JogoCopas()
 for i in range(4):
     jogo.adicionar_jogador(f"Jogador {i+1}")
 
@@ -19,7 +19,7 @@ jogo.jogadores[3].pontosRodada = 0
 
 jogo.somaPontos()
 for i in jogo.jogadores:
-    print(i.pontosTotais)
+    print(i.pontosTotais) """
 
 """ carta = br.Carta("ouros",2)
 bloco = enre.Bloco(carta, 0, 1, 0)
@@ -29,21 +29,26 @@ comprimido = pickle.dumps(mensagem)
 descomprimido = pickle.loads(comprimido)
 br.imprimeCarta(descomprimido.bloco1.carta) """
 
-"""numero_maquina = int(input("numero da maquina "))
+numero_maquina = int(input("numero da maquina "))
 valores = info.obter_valores_maquina(numero_maquina)
 
 envia = input("envia ou recebe ")
 
 if (envia == "e"):
-    blocoZerado = enre.Bloco(br.Carta(0,0), 0, 0, 0)
+    msg = Mensagem(5, numero_maquina, 15)
+    comprimido = pickle.dumps(msg)
+    msg.enviaMensagem(valores[1], valores[3])
+    msg.imprimeMensagem()
+
+    """ blocoZerado = enre.Bloco(br.Carta(0,0), 0, 0, 0)
     mensagem = enre.Mensagem(0, blocoZerado, blocoZerado, blocoZerado, blocoZerado) 
-    enre.enviaMensagem(mensagem, valores[1], valores[3])
+    enre.enviaMensagem(mensagem, valores[1], valores[3]) """
 else:
- 
-    mensagem = enre.recebeMensagem(valores[0], int(valores[2]))"""
+    msg = recebeMensagem(valores[0], int(valores[2]))
+    descomprimido = pickle.loads(msg)
+    descomprimido.imprimeMensagem()
 
-
-""" sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    """ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((valores[0], int(valores[2])))
  
     while True:
