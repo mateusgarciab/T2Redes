@@ -64,7 +64,7 @@ class JogoCopas:
         self.cartas_na_mesa = []
         print(f"\n=== Rodada {self.rodada} ===")
 
-        mensagem = Mensagem(3, 1, 1, self.jogador_iniciante)
+        mensagem = Mensagem(3, 1, 1, self.rodada)
         mensagem.enviaMensagem(ipEnvio, portaEnvio)
         mensagem = recebeMensagem(ipChegada, portaChegada)
 

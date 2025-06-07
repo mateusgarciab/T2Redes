@@ -75,9 +75,9 @@ else: #Joga o Jogo
             print("===== Nova Mesa =====")
             mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Mesa, e rapassa
         elif mensagem.tipo == 3:
-            print("=== Nova Rodada ===")
-            if mensagem.cartaID == maquina:
-                print(f"Você é o primeiro a jogar {mensagem.cartaID} ")
+            print(f"=== Rodada {mensagem.cartaID} ===")
+            """             if mensagem.cartaID == maquina:
+                print(f"Você é o primeiro a jogar {mensagem.cartaID} ") """
             mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Rodada, e repassa
 
         else:
