@@ -15,12 +15,17 @@ class Mensagem():
 
     def enviaMensagem(self, ipEnvio, portaEnvio):
         soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        print("Enviando mensagem de tipo: ", self.tipo)
-        soquete.sendto(pickle.dumps(self), (ipEnvio, int(portaEnvio)))
         print("Enviado")
+        self.imprimeMensagem()
+        soquete.sendto(pickle.dumps(self), (ipEnvio, int(portaEnvio)))
 
         soquete.close()
 
+    def mensagemParaMim(self, maquina):
+        if self.destino == maquina:
+            return True
+        else:
+            return False
 
 def recebeMensagem(ipChegada, portaChegada) -> Mensagem:
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -30,7 +35,7 @@ def recebeMensagem(ipChegada, portaChegada) -> Mensagem:
     while True:
         dados, addr = soquete.recvfrom(1024) 
         mensagem = pickle.loads(dados)
-        print(f"Recebido mensagem de tipo: {mensagem.tipo}")
-        """ mensagem.imprimeMensagem() """
+        print(f"Recebido")
+        mensagem.imprimeMensagem()
         soquete.close()
         return mensagem

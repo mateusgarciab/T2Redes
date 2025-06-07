@@ -1,5 +1,6 @@
 import random
 from baralho import *
+from mensagem import *
 
 class Jogador:
     def __init__(self, nome):
@@ -19,10 +20,11 @@ class Jogador:
     
     def mostrar_mao(self):
         print(f"\nMão de {self.nome}:")
-        """imprimeMao(self.mao)"""
+        imprimeMao(self.mao)
 
 class JogoCopas:
     def __init__(self):
+        self.jogoAtivo = True
         self.jogadores = []
         self.baralho = criaBaralho()
         self.rodada = 0
@@ -37,11 +39,14 @@ class JogoCopas:
         return False
     
     
-    def distribuir_cartas(self):
+    def distribuir_cartas(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         random.shuffle(self.baralho)
+        mensagem = Mensagem(1, 1, 1, 0)
         for i in range(len(self.baralho)):
             self.jogadores[i % 4].receber_carta(self.baralho[i])
-            """Mandar para o jogador a acrta dele e esperar resposta"""
+            """Mandar para o jogador a carta dele e esperar resposta"""
+            mensagem.enviaMensagem(ipEnvio, portaEnvio)
+            recebeMensagem(ipChegada, portaChegada)
             """Quem tem o dois de copas"""
             if self.baralho[i].identificador == 26: 
                 j = i
@@ -49,6 +54,7 @@ class JogoCopas:
         for jogador in self.jogadores:
             jogador.ordenar_mao()
         """Retorna o jogador que tem o dois de paus"""
+        self.jogador_iniciante = j
         return j
     
     def iniciar_rodada(self):
