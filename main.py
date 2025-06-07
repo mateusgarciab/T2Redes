@@ -51,6 +51,7 @@ else: #Joga o Jogo
                 print("So passa")
                 mensagem.enviaMensagem(ipEnvio, portaEnvio) # Não era para mim, e rapassa
             jogador.mostrar_mao()
+            jogador.ordenar_mao()
 
         else:
             print(f"Mesagem de tipo incorreto {mensagem.tipo}")
