@@ -43,7 +43,7 @@ else: #Joga o Jogo
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
         elif mensagem.tipo == 1:
             print("Tipo 1 ")
-            if mensagem.mensagemParaMim():
+            if mensagem.mensagemParaMim(maquina):
                 print("Recebeu Carta")
                 jogador.receber_carta(buscarCartaPorId(mensagem.cartaID, baralho))
                 mensagem.enviaMensagem(ipEnvio, portaEnvio) # Era para mim, e repassa
