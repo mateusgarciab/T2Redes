@@ -45,6 +45,7 @@ class JogoCopas:
         for i in range(len(self.baralho)):
             self.jogadores[i % 4].receber_carta(self.baralho[i])
             """Mandar para o jogador a carta dele e esperar resposta"""
+            mensagem.cartaID = self.baralho[i].identificador
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
             recebeMensagem(ipChegada, portaChegada)
             """Quem tem o dois de copas"""
