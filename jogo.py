@@ -64,12 +64,16 @@ class JogoCopas:
         self.cartas_na_mesa = []
         print(f"\n=== Rodada {self.rodada} ===")
 
-    def iniciaMesa(self):
+    def iniciaMesa(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         self.baralho = criaBaralho()
         self.rodada = 0
         self.cartas_na_mesa = []
         self.jogador_iniciante = 0
         self.copas_quebradas = False
+
+        mensagem = Mensagem(2, 1, 1, 0)
+        mensagem.enviaMensagem(ipEnvio, portaEnvio)
+        mensagem = recebeMensagem(ipChegada, portaChegada)
     
     def validar_jogada(self, jogador_idx, carta_idx):
         carta = self.jogadores[jogador_idx].mao[carta_idx]

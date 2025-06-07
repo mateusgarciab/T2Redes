@@ -23,10 +23,30 @@ if maquina == 1:
     mensagem.enviaMensagem(ipEnvio, portaEnvio)
     print("Entre envia e recebe")
     mensagem = recebeMensagem(ipChegada, portaChegada)
-    jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada)
+    """ jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada) """
 
-    for i in range(4):
-        jogo.jogadores[i].mostrar_mao()  
+    """ for i in range(4):
+        jogo.jogadores[i].mostrar_mao()   """
+    while not jogo.verificaFimJogo():
+        jogo.iniciaMesa(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
+            
+        # Distribui cartas
+        jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
+        
+        # Jogo principal
+        while not jogo.verificaFimMesa():
+            jogo.iniciar_rodada()
+            jogo.jogar_rodada()
+            jogo.determinar_vencedor_rodada()
+
+        jogo.somaPontos()
+        """for i in jogo.jogadores:
+            print(i.pontosRodada)"""
+        for i in jogo.jogadores:
+            print(i.pontosTotais)
+
+    # Resultado final
+    jogo.determinarVencedorJogo()
 
 
 else: #Joga o Jogo
@@ -50,8 +70,11 @@ else: #Joga o Jogo
             else:
                 print("So passa")
                 mensagem.enviaMensagem(ipEnvio, portaEnvio) # Não era para mim, e rapassa
-            jogador.mostrar_mao()
             jogador.ordenar_mao()
+            jogador.mostrar_mao()
+        elif mensagem.tipo == 2:
+            print("=== Nova rodada ===")
+            mensagem.enviaMensagem(ipEnvio, portaEnvio) # informa a nova rodada, e rapassa
 
         else:
             print(f"Mesagem de tipo incorreto {mensagem.tipo}")
