@@ -35,7 +35,7 @@ if maquina == 1:
         
         # Jogo principal
         while not jogo.verificaFimMesa():
-            jogo.iniciar_rodada()
+            jogo.iniciar_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
             jogo.jogar_rodada()
             jogo.determinar_vencedor_rodada()
 
@@ -50,7 +50,6 @@ if maquina == 1:
 
 
 else: #Joga o Jogo
-    print(f"Sou {maquina}")
     baralho = criaBaralho()
     jogoAtivo = True
     jogador = Jogador(f"Jogador {maquina}")
@@ -71,10 +70,15 @@ else: #Joga o Jogo
                 print("So passa")
                 mensagem.enviaMensagem(ipEnvio, portaEnvio) # Não era para mim, e rapassa
             jogador.ordenar_mao()
-            jogador.mostrar_mao()
+            """ jogador.mostrar_mao() """
         elif mensagem.tipo == 2:
-            print("=== Nova rodada ===")
-            mensagem.enviaMensagem(ipEnvio, portaEnvio) # informa a nova rodada, e rapassa
+            print("===== Nova Mesa =====")
+            mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Mesa, e rapassa
+        elif mensagem.tipo == 3:
+            print("=== Nova Rodada ===")
+            if mensagem.cartaID == maquina:
+                print(f"Você é o primeiro a jogar {mensagem.cartaID} ")
+            mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Rodada, e repassa
 
         else:
             print(f"Mesagem de tipo incorreto {mensagem.tipo}")

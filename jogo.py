@@ -59,10 +59,14 @@ class JogoCopas:
         self.jogador_iniciante = j
         return j
     
-    def iniciar_rodada(self):
+    def iniciar_rodada(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         self.rodada += 1
         self.cartas_na_mesa = []
         print(f"\n=== Rodada {self.rodada} ===")
+
+        mensagem = Mensagem(3, 1, 1, self.jogador_iniciante)
+        mensagem.enviaMensagem(ipEnvio, portaEnvio)
+        mensagem = recebeMensagem(ipChegada, portaChegada)
 
     def iniciaMesa(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         self.baralho = criaBaralho()
