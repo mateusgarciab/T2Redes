@@ -70,6 +70,7 @@ if maquina == 1:
                         jogo.jogar_rodada(0, idCarta)
                         mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
                         mensagem.enviaMensagem(ipEnvio, portaEnvio)
+                print(f"_________________ {len(jogo.cartas_na_mesa)} ____________________")
 
 
 
