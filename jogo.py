@@ -87,11 +87,12 @@ class JogoCopas:
             recebeMensagem(ipChegada, portaChegada)
             #Quem tem o dois de copas
             if self.baralho[i].identificador == 26: 
-                j = i
+                j = i%4
         
         for jogador in self.jogadores:
             jogador.ordenar_mao()
         # Retorna o jogador que tem o dois de paus
+        print(f"{j} começa") # ============================================================================================================
         self.jogador_iniciante = j
         """ return j """
     
