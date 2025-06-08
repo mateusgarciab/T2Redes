@@ -41,7 +41,7 @@ if maquina == 1:
                 jogo.jogar_rodada(jogo.jogadores[0].nome, idCarta)
             else:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
-                mensagem.enviaMensagem()
+                mensagem.enviaMensagem(ipEnvio, portaEnvio)
             
             while mensagem.tipo == 4 and mensagem.destino == 1:
                 mensagem = recebeMensagem(ipChegada, portaChegada)
