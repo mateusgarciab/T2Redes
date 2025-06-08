@@ -162,10 +162,11 @@ else: #Joga o Jogo
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
         elif mensagem.tipo == 6:
-            if mensagem.cartaID == maquina: #int(texto[-1])
+            if mensagem.cartaID == maquina:
                 print("++++++++++++ Você ganhou ++++++++++++")
             else:
                 print(f"++++++++++++ {mensagem.cartaID} ganhou ++++++++++++")
+            mensagem.enviaMensagem(ipEnvio, portaEnvio)
         else:
             print(f"Mesagem de tipo incorreto {mensagem.tipo}")
         
