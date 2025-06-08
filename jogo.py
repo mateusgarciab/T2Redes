@@ -83,12 +83,12 @@ class JogoCopas:
             self.jogadores[i % 4].receber_carta(self.baralho[i])
             # Mandar para o jogador a carta dele e esperar resposta
             mensagem.cartaID = self.baralho[i].identificador
-            mensagem.destino = (i % 4)
+            mensagem.destino = (i % 4) + 1
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
             recebeMensagem(ipChegada, portaChegada)
             #Quem tem o dois de copas
             if self.baralho[i].identificador == 26: 
-                j = (i%4) 
+                j = (i%4) + 1
         
         for jogador in self.jogadores:
             jogador.ordenar_mao()

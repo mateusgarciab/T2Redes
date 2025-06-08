@@ -22,7 +22,7 @@ class Mensagem():
         soquete.close()
 
     def mensagemParaMim(self, maquina):
-        if self.destino+1 == maquina:
+        if self.destino == maquina:
             return True
         else:
             return False
