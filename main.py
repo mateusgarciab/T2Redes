@@ -135,6 +135,7 @@ else: #Joga o Jogo
                 print("Copas foram quebradas!")
                 copasQuebradas = True
             cartas_na_mesa.append(carta)
+            mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
         else:
             print(f"Mesagem de tipo incorreto {mensagem.tipo}")
