@@ -68,6 +68,7 @@ class JogoCopas:
         self.cartas_na_mesa = []
         self.jogador_iniciante = 0
         self.copas_quebradas = False
+        self.jogadores_na_rodada = {}
     
     def adicionar_jogador(self, nome):
         if len(self.jogadores) < 4:
@@ -100,6 +101,7 @@ class JogoCopas:
     def iniciar_rodada(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         self.rodada += 1
         self.cartas_na_mesa = []
+        self.jogadores_na_rodada = {}
         print(f"\n=== Rodada {self.rodada} ===")
 
         mensagem = Mensagem(3, 1, 1, self.rodada)
@@ -156,8 +158,8 @@ class JogoCopas:
         return random.choice(cartas_validas) """
         
     def jogar_rodada(self, jogador, idCarta):
-        self.cartas_na_mesa = []
-        self.jogadores_na_rodada = {}  # Mapeia carta -> jogador
+        """ self.cartas_na_mesa = [] """
+          # Mapeia carta -> jogador
 
         jogador = self.jogadores[jogador]
 

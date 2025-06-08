@@ -25,8 +25,6 @@ if maquina == 1:
     mensagem = recebeMensagem(ipChegada, portaChegada)
     """ jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada) """
 
-    """ for i in range(4):
-        jogo.jogadores[i].mostrar_mao()   """
     while not jogo.verificaFimJogo():
         jogo.iniciaMesa(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
             
