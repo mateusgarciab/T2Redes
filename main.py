@@ -144,6 +144,7 @@ else: #Joga o Jogo
                 mensagem = recebeMensagem(ipChegada, portaChegada)
 
                 print(f"_________________ {len(cartas_na_mesa)} ____________________")
+                imprimeMao(cartas_na_mesa)
                 if len(cartas_na_mesa) == 4:
                     mensagem = Mensagem(4, maquina, 1, 0)
                 else:
