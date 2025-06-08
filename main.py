@@ -38,6 +38,8 @@ if maquina == 1:
 
             if jogo.jogador_iniciante == 1: #Eu jogo primeiro
                 idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
+                #REMOVER ACARTA ADICIONAL
+                jogo.cartas_na_mesa.pop()
                 jogo.jogar_rodada(0, idCarta)
 
                 mensagem = Mensagem(5, 1, 1, idCarta)
