@@ -22,9 +22,45 @@ class Jogador:
         print(f"\nMão de {self.nome}:")
         imprimeMao(self.mao)
 
+    def jogadorJoga(self, cartas_na_mesa, rodada, copasQuebradas):
+        cartasValidas = []
+        naipeRodada = 0
+        if (not cartas_na_mesa) and (rodada == 1):                          # Você é primeiro da primeira rodada
+            cartasValidas.append(buscarCartaPorId(39, self.mao)) # Dois de Paus
+        elif rodada == 1:                                                   # Primeira rodada, você não é primeiro
+            naipeRodada = cartas_na_mesa[0].naipe
+            for i in self.mao:
+                if (i.valor == 0) and (naipeRodada == i.naipe):             # Não pode ser de copas nem dama de espada
+                    cartasValidas.append(i)
+        elif not cartas_na_mesa:                                            # Primeiro da rodada, qualquer rodada
+            for i in self.mao:
+                if i.naipe ==  "Copas":
+                    if copasQuebradas:
+                        cartasValidas.append(i)
+                else:
+                    cartasValidas.append(i)
+        else:                                                               # Você não é o primeiro e nem é a primeira rodada
+            naipeRodada = cartas_na_mesa[0].naipe
+            for i in self.mao:
+                if naipeRodada == i.naipe:
+                    cartasValidas.append(i)
+
+
+        if not cartasValidas:                      # Você não tem cartas do naipe da rodada
+            for i in self.mao:
+                cartasValidas.append(i)
+
+        cartaEscolhida = escolheCarta(cartasValidas)
+        self.jogar_carta(cartaEscolhida.identificador) # Remove da Mão a carta escolhida
+        if cartaEscolhida.naipe == "Copas" and not copasQuebradas:
+            copasQuebradas = True
+        cartas_na_mesa.append(cartaEscolhida)
+        return cartaEscolhida.identificador
+        
+
 class JogoCopas:
     def __init__(self):
-        self.jogoAtivo = True
+        self.jogoAtivo = True #Talvez possa tirar
         self.jogadores = []
         self.baralho = criaBaralho()
         self.rodada = 0
@@ -44,20 +80,20 @@ class JogoCopas:
         mensagem = Mensagem(1, 1, 1, 0)
         for i in range(len(self.baralho)):
             self.jogadores[i % 4].receber_carta(self.baralho[i])
-            """Mandar para o jogador a carta dele e esperar resposta"""
+            # Mandar para o jogador a carta dele e esperar resposta
             mensagem.cartaID = self.baralho[i].identificador
             mensagem.destino = i % 4
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
             recebeMensagem(ipChegada, portaChegada)
-            """Quem tem o dois de copas"""
+            #Quem tem o dois de copas
             if self.baralho[i].identificador == 26: 
                 j = i
         
         for jogador in self.jogadores:
             jogador.ordenar_mao()
-        """Retorna o jogador que tem o dois de paus"""
+        # Retorna o jogador que tem o dois de paus
         self.jogador_iniciante = j
-        return j
+        """ return j """
     
     def iniciar_rodada(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         self.rodada += 1
@@ -103,7 +139,7 @@ class JogoCopas:
                 return False
             return True
         
-    def simular_escolha(self, jogador):
+    """ def simular_escolha(self, jogador):
         # Simula a escolha de carta pelo jogador
         # Isso será substituído pela entrada do jogador
         cartas_validas = []
@@ -115,28 +151,27 @@ class JogoCopas:
             # Se não há jogadas válidas (teoricamente impossível nas regras)
             return 0
         
-        return random.choice(cartas_validas)
+        return random.choice(cartas_validas) """
         
-    def jogar_rodada(self):
+    def jogar_rodada(self, nomeJogador, idCarta):
         self.cartas_na_mesa = []
-        self.jogadores_na_rodada = {}  # Novo: mapeia carta -> jogador
+        self.jogadores_na_rodada = {}  # Mapeia carta -> jogador
 
-        for i in range(4):
-            jogador_idx = (self.jogador_iniciante + i) % 4
-            jogador = self.jogadores[jogador_idx]
+        jogador_idx = nomeJogador
+        jogador = self.jogadores[jogador_idx]
 
-            jogador.mostrar_mao()
-            carta_idx = self.simular_escolha(jogador)
-            carta_jogada = jogador.jogar_carta(carta_idx)
+        baralho = criaBaralho()
+        carta_jogada = buscarCartaPorId(idCarta, baralho)
 
-            self.cartas_na_mesa.append(carta_jogada)
-            self.jogadores_na_rodada[carta_jogada] = jogador  # Novo: registra jogador
+        self.cartas_na_mesa.append(carta_jogada)
+        self.jogadores_na_rodada[carta_jogada] = jogador  # Registra jogador
 
-            print(f"{jogador.nome} jogou: {carta_jogada.simbolo} de {carta_jogada.naipe}")
+        print(f"{jogador.nome} jogou: {carta_jogada.simbolo} de {carta_jogada.naipe}")
+        if carta_jogada.naipe == "Copas" and not self.copas_quebradas:
+            self.copas_quebradas = True
+            print("Copas foram quebradas!")
 
-            if carta_jogada.naipe == "Copas" and not self.copas_quebradas:
-                self.copas_quebradas = True
-                print("Copas foram quebradas!")
+    """ ================================================================================================================= """
 
     def determinar_vencedor_rodada(self):
         naipe_inicial = self.cartas_na_mesa[0].naipe

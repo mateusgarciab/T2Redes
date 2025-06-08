@@ -36,7 +36,26 @@ if maquina == 1:
         # Jogo principal
         while not jogo.verificaFimMesa():
             jogo.iniciar_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
-            jogo.jogar_rodada()
+            if jogo.jogador_iniciante == 1: #Eu jogo primeiro
+                idCarta = jogo.jogadores[0].jogadorJoga()
+                jogo.jogar_rodada(jogo.jogadores[0].nome, idCarta)
+            else:
+                mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
+                mensagem.enviaMensagem()
+            
+            while mensagem.tipo == 4 and mensagem.destino == 1:
+                mensagem = recebeMensagem(ipChegada, portaChegada)
+                if mensagem.tipo == 5:
+                    carta = buscarCartaPorId(mensagem.cartaID, jogo.baralho) # talvez o baralho já não tenha nada, se der problema pode ser aqui
+                    jogo.jogar_rodada(mensagem.origem, mensagem.cartaID)
+                    """ print(f"Jogador {mensagem.origem} jogou {carta.simbolo} de {carta.naipe}") """
+
+
+
+
+
+
+            """ jogo.jogar_rodada() """
             jogo.determinar_vencedor_rodada()
 
         jogo.somaPontos()
@@ -49,10 +68,16 @@ if maquina == 1:
     jogo.determinarVencedorJogo()
 
 
+
+
 else: #Joga o Jogo
     baralho = criaBaralho()
     jogoAtivo = True
     jogador = Jogador(f"Jogador {maquina}")
+    cartas_na_mesa = []
+    copas_quebradas = False
+    rodada = 0
+
 
     while jogoAtivo:    
         mensagem = recebeMensagem(ipChegada, portaChegada)
@@ -60,6 +85,7 @@ else: #Joga o Jogo
         if mensagem.tipo == 0: # Começa jogo
             print("Tipo zero, inicio de Jogo")
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
+
         elif mensagem.tipo == 1:
             print("Tipo 1 ")
             if mensagem.mensagemParaMim(maquina):
@@ -71,14 +97,42 @@ else: #Joga o Jogo
                 mensagem.enviaMensagem(ipEnvio, portaEnvio) # Não era para mim, e rapassa
             jogador.ordenar_mao()
             """ jogador.mostrar_mao() """
+
         elif mensagem.tipo == 2:
             print("===== Nova Mesa =====")
             mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Mesa, e rapassa
+
         elif mensagem.tipo == 3:
+            rodada = mensagem.cartaID
             print(f"=== Rodada {mensagem.cartaID} ===")
-            """             if mensagem.cartaID == maquina:
+            """if mensagem.cartaID == maquina:
                 print(f"Você é o primeiro a jogar {mensagem.cartaID} ") """
             mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Rodada, e repassa
+
+        elif mensagem.tipo == 4:
+            if mensagem.destino == maquina:
+                print("Você tem o bastão")
+                print("Suas cartas")
+                imprimeMao(jogador.mao)
+                id = jogador.jogadorJoga(cartas_na_mesa, rodada, copas_quebradas)
+                mensagem = Mensagem(5, maquina, maquina, id)
+                mensagem.enviaMensagem(ipEnvio, portaEnvio)
+                mensagem = recebeMensagem(ipChegada, portaChegada)
+
+                if len(cartas_na_mesa) == 4:
+                    mensagem = Mensagem(4, maquina, 1, 0)
+                else:
+                    mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
+            else:
+                mensagem.enviaMensagem(ipEnvio, portaEnvio) # Bastão não é para mim
+
+        elif mensagem.tipo == 5:
+            carta = buscarCartaPorId(mensagem.cartaID, baralho)
+            print(f"Jogador {mensagem.origem} jogou {carta.simbolo} de {carta.naipe}")
+            if carta.naipe == "Copas" and not copasQuebradas:
+                print("Copas foram quebradas!")
+                copasQuebradas = True
+            cartas_na_mesa.append(carta)
 
         else:
             print(f"Mesagem de tipo incorreto {mensagem.tipo}")

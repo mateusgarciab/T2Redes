@@ -68,3 +68,16 @@ def buscarCartaPorId(identificador, baralho) -> Carta:
             return carta
     print("Carta não identificada")
     return None
+
+def escolheCarta(mao) -> Carta:
+    print("Escolha uma carta para jogar")
+    for i in range(len(mao)):
+        print(f"[{i}] {mao[i].simbolo} de {mao[i].naipe}")
+
+    # Do while, pq o python é assim ?
+    while True:
+        escolha = int(input())
+        if escolha >= 0 and escolha < len(mao):
+            break
+    
+    return mao[escolha]
