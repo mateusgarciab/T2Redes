@@ -3,7 +3,7 @@ from mensagem import *
 from jogo import *
 
 msg = Mensagem(5, 1, 15, 50)
-jogo = Jogador("eu")
+jogo = Jogador("eu", msg.imprimeMensagem)
 copas_quebradas = False
 
 jogo.mao = criaBaralho()

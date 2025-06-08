@@ -41,9 +41,10 @@ if maquina == 1:
             if jogo.jogador_iniciante == 1: #Eu jogo primeiro
                 idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
                 jogo.jogar_rodada(0, idCarta)
+                mensagem = Mensagem(4, 1, 2, 0)
             else:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
-                mensagem.enviaMensagem(ipEnvio, portaEnvio)
+            mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
             jogo.jogadores[0].mostrar_mao()
             jogo.jogadores[1].mostrar_mao()
@@ -102,7 +103,6 @@ else: #Joga o Jogo
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
         elif mensagem.tipo == 1:
-            print("Tipo 1 ")
             if mensagem.mensagemParaMim(maquina):
                 print("Recebeu Carta")
                 jogador.receber_carta(buscarCartaPorId(mensagem.cartaID, baralho))
