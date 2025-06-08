@@ -136,7 +136,7 @@ else: #Joga o Jogo
                 if len(cartas_na_mesa) == 4:
                     mensagem = Mensagem(4, maquina, 1, 0)
                 else:
-                    mensagem = Mensagem(4, maquina, (maquina+1)%4, 0)
+                    mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)
             else:
                 mensagem.enviaMensagem(ipEnvio, portaEnvio) # Bastão não é para mim
