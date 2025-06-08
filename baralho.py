@@ -14,7 +14,7 @@ class Carta:
 def imprimeMao(mao): 
     for i in range(len(mao)):
         mao[i].imprimeCarta()
-    print("Valor da mao", valorMao(mao))
+    """ print("Valor da mao", valorMao(mao)) """
 
 def criaBaralho(): 
     baralho = []

@@ -51,10 +51,10 @@ if maquina == 1:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
-            """ jogo.jogadores[0].mostrar_mao()
+            jogo.jogadores[0].mostrar_mao()
             jogo.jogadores[1].mostrar_mao()
             jogo.jogadores[2].mostrar_mao()
-            jogo.jogadores[3].mostrar_mao() """ # Lembrar de tirar as cartas jogadas das maos dos jogadores aqui
+            jogo.jogadores[3].mostrar_mao() # Lembrar de tirar as cartas jogadas das maos dos jogadores aqui
             
             while len(jogo.cartas_na_mesa) < 4: #not(mensagem.tipo == 4 and mensagem.destino == 1)
                 mensagem = recebeMensagem(ipChegada, portaChegada)
@@ -62,6 +62,8 @@ if maquina == 1:
                     carta = buscarCartaPorId(mensagem.cartaID, jogo.baralho) # talvez o baralho já não tenha nada, se der problema pode ser aqui
                     jogo.jogar_rodada(mensagem.origem-1, mensagem.cartaID)
                     mensagem.enviaMensagem(ipEnvio, portaEnvio)
+
+                    jogo.jogadores[mensagem.origem].mao = [carta for carta in jogo.jogadores[mensagem.origem].mao if carta.identificador != 2]
                 if mensagem.tipo == 4:
                     if len(jogo.cartas_na_mesa) == 4:
                         break
@@ -69,7 +71,7 @@ if maquina == 1:
                         idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
                         jogo.jogar_rodada(0, idCarta)
                         del jogo.cartas_na_mesa[-1]
-                        
+
                         mensagem = Mensagem(5, 1, 1, idCarta)
                         mensagem.enviaMensagem(ipEnvio, portaEnvio)
                         mensagem = recebeMensagem(ipChegada, portaChegada)
@@ -133,8 +135,7 @@ else: #Joga o Jogo
             rodada = mensagem.cartaID
             print(f"=== Rodada {mensagem.cartaID} ===")
             jogador.mostrar_mao()
-            """if mensagem.cartaID == maquina:
-                print(f"Você é o primeiro a jogar {mensagem.cartaID} ") """
+            cartas_na_mesa = []
             mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Rodada, e repassa
 
         elif mensagem.tipo == 4:
