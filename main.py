@@ -68,6 +68,8 @@ if maquina == 1:
                     else:
                         idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
                         jogo.jogar_rodada(0, idCarta)
+                        del jogo.cartas_na_mesa[-1]
+
                         mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
                         mensagem.enviaMensagem(ipEnvio, portaEnvio)
                 print(f"_________________ {len(jogo.cartas_na_mesa)} ____________________")
@@ -75,11 +77,10 @@ if maquina == 1:
 
 
 
-
             print("===========================================================================")
 
             """ jogo.jogar_rodada() """
-            jogo.determinar_vencedor_rodada()
+            jogo.determinar_vencedor_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada)
 
         jogo.somaPontos()
         """for i in jogo.jogadores:
@@ -160,6 +161,11 @@ else: #Joga o Jogo
             cartas_na_mesa.append(carta)
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
+        elif mensagem.tipo == 6:
+            if mensagem.cartaID == maquina:
+                print("++++++++++++ Você ganhou ++++++++++++")
+            else:
+                print(f"++++++++++++ {mensagem.cartaID} ganhou ++++++++++++")
         else:
             print(f"Mesagem de tipo incorreto {mensagem.tipo}")
         

@@ -182,7 +182,7 @@ class JogoCopas:
 
     """ ================================================================================================================= """
 
-    def determinar_vencedor_rodada(self):
+    def determinar_vencedor_rodada(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         naipe_inicial = self.cartas_na_mesa[0].naipe
         print("\n---Fim de rodada---")
         """print(naipe_inicial)"""
@@ -207,6 +207,10 @@ class JogoCopas:
 
         jogador_vencedor.pontosRodada += pontos_rodada
         self.jogador_iniciante = self.jogadores.index(jogador_vencedor)
+        
+        mensagem = Mensagem(6, 1, 1, self.jogadores_na_rodada[carta_vencedora])
+        mensagem.enviaMensagem(ipEnvio, portaEnvio)
+        mensagem = recebeMensagem(ipChegada, portaChegada)
 
 
 
