@@ -51,10 +51,10 @@ if maquina == 1:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
-            jogo.jogadores[0].mostrar_mao()
+            """ jogo.jogadores[0].mostrar_mao()
             jogo.jogadores[1].mostrar_mao()
             jogo.jogadores[2].mostrar_mao()
-            jogo.jogadores[3].mostrar_mao()
+            jogo.jogadores[3].mostrar_mao() """ # Lembrar de tirar as cartas jogadas das maos dos jogadores aqui
             
             while len(jogo.cartas_na_mesa) < 4: #not(mensagem.tipo == 4 and mensagem.destino == 1)
                 mensagem = recebeMensagem(ipChegada, portaChegada)
@@ -69,6 +69,10 @@ if maquina == 1:
                         idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
                         jogo.jogar_rodada(0, idCarta)
                         del jogo.cartas_na_mesa[-1]
+                        
+                        mensagem = Mensagem(5, 1, 1, idCarta)
+                        mensagem.enviaMensagem(ipEnvio, portaEnvio)
+                        mensagem = recebeMensagem(ipChegada, portaChegada)
                         if len(jogo.cartas_na_mesa) != 4:
                             mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
                             mensagem.enviaMensagem(ipEnvio, portaEnvio)
