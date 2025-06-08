@@ -37,7 +37,7 @@ if maquina == 1:
         while not jogo.verificaFimMesa():
             jogo.iniciar_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
             if jogo.jogador_iniciante == 1: #Eu jogo primeiro
-                idCarta = jogo.jogadores[0].jogadorJoga()
+                idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
                 jogo.jogar_rodada(jogo.jogadores[0].nome, idCarta)
             else:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
