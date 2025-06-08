@@ -62,6 +62,8 @@ if maquina == 1:
                     else:
                         idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
                         jogo.jogar_rodada(0, idCarta)
+                        mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
+                        mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
 
 
