@@ -174,8 +174,8 @@ class JogoCopas:
             print("Copas foram quebradas!")
 
     def encontraDoisCopas(self):
-        for i in self.jogadores:
-            for j in i.mao:
+        for i in range(len(self.jogadores)):
+            for j in self.jogadores[i].mao:
                 if j.identificador == 39:
                     return i+1
 
