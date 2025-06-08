@@ -63,7 +63,7 @@ if maquina == 1:
                     jogo.jogar_rodada(mensagem.origem-1, mensagem.cartaID)
                     mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
-                    jogo.jogadores[mensagem.origem].mao = [carta for carta in jogo.jogadores[mensagem.origem].mao if carta.identificador != 2]
+                    jogo.jogadores[mensagem.origem-1].mao = [carta for carta in jogo.jogadores[mensagem.origem-1].mao if carta.identificador != 2]
                 if mensagem.tipo == 4:
                     if len(jogo.cartas_na_mesa) == 4:
                         break
