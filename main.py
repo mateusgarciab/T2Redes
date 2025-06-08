@@ -43,6 +43,11 @@ if maquina == 1:
             else:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)
+
+            jogo.jogadores[0].mostrar_mao()
+            jogo.jogadores[1].mostrar_mao()
+            jogo.jogadores[2].mostrar_mao()
+            jogo.jogadores[3].mostrar_mao()
             
             while not(mensagem.tipo == 4 and mensagem.destino == 1):
                 mensagem = recebeMensagem(ipChegada, portaChegada)
