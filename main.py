@@ -54,7 +54,7 @@ if maquina == 1:
                 mensagem = recebeMensagem(ipChegada, portaChegada)
                 if mensagem.tipo == 5:
                     carta = buscarCartaPorId(mensagem.cartaID, jogo.baralho) # talvez o baralho já não tenha nada, se der problema pode ser aqui
-                    jogo.jogar_rodada(mensagem.origem, mensagem.cartaID)
+                    jogo.jogar_rodada(mensagem.origem-1, mensagem.cartaID)
                 
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
