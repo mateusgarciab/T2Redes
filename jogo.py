@@ -88,7 +88,7 @@ class JogoCopas:
             recebeMensagem(ipChegada, portaChegada)
             #Quem tem o dois de copas
             if self.baralho[i].identificador == 26: 
-                j = i%4 + 1
+                j = (i%4) + 1
         
         for jogador in self.jogadores:
             jogador.ordenar_mao()

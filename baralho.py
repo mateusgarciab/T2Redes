@@ -70,7 +70,7 @@ def buscarCartaPorId(identificador, baralho) -> Carta:
     return None
 
 def escolheCarta(mao) -> Carta:
-    print("Escolha uma carta para jogar")
+    print(f"Escolha uma carta para jogar {len(mao)}")
     for i in range(len(mao)):
         print(f"[{i}] {mao[i].simbolo} de {mao[i].naipe}")
 

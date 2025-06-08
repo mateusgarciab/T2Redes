@@ -36,6 +36,7 @@ if maquina == 1:
         # Jogo principal
         while not jogo.verificaFimMesa():
             jogo.iniciar_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
+
             if jogo.jogador_iniciante == 1: #Eu jogo primeiro
                 idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
                 jogo.jogar_rodada(jogo.jogadores[0].nome, idCarta)
@@ -105,6 +106,7 @@ else: #Joga o Jogo
         elif mensagem.tipo == 3:
             rodada = mensagem.cartaID
             print(f"=== Rodada {mensagem.cartaID} ===")
+            jogador.mostrar_mao()
             """if mensagem.cartaID == maquina:
                 print(f"Você é o primeiro a jogar {mensagem.cartaID} ") """
             mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Rodada, e repassa
