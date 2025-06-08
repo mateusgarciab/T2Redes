@@ -74,7 +74,7 @@ if maquina == 1:
 
 
 
-
+            print("===========================================================================")
 
             """ jogo.jogar_rodada() """
             jogo.determinar_vencedor_rodada()

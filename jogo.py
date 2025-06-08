@@ -167,7 +167,7 @@ class JogoCopas:
         self.cartas_na_mesa.append(carta_jogada)
         self.jogadores_na_rodada[carta_jogada] = jogador  # Registra jogador
 
-        print(f"{jogador.nome} jogou: {carta_jogada.simbolo} de {carta_jogada.naipe}")
+        print(f" -- {jogador.nome} jogou: {carta_jogada.simbolo} de {carta_jogada.naipe}")
         if carta_jogada.naipe == "Copas" and not self.copas_quebradas:
             self.copas_quebradas = True
             print("Copas foram quebradas!")
