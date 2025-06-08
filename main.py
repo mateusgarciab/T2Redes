@@ -32,6 +32,7 @@ if maquina == 1:
             
         # Distribui cartas
         jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
+        jogo.jogador_iniciante = jogo.encontraDoisCopas()
         
         # Jogo principal
         while not jogo.verificaFimMesa():
