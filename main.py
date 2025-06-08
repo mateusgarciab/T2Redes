@@ -50,14 +50,14 @@ if maquina == 1:
             jogo.jogadores[2].mostrar_mao()
             jogo.jogadores[3].mostrar_mao()
             
-            while len(jogo.cartas_na_mesa) <= 4: #not(mensagem.tipo == 4 and mensagem.destino == 1)
+            while len(jogo.cartas_na_mesa) < 4: #not(mensagem.tipo == 4 and mensagem.destino == 1)
                 mensagem = recebeMensagem(ipChegada, portaChegada)
                 if mensagem.tipo == 5:
                     carta = buscarCartaPorId(mensagem.cartaID, jogo.baralho) # talvez o baralho já não tenha nada, se der problema pode ser aqui
                     jogo.jogar_rodada(mensagem.origem-1, mensagem.cartaID)
                     mensagem.enviaMensagem(ipEnvio, portaEnvio)
                 if mensagem.tipo == 4:
-                    if len(jogo.cartas_na_mesa) <= 4:
+                    if len(jogo.cartas_na_mesa) == 4:
                         break
                     else:
                         idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
