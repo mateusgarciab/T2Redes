@@ -206,7 +206,7 @@ class JogoCopas:
             print("Dama de Espadas capturada! +13 pontos")
 
         jogador_vencedor.pontosRodada += pontos_rodada
-        self.jogador_iniciante = self.jogadores.index(jogador_vencedor)
+        self.jogador_iniciante = self.jogadores.index(jogador_vencedor) + 1 #aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         
         mensagem = Mensagem(6, 1, 1, int(jogador_vencedor.nome[-1]))
         mensagem.enviaMensagem(ipEnvio, portaEnvio)
