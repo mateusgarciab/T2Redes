@@ -55,7 +55,8 @@ if maquina == 1:
                 if mensagem.tipo == 5:
                     carta = buscarCartaPorId(mensagem.cartaID, jogo.baralho) # talvez o baralho já não tenha nada, se der problema pode ser aqui
                     jogo.jogar_rodada(mensagem.origem, mensagem.cartaID)
-                    """ print(f"Jogador {mensagem.origem} jogou {carta.simbolo} de {carta.naipe}") """
+                
+                mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
 
 
