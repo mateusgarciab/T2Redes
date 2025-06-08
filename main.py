@@ -71,6 +71,7 @@ if maquina == 1:
                         mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
                         mensagem.enviaMensagem(ipEnvio, portaEnvio)
                 print(f"_________________ {len(jogo.cartas_na_mesa)} ____________________")
+                imprimeMao(jogo.cartas_na_mesa)
 
 
 
