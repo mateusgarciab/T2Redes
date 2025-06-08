@@ -140,6 +140,7 @@ else: #Joga o Jogo
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)
                 mensagem = recebeMensagem(ipChegada, portaChegada)
 
+                print(f"_________________ {len(cartas_na_mesa)} ____________________")
                 if len(cartas_na_mesa) == 4:
                     mensagem = Mensagem(4, maquina, 1, 0)
                 else:
