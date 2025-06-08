@@ -69,9 +69,9 @@ if maquina == 1:
                         idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
                         jogo.jogar_rodada(0, idCarta)
                         del jogo.cartas_na_mesa[-1]
-
-                        mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
-                        mensagem.enviaMensagem(ipEnvio, portaEnvio)
+                        if len(jogo.cartas_na_mesa) != 4:
+                            mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
+                            mensagem.enviaMensagem(ipEnvio, portaEnvio)
                 print(f"_________________ {len(jogo.cartas_na_mesa)} ____________________")
                 imprimeMao(jogo.cartas_na_mesa)
 
@@ -154,7 +154,7 @@ else: #Joga o Jogo
 
         elif mensagem.tipo == 5:
             carta = buscarCartaPorId(mensagem.cartaID, baralho)
-            print(f"Jogador {mensagem.origem} jogou {carta.simbolo} de {carta.naipe}")
+            print(f" -- Jogador {mensagem.origem} jogou {carta.simbolo} de {carta.naipe}")
             if carta.naipe == "Copas" and not copasQuebradas:
                 print("Copas foram quebradas!")
                 copasQuebradas = True
@@ -162,7 +162,7 @@ else: #Joga o Jogo
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
         elif mensagem.tipo == 6:
-            if mensagem.cartaID == maquina:
+            if mensagem.cartaID == maquina: #int(texto[-1])
                 print("++++++++++++ Você ganhou ++++++++++++")
             else:
                 print(f"++++++++++++ {mensagem.cartaID} ganhou ++++++++++++")

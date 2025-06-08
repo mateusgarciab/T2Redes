@@ -208,7 +208,7 @@ class JogoCopas:
         jogador_vencedor.pontosRodada += pontos_rodada
         self.jogador_iniciante = self.jogadores.index(jogador_vencedor)
         
-        mensagem = Mensagem(6, 1, 1, self.jogadores_na_rodada[carta_vencedora])
+        mensagem = Mensagem(6, 1, 1, jogador_vencedor)
         mensagem.enviaMensagem(ipEnvio, portaEnvio)
         mensagem = recebeMensagem(ipChegada, portaChegada)
 
