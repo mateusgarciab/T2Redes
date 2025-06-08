@@ -155,12 +155,11 @@ class JogoCopas:
         
         return random.choice(cartas_validas) """
         
-    def jogar_rodada(self, nomeJogador, idCarta):
+    def jogar_rodada(self, jogador, idCarta):
         self.cartas_na_mesa = []
         self.jogadores_na_rodada = {}  # Mapeia carta -> jogador
 
-        jogador_idx = nomeJogador
-        jogador = self.jogadores[jogador_idx]
+        jogador = self.jogadores[jogador]
 
         baralho = criaBaralho()
         carta_jogada = buscarCartaPorId(idCarta, baralho)

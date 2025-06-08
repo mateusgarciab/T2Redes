@@ -40,7 +40,7 @@ if maquina == 1:
 
             if jogo.jogador_iniciante == 1: #Eu jogo primeiro
                 idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
-                jogo.jogar_rodada(jogo.jogadores[0].nome, idCarta)
+                jogo.jogar_rodada(0, idCarta)
             else:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)
