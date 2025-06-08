@@ -43,7 +43,7 @@ if maquina == 1:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)
             
-            while mensagem.tipo == 4 and mensagem.destino == 1:
+            while not(mensagem.tipo == 4 and mensagem.destino == 1):
                 mensagem = recebeMensagem(ipChegada, portaChegada)
                 if mensagem.tipo == 5:
                     carta = buscarCartaPorId(mensagem.cartaID, jogo.baralho) # talvez o baralho já não tenha nada, se der problema pode ser aqui

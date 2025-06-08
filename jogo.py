@@ -51,7 +51,8 @@ class Jogador:
                 cartasValidas.append(i)
 
         cartaEscolhida = escolheCarta(cartasValidas)
-        self.jogar_carta(cartaEscolhida.identificador) # Remove da Mão a carta escolhida
+        """ self.jogar_carta(cartaEscolhida.identificador) """ # Remove da Mão a carta escolhida
+        self.mao = [carta for carta in self.mao if carta.identificador != cartaEscolhida.identificador]
         if cartaEscolhida.naipe == "Copas" and not copasQuebradas:
             copasQuebradas = True
         cartas_na_mesa.append(cartaEscolhida)
