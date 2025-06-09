@@ -94,7 +94,7 @@ if maquina == 1:
         for i in jogo.jogadores:
             print(i.pontosTotais)
         for i in range(3):  
-            mensagem = Mensagem(7, 1, i+2, jogo.jogadores[i+2].pontosTotais)
+            mensagem = Mensagem(7, 1, i+2, jogo.jogadores[i+1].pontosTotais)
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
             mensagem = recebeMensagem(ipChegada, portaChegada)
 
