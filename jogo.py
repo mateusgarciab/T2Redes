@@ -55,6 +55,7 @@ class Jogador:
         self.mao = [carta for carta in self.mao if carta.identificador != cartaEscolhida.identificador]
         if cartaEscolhida.naipe == "Copas" and not copasQuebradas:
             copasQuebradas = True
+        cartaEscolhida.origem = 1
         cartas_na_mesa.append(cartaEscolhida)
         return cartaEscolhida.identificador
         
