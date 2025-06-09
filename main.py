@@ -164,9 +164,9 @@ else: #Joga o Jogo
         elif mensagem.tipo == 5:
             carta = buscarCartaPorId(mensagem.cartaID, baralho)
             print(f" -- Jogador {mensagem.origem} jogou {carta.simbolo} de {carta.naipe}")
-            if carta.naipe == "Copas" and not copasQuebradas:
+            if carta.naipe == "Copas" and not copas_quebradas:
                 print("Copas foram quebradas!")
-                copasQuebradas = True
+                copas_quebradas = True
             cartas_na_mesa.append(carta)
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 

@@ -169,7 +169,7 @@ class JogoCopas:
         self.cartas_na_mesa.append(carta_jogada)
         """ self.jogadores_na_rodada[carta_jogada] = jogador """  # Registra jogador
         carta_jogada.origem = int(jogador.nome[-1])
-        print(f"aaaaaaaaaaaaaaaaaaaaaaaaaaa  {carta_jogada.origem}")
+        print(f"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  {carta_jogada.origem}")
 
         print(f" -- {jogador.nome} jogou: {carta_jogada.simbolo} de {carta_jogada.naipe}")
         if carta_jogada.naipe == "Copas" and not self.copas_quebradas:
@@ -196,6 +196,7 @@ class JogoCopas:
         carta_vencedora.imprimeCarta()
 
         """ jogador_vencedor = self.jogadores_na_rodada[carta_vencedora] """  # Busca direta
+        print(f"vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv {carta_vencedora.origem}")
         jogador_vencedor = self.jogadores[carta_vencedora.origem-1]
 
         print(f"{jogador_vencedor.nome} venceu a rodada!")
