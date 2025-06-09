@@ -64,7 +64,7 @@ if maquina == 1:
                     mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
                     jogo.jogadores[mensagem.origem-1].mao = [carta for carta in jogo.jogadores[mensagem.origem-1].mao if carta.identificador != 2] # Remove cartas jogadas da mao dos jogadores
-                    if len(jogo.cartas_na_mesa == 4):
+                    if len(jogo.cartas_na_mesa) == 4:
                         mensagem = recebeMensagem(ipChegada, portaChegada) # Ainda precisa espera passarem o bastao para o 1
 
                 if mensagem.tipo == 4:
