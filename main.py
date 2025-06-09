@@ -54,16 +54,17 @@ if maquina == 1:
             jogo.jogadores[0].mostrar_mao()
             jogo.jogadores[1].mostrar_mao()
             jogo.jogadores[2].mostrar_mao()
-            jogo.jogadores[3].mostrar_mao() # Lembrar de tirar as cartas jogadas das maos dos jogadores aqui
+            jogo.jogadores[3].mostrar_mao() 
             
             while len(jogo.cartas_na_mesa) < 4: #not(mensagem.tipo == 4 and mensagem.destino == 1)
                 mensagem = recebeMensagem(ipChegada, portaChegada)
                 if mensagem.tipo == 5:
-                    carta = buscarCartaPorId(mensagem.cartaID, jogo.baralho) # talvez o baralho já não tenha nada, se der problema pode ser aqui
+                    carta = buscarCartaPorId(mensagem.cartaID, jogo.baralho)
                     jogo.jogar_rodada(mensagem.origem-1, mensagem.cartaID)
                     mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
-                    jogo.jogadores[mensagem.origem-1].mao = [carta for carta in jogo.jogadores[mensagem.origem-1].mao if carta.identificador != 2]
+                    jogo.jogadores[mensagem.origem-1].mao = [carta for carta in jogo.jogadores[mensagem.origem-1].mao if carta.identificador != 2] # Remove cartas jogadas da mao dos jogadores
+
                 if mensagem.tipo == 4:
                     if len(jogo.cartas_na_mesa) == 4:
                         break

@@ -6,6 +6,7 @@ class Carta:
         self.simbolo = simbolo
         self.valor = valor
         self.identificador = identificador
+        self.origem = -1
 
     def imprimeCarta(self):     
         print(f"{self.simbolo} de {self.naipe} e id {self.identificador}")

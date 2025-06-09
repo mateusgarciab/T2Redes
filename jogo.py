@@ -167,7 +167,8 @@ class JogoCopas:
         carta_jogada = buscarCartaPorId(idCarta, baralho)
 
         self.cartas_na_mesa.append(carta_jogada)
-        self.jogadores_na_rodada[carta_jogada] = jogador  # Registra jogador
+        """ self.jogadores_na_rodada[carta_jogada] = jogador """  # Registra jogador
+        carta_jogada.origem = int(jogador.nome[-1])
 
         print(f" -- {jogador.nome} jogou: {carta_jogada.simbolo} de {carta_jogada.naipe}")
         if carta_jogada.naipe == "Copas" and not self.copas_quebradas:
@@ -193,7 +194,8 @@ class JogoCopas:
         carta_vencedora = max(cartas_do_naipe, key=lambda x: x.identificador)
         carta_vencedora.imprimeCarta()
 
-        jogador_vencedor = self.jogadores_na_rodada[carta_vencedora]  # Novo: busca direta
+        """ jogador_vencedor = self.jogadores_na_rodada[carta_vencedora] """  # Busca direta
+        jogador_vencedor = carta_vencedora.origem
 
         print(f"{jogador_vencedor.nome} venceu a rodada!")
 
@@ -211,6 +213,11 @@ class JogoCopas:
         mensagem = Mensagem(6, 1, 1, int(jogador_vencedor.nome[-1]))
         mensagem.enviaMensagem(ipEnvio, portaEnvio)
         mensagem = recebeMensagem(ipChegada, portaChegada)
+
+        if mensagem.int(jogador_vencedor.nome[-1]) == 1:
+                print("++++++++++++ Você ganhou ++++++++++++")
+        else:
+            print(f"++++++++++++ {int(jogador_vencedor.nome[-1])} ganhou ++++++++++++")
 
 
 
