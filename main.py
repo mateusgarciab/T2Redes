@@ -93,6 +93,10 @@ if maquina == 1:
             print(i.pontosRodada)"""
         for i in jogo.jogadores:
             print(i.pontosTotais)
+        #ver isso aq
+        print("Fim da Mesa")
+        print(f"Pontos Totais {mensagem.cartaID}")
+        
         for i in range(3):  
             mensagem = Mensagem(7, 1, i+2, jogo.jogadores[i+1].pontosTotais)
             mensagem.enviaMensagem(ipEnvio, portaEnvio)

@@ -255,7 +255,7 @@ class JogoCopas:
             i.pontosRodada = 0
 
     def verificaFimJogo(self):
-        return any(j.pontosTotais >= 100 for j in self.jogadores)
+        return any(j.pontosTotais >= 100 for j in self.jogadores) # 100 numero de pontos para a cabar o jogo
 
             
 
