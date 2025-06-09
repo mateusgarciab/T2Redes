@@ -195,7 +195,7 @@ class JogoCopas:
         carta_vencedora.imprimeCarta()
 
         """ jogador_vencedor = self.jogadores_na_rodada[carta_vencedora] """  # Busca direta
-        jogador_vencedor = carta_vencedora.origem
+        jogador_vencedor = self.jogadores[carta_vencedora.origem-1]
 
         print(f"{jogador_vencedor.nome} venceu a rodada!")
 
