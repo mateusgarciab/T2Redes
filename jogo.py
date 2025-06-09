@@ -170,7 +170,6 @@ class JogoCopas:
         self.cartas_na_mesa.append(carta_jogada)
         """ self.jogadores_na_rodada[carta_jogada] = jogador """  # Registra jogador
         carta_jogada.origem = int(jogador.nome[-1])
-        print(f"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  {carta_jogada.origem}")
 
         print(f" -- {jogador.nome} jogou: {carta_jogada.simbolo} de {carta_jogada.naipe}")
         if carta_jogada.naipe == "Copas" and not self.copas_quebradas:
@@ -197,7 +196,6 @@ class JogoCopas:
         carta_vencedora.imprimeCarta()
 
         """ jogador_vencedor = self.jogadores_na_rodada[carta_vencedora] """  # Busca direta
-        print(f"vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv {carta_vencedora.origem}")
         jogador_vencedor = self.jogadores[carta_vencedora.origem-1]
 
         print(f"{jogador_vencedor.nome} venceu a rodada!")
@@ -228,21 +226,18 @@ class JogoCopas:
     def verificaFimMesa(self):
         return all(len(j.mao) == 0 for j in self.jogadores)
     
-    def determinarVencedorJogo(self):
+    def determinarVencedorJogo(self, ipEnvio, portaEnvio):
         menor_pontuacao = min(j.pontosTotais for j in self.jogadores)
         vencedores = [j for j in self.jogadores if j.pontosTotais == menor_pontuacao]
-        
-        if len(vencedores) == 1:
-            print(f"\n{vencedores[0].nome} venceu o jogo com {vencedores[0].pontosTotais} pontos!")
-        else:
-            print("\nEmpate entre:")
-            for v in vencedores:
-                print(f"{v.nome} com {v.pontosTotais} pontos")
+            
+        print(f"\n{vencedores[0].nome} venceu o jogo com {vencedores[0].pontosTotais} pontos!")
+        mensagem = Mensagem(8, 1, int(vencedores[0].nome[-1]), menor_pontuacao)
+        mensagem.enviaMensagem(ipEnvio, portaEnvio)
         
         return vencedores
     
     def somaPontos(self):
-        if any(j.pontosRodada == 26 for j in self.jogadores): # Verificar
+        if any(j.pontosRodada == 26 for j in self.jogadores): 
             print("\nLua acertada")
             for i in self.jogadores:
                 if i.pontosRodada == 26:

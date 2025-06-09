@@ -18,23 +18,20 @@ if maquina == 1:
     for i in range(4):
         jogo.adicionar_jogador(f"Jogador {i+1}")
 
-    print("Sou um")
     mensagem = Mensagem(0, 1, 1, 0) # Mesagem inicial para verifcar conexão
     mensagem.enviaMensagem(ipEnvio, portaEnvio)
-    print("Entre envia e recebe")
     mensagem = recebeMensagem(ipChegada, portaChegada)
-    """ jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada) """
 
     while not jogo.verificaFimJogo():
-        jogo.iniciaMesa(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
+        jogo.iniciaMesa(ipEnvio, portaEnvio, ipChegada, portaChegada) 
             
         # Distribui cartas
-        jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
+        jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada)
         jogo.jogador_iniciante = jogo.encontraDoisCopas()
         
         # Jogo principal
         while not jogo.verificaFimMesa():
-            jogo.iniciar_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada) #modi
+            jogo.iniciar_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada) 
 
             if jogo.jogador_iniciante == 1: #Eu jogo primeiro
                 idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
@@ -63,7 +60,7 @@ if maquina == 1:
                     jogo.jogar_rodada(mensagem.origem-1, mensagem.cartaID)
                     mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
-                    jogo.jogadores[mensagem.origem-1].mao = [carta for carta in jogo.jogadores[mensagem.origem-1].mao if carta.identificador != 2] # Remove cartas jogadas da mao dos jogadores
+                    jogo.jogadores[mensagem.origem-1].mao = [carta for carta in jogo.jogadores[mensagem.origem-1].mao if carta.identificador != mensagem.cartaID] # Remove cartas jogadas da mao dos jogadores
                     if len(jogo.cartas_na_mesa) == 4:
                         mensagem = recebeMensagem(ipChegada, portaChegada) # Ainda precisa espera passarem o bastao para o 1
 
@@ -85,20 +82,25 @@ if maquina == 1:
                 imprimeMao(jogo.cartas_na_mesa)
 
 
-
             print("===========================================================================")
 
             """ jogo.jogar_rodada() """
             jogo.determinar_vencedor_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada)
+            print(f"Você somou {jogo.jogadores[0].pontosRodada} pontos")
 
         jogo.somaPontos()
         """for i in jogo.jogadores:
             print(i.pontosRodada)"""
         for i in jogo.jogadores:
             print(i.pontosTotais)
+        for i in range(3):  
+            mensagem = Mensagem(7, 1, i+2, jogo.jogadores[i+2].pontosTotais)
+            mensagem.enviaMensagem(ipEnvio, portaEnvio)
+            mensagem = recebeMensagem(ipChegada, portaChegada)
+
 
     # Resultado final
-    jogo.determinarVencedorJogo()
+    jogo.determinarVencedorJogo(ipEnvio, portaEnvio)
 
 
 
@@ -172,10 +174,28 @@ else: #Joga o Jogo
 
         elif mensagem.tipo == 6:
             if mensagem.cartaID == maquina:
-                print("++++++++++++ Você ganhou ++++++++++++")
+                print("++++++++++++ Você ganhou a rodada ++++++++++++")
+                jogador.pontosRodada = valorMao(cartas_na_mesa)
             else:
                 print(f"++++++++++++ {mensagem.cartaID} ganhou ++++++++++++")
+                jogador.pontosRodada = 0
+            print(f"Você somou {jogador.pontosRodada} pontos")
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
+
+        elif mensagem.tipo == 7:
+            if mensagem.destino == maquina:
+                print("Fim da Mesa")
+                print(f"Pontos Totais {mensagem.cartaID}")
+                jogador.pontosTotais = mensagem.cartaID
+            mensagem.enviaMensagem(ipEnvio, portaEnvio)
+            copas_quebradas = False
+
+        elif mensagem.tipo == 8:
+            jogoAtivo = False
+            print("Fim de jogo")
+            print(f"\n{mensagem.destino} venceu o jogo com {mensagem.cartaID} pontos!")
+            mensagem.enviaMensagem(ipEnvio, portaEnvio)
+
         else:
             print(f"Mesagem de tipo incorreto {mensagem.tipo}")
         
