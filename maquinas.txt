@@ -12,12 +12,12 @@ portaEnvia 51843
 
 maquina 3
 ip 10.254.223.40
-ipEnvio 10.254.223.43
+ipEnvio 10.254.223.41
 portaRecebe 51843
 portaEnvia 51844
 
 maquina 4
-ip 10.254.223.43
+ip 10.254.223.41
 ipEnvio 10.254.223.29
 portaRecebe 51844
 portaEnvia 51841

@@ -48,10 +48,10 @@ if maquina == 1:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
-            jogo.jogadores[0].mostrar_mao()
+            """ jogo.jogadores[0].mostrar_mao()
             jogo.jogadores[1].mostrar_mao()
             jogo.jogadores[2].mostrar_mao()
-            jogo.jogadores[3].mostrar_mao() 
+            jogo.jogadores[3].mostrar_mao()  """
             
             while len(jogo.cartas_na_mesa) < 4: #not(mensagem.tipo == 4 and mensagem.destino == 1)
                 mensagem = recebeMensagem(ipChegada, portaChegada)
@@ -78,11 +78,11 @@ if maquina == 1:
                         if len(jogo.cartas_na_mesa) != 4:
                             mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
                             mensagem.enviaMensagem(ipEnvio, portaEnvio)
-                print(f"_________________ {len(jogo.cartas_na_mesa)} ____________________")
-                imprimeMao(jogo.cartas_na_mesa)
+                """ print(f"_________________ {len(jogo.cartas_na_mesa)} ____________________")
+                imprimeMao(jogo.cartas_na_mesa) """
 
 
-            print("===========================================================================")
+            """ print("===========================================================================") """
 
             """ jogo.jogar_rodada() """
             jogo.determinar_vencedor_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada)
@@ -157,8 +157,8 @@ else: #Joga o Jogo
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)
                 mensagem = recebeMensagem(ipChegada, portaChegada)
 
-                print(f"_________________ {len(cartas_na_mesa)} ____________________")
-                imprimeMao(cartas_na_mesa)
+                """ print(f"_________________ {len(cartas_na_mesa)} ____________________")
+                imprimeMao(cartas_na_mesa) """
                 if len(cartas_na_mesa) == 4:
                     mensagem = Mensagem(4, maquina, 1, 0)
                 else:
