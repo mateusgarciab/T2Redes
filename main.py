@@ -46,7 +46,7 @@ if maquina == 1:
 
 
             
-            while len(jogo.cartas_na_mesa) < 4: #not(mensagem.tipo == 4 and mensagem.destino == 1)
+            while len(jogo.cartas_na_mesa) < 4: 
                 mensagem = recebeMensagem(ipChegada, portaChegada)
                 if mensagem.tipo == 5:
                     carta = buscarCartaPorId(mensagem.cartaID, jogo.baralho)
@@ -71,13 +71,8 @@ if maquina == 1:
                         if len(jogo.cartas_na_mesa) != 4:
                             mensagem = Mensagem(4, maquina, (maquina%4)+1, 0)
                             mensagem.enviaMensagem(ipEnvio, portaEnvio)
-                """ print(f"_________________ {len(jogo.cartas_na_mesa)} ____________________")
-                imprimeMao(jogo.cartas_na_mesa) """
-
-
    
 
-            """ jogo.jogar_rodada() """
             jogo.determinar_vencedor_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada)
             print(f"Você somou {jogo.jogadores[0].pontosRodada} pontos")
 
@@ -98,7 +93,7 @@ if maquina == 1:
 
 
 
-else: #Joga o Jogo
+else: # Joga o Jogo
     baralho = criaBaralho()
     jogoAtivo = True
     jogador = Jogador(f"Jogador {maquina}")
@@ -106,12 +101,10 @@ else: #Joga o Jogo
     copas_quebradas = False
     rodada = 0
 
-
     while jogoAtivo:    
         mensagem = recebeMensagem(ipChegada, portaChegada)
         #switch case
-        if mensagem.tipo == 0: # Começa jogo
-            print("Tipo zero, inicio de Jogo")
+        if mensagem.tipo == 0:
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
         elif mensagem.tipo == 1:
@@ -121,18 +114,16 @@ else: #Joga o Jogo
                 jogador.receber_carta(cartaVez)
                 mensagem.enviaMensagem(ipEnvio, portaEnvio) # Era para mim, e repassa
             else:
-                """ print("So passa") """
                 mensagem.enviaMensagem(ipEnvio, portaEnvio) # Não era para mim, e rapassa
             jogador.ordenar_mao()
-            """ jogador.mostrar_mao() """
 
         elif mensagem.tipo == 2:
-            print("===== Nova Mesa =====")
+            print("\n===== Nova Mesa =====")
             mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Mesa, e rapassa
 
         elif mensagem.tipo == 3:
             rodada = mensagem.cartaID
-            print(f"=== Rodada {mensagem.cartaID} ===")
+            print(f"\n=== Rodada {mensagem.cartaID} ===")
             jogador.mostrar_mao()
             cartas_na_mesa = []
             mensagem.enviaMensagem(ipEnvio, portaEnvio) # Informa a nova Rodada, e repassa
@@ -147,8 +138,6 @@ else: #Joga o Jogo
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)
                 mensagem = recebeMensagem(ipChegada, portaChegada)
 
-                """ print(f"_________________ {len(cartas_na_mesa)} ____________________")
-                imprimeMao(cartas_na_mesa) """
                 if len(cartas_na_mesa) == 4:
                     mensagem = Mensagem(4, maquina, 1, 0)
                 else:
