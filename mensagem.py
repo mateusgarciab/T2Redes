@@ -15,8 +15,8 @@ class Mensagem():
 
     def enviaMensagem(self, ipEnvio, portaEnvio):
         soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        print("Enviado")
-        self.imprimeMensagem()
+        """ print("Enviado")
+        self.imprimeMensagem() """
         soquete.sendto(pickle.dumps(self), (ipEnvio, int(portaEnvio)))
 
         soquete.close()
