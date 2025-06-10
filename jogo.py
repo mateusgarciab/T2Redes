@@ -11,8 +11,6 @@ class Jogador:
     
     def receber_carta(self, carta):
         self.mao.append(carta)
-        print("Você recebeu ")
-        carta.imprimeCarta()
     
     def jogar_carta(self, carta_idx):
         return self.mao.pop(carta_idx)

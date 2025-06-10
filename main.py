@@ -127,8 +127,9 @@ else: #Joga o Jogo
 
         elif mensagem.tipo == 1:
             if mensagem.mensagemParaMim(maquina):
-                """ print("Recebeu Carta") """
-                jogador.receber_carta(buscarCartaPorId(mensagem.cartaID, baralho))
+                cartaVez = buscarCartaPorId(mensagem.cartaID, baralho)
+                print(f"Recebeu Carta {cartaVez.simbolo} de {cartaVez.naipe} ")
+                jogador.receber_carta(cartaVez)
                 mensagem.enviaMensagem(ipEnvio, portaEnvio) # Era para mim, e repassa
             else:
                 """ print("So passa") """
