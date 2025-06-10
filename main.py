@@ -75,18 +75,15 @@ if maquina == 1:
                 imprimeMao(jogo.cartas_na_mesa) """
 
 
-            """ print("===========================================================================") """
+   
 
             """ jogo.jogar_rodada() """
             jogo.determinar_vencedor_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada)
             print(f"Você somou {jogo.jogadores[0].pontosRodada} pontos")
 
         jogo.somaPontos()
-        """for i in jogo.jogadores:
-            print(i.pontosRodada)"""
         for i in jogo.jogadores:
             print(i.pontosTotais)
-        #ver isso aq
         print("Fim da Mesa")
         print(f"Pontos Totais {mensagem.cartaID}")
         
@@ -96,7 +93,6 @@ if maquina == 1:
             mensagem = recebeMensagem(ipChegada, portaChegada)
 
 
-    # Resultado final
     jogo.determinarVencedorJogo(ipEnvio, portaEnvio)
 
 
@@ -144,8 +140,8 @@ else: #Joga o Jogo
         elif mensagem.tipo == 4:
             if mensagem.destino == maquina:
                 print("Você tem o bastão")
-                print("Suas cartas")
-                imprimeMao(jogador.mao)
+                """ print("Suas cartas")
+                imprimeMao(jogador.mao) """
                 id = jogador.jogadorJoga(cartas_na_mesa, rodada, copas_quebradas)
                 mensagem = Mensagem(5, maquina, maquina, id)
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)
@@ -172,10 +168,10 @@ else: #Joga o Jogo
 
         elif mensagem.tipo == 6:
             if mensagem.cartaID == maquina:
-                print("++++++++++++ Você ganhou a rodada ++++++++++++")
+                print("\n++++++++++++ Você ganhou a rodada ++++++++++++")
                 jogador.pontosRodada = valorMao(cartas_na_mesa)
             else:
-                print(f"++++++++++++ {mensagem.cartaID} ganhou ++++++++++++")
+                print(f"\n++++++++++++ {mensagem.cartaID} ganhou ++++++++++++")
                 jogador.pontosRodada = 0
             print(f"Você somou {jogador.pontosRodada} pontos")
             mensagem.enviaMensagem(ipEnvio, portaEnvio)

@@ -217,9 +217,9 @@ class JogoCopas:
         mensagem = recebeMensagem(ipChegada, portaChegada)
 
         if int(jogador_vencedor.nome[-1]) == 1:
-                print("++++++++++++ Você ganhou ++++++++++++")
+                print("\n++++++++++++ Você ganhou ++++++++++++")
         else:
-            print(f"++++++++++++ {int(jogador_vencedor.nome[-1])} ganhou ++++++++++++")
+            print(f"\n++++++++++++ {int(jogador_vencedor.nome[-1])} ganhou ++++++++++++")
 
 
     
