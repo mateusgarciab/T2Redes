@@ -75,10 +75,12 @@ def escolheCarta(mao) -> Carta:
     for i in range(len(mao)):
         print(f"[{i}] {mao[i].simbolo} de {mao[i].naipe}")
 
-    # Do while, pq o python é assim ?
+    # Do while
     while True:
-        escolha = int(input())
-        if escolha >= 0 and escolha < len(mao):
-            break
+        escolha = input()
+        if escolha != '':
+            escolha = int(escolha)
+            if escolha >= 0 and escolha < len(mao):
+                break
     
     return mao[escolha]
