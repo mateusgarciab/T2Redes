@@ -29,6 +29,7 @@ if maquina == 1:
         # Jogo principal
         while not jogo.verificaFimMesa():
             jogo.iniciar_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada) 
+            imprimeMao(jogo.jogadores[0].mao)
 
             if jogo.jogador_iniciante == 1: #Eu jogo primeiro
                 idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
