@@ -15,8 +15,6 @@ class Mensagem():
 
     def enviaMensagem(self, ipEnvio, portaEnvio):
         soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        """ print("Enviado")
-        self.imprimeMensagem() """
         soquete.sendto(pickle.dumps(self), (ipEnvio, int(portaEnvio)))
 
         soquete.close()
@@ -30,12 +28,10 @@ class Mensagem():
 def recebeMensagem(ipChegada, portaChegada) -> Mensagem:
     soquete = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     soquete.bind((ipChegada, int(portaChegada)))
-    """ print("Esperar") """
-    #recebe
+
     while True:
         dados, addr = soquete.recvfrom(1024) 
         mensagem = pickle.loads(dados)
-        """ print(f"Recebido") """
-        """ mensagem.imprimeMensagem() """
         soquete.close()
+
         return mensagem

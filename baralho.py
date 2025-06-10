@@ -15,7 +15,6 @@ class Carta:
 def imprimeMao(mao): 
     for i in range(len(mao)):
         mao[i].imprimeCarta()
-    """ print("Valor da mao", valorMao(mao)) """
 
 def criaBaralho(): 
     baralho = []
@@ -48,13 +47,6 @@ def criaBaralho():
     baralho.append(Carta("Paus", "As", 0, 51))
 
     return baralho
-
-""" def cartaAleatoria(baralho): 
-    random.shuffle(baralho)
-    cartaEscolhida = baralho[0]
-    baralho.remove(cartaEscolhida)
-
-    return cartaEscolhida """
 
 def valorMao(mao): 
     valor = 0

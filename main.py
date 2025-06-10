@@ -10,7 +10,6 @@ ipChegada = valores[0]
 ipEnvio =  valores[1]
 portaChegada = valores[2]
 portaEnvio =   valores[3]
-"""print(f"ipChegada {ipChegada}  ipEnvio {ipEnvio}  portaChegada {portaChegada}  portaEnvio {portaEnvio}")"""
 
 # Maquina 1 controla o jogo 
 if maquina == 1:
@@ -24,8 +23,6 @@ if maquina == 1:
 
     while not jogo.verificaFimJogo():
         jogo.iniciaMesa(ipEnvio, portaEnvio, ipChegada, portaChegada) 
-            
-        # Distribui cartas
         jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada)
         jogo.jogador_iniciante = jogo.encontraDoisCopas()
         
@@ -35,7 +32,6 @@ if maquina == 1:
 
             if jogo.jogador_iniciante == 1: #Eu jogo primeiro
                 idCarta = jogo.jogadores[0].jogadorJoga(jogo.cartas_na_mesa, jogo.rodada, jogo.copas_quebradas)
-                #REMOVER ACARTA ADICIONAL
                 del jogo.cartas_na_mesa[-1]
                 jogo.jogar_rodada(0, idCarta)
 
@@ -48,10 +44,7 @@ if maquina == 1:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
-            """ jogo.jogadores[0].mostrar_mao()
-            jogo.jogadores[1].mostrar_mao()
-            jogo.jogadores[2].mostrar_mao()
-            jogo.jogadores[3].mostrar_mao()  """
+
             
             while len(jogo.cartas_na_mesa) < 4: #not(mensagem.tipo == 4 and mensagem.destino == 1)
                 mensagem = recebeMensagem(ipChegada, portaChegada)

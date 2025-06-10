@@ -27,11 +27,13 @@ class Jogador:
         naipeRodada = 0
         if (not cartas_na_mesa) and (rodada == 1):                          # Você é primeiro da primeira rodada
             cartasValidas.append(buscarCartaPorId(39, self.mao)) # Dois de Paus
+
         elif rodada == 1:                                                   # Primeira rodada, você não é primeiro
             naipeRodada = cartas_na_mesa[0].naipe
             for i in self.mao:
                 if (i.valor == 0) and (naipeRodada == i.naipe):             # Não pode ser de copas nem dama de espada
                     cartasValidas.append(i)
+
         elif not cartas_na_mesa:                                            # Primeiro da rodada, qualquer rodada
             for i in self.mao:
                 if i.naipe ==  "Copas":
@@ -39,6 +41,7 @@ class Jogador:
                         cartasValidas.append(i)
                 else:
                     cartasValidas.append(i)
+
         else:                                                               # Você não é o primeiro e nem é a primeira rodada
             naipeRodada = cartas_na_mesa[0].naipe
             for i in self.mao:
@@ -51,7 +54,7 @@ class Jogador:
                 cartasValidas.append(i)
 
         cartaEscolhida = escolheCarta(cartasValidas)
-        """ self.jogar_carta(cartaEscolhida.identificador) """ # Remove da Mão a carta escolhida
+        # Remove da Mão a carta escolhida
         self.mao = [carta for carta in self.mao if carta.identificador != cartaEscolhida.identificador]
         if cartaEscolhida.naipe == "Copas" and not copasQuebradas:
             copasQuebradas = True
@@ -62,14 +65,14 @@ class Jogador:
 
 class JogoCopas:
     def __init__(self):
-        self.jogoAtivo = True #Talvez possa tirar
+        """ self.jogoAtivo = True  """
         self.jogadores = []
         self.baralho = criaBaralho()
         self.rodada = 0
         self.cartas_na_mesa = []
         self.jogador_iniciante = 0
         self.copas_quebradas = False
-        self.jogadores_na_rodada = {}
+        """ self.jogadores_na_rodada = {} """
     
     def adicionar_jogador(self, nome):
         if len(self.jogadores) < 4:
@@ -102,7 +105,7 @@ class JogoCopas:
     def iniciar_rodada(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         self.rodada += 1
         self.cartas_na_mesa = []
-        self.jogadores_na_rodada = {}
+        """ self.jogadores_na_rodada = {} """
         print(f"\n=== Rodada {self.rodada} ===")
 
         mensagem = Mensagem(3, 1, 1, self.rodada)
@@ -120,7 +123,7 @@ class JogoCopas:
         mensagem.enviaMensagem(ipEnvio, portaEnvio)
         mensagem = recebeMensagem(ipChegada, portaChegada)
     
-    def validar_jogada(self, jogador_idx, carta_idx):
+    """ def validar_jogada(self, jogador_idx, carta_idx):
         carta = self.jogadores[jogador_idx].mao[carta_idx]
         
         # Primeira carta da rodada
@@ -142,7 +145,7 @@ class JogoCopas:
             # Mas não pode iniciar copas até serem "quebradas"
             if not self.copas_quebradas and carta.naipe == "Copas":
                 return False
-            return True
+            return True """
         
     """ def simular_escolha(self, jogador):
         # Simula a escolha de carta pelo jogador
@@ -181,8 +184,7 @@ class JogoCopas:
             for j in self.jogadores[i].mao:
                 if j.identificador == 39:
                     return i+1
-
-    """ ================================================================================================================= """
+    
 
     def determinar_vencedor_rodada(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         naipe_inicial = self.cartas_na_mesa[0].naipe
@@ -195,12 +197,11 @@ class JogoCopas:
         carta_vencedora = max(cartas_do_naipe, key=lambda x: x.identificador)
         carta_vencedora.imprimeCarta()
 
-        """ jogador_vencedor = self.jogadores_na_rodada[carta_vencedora] """  # Busca direta
-        jogador_vencedor = self.jogadores[carta_vencedora.origem-1]
+
+        jogador_vencedor = self.jogadores[carta_vencedora.origem-1] # -1 por maquinas começarem em 1
 
         print(f"{jogador_vencedor.nome} venceu a rodada!")
 
-        # Restante do código permanece igual...
         pontos_rodada = sum(1 for c in self.cartas_na_mesa if c.naipe == "Copas")
         dama_espadas = any(c.naipe == "Espada" and c.simbolo == "Dama" for c in self.cartas_na_mesa)
 
@@ -209,7 +210,7 @@ class JogoCopas:
             print("Dama de Espadas capturada! +13 pontos")
 
         jogador_vencedor.pontosRodada += pontos_rodada
-        self.jogador_iniciante = self.jogadores.index(jogador_vencedor) + 1 #aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        self.jogador_iniciante = self.jogadores.index(jogador_vencedor) + 1 
         
         mensagem = Mensagem(6, 1, 1, int(jogador_vencedor.nome[-1]))
         mensagem.enviaMensagem(ipEnvio, portaEnvio)
@@ -219,7 +220,6 @@ class JogoCopas:
                 print("++++++++++++ Você ganhou ++++++++++++")
         else:
             print(f"++++++++++++ {int(jogador_vencedor.nome[-1])} ganhou ++++++++++++")
-
 
 
     
@@ -259,7 +259,7 @@ class JogoCopas:
 
             
 
-def main():
+""" def main():
     jogo = JogoCopas()
     
     # Adiciona jogadores (em rede, seriam os jogadores conectados)
@@ -278,10 +278,10 @@ def main():
             jogo.jogar_rodada()
             jogo.determinar_vencedor_rodada()
 
-        """jogo.jogadores[1].pontosRodada = 26"""
+        jogo.jogadores[1].pontosRodada = 26
         jogo.somaPontos()
-        """for i in jogo.jogadores:
-            print(i.pontosRodada)"""
+        for i in jogo.jogadores:
+            print(i.pontosRodada)
         for i in jogo.jogadores:
             print(i.pontosTotais)
 
@@ -290,4 +290,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main() """

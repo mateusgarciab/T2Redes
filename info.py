@@ -14,15 +14,3 @@ def obter_valores_maquina(numero):
     except FileNotFoundError:
         print("Arquivo 'maquinas.txt' não encontrado.")
         return None
-    
-
-""" numero_maquina = 0
-valores = obter_valores_maquina(numero_maquina)
-if valores:
-    print(f"Valores da Máquina {numero_maquina}:")
-    print(type(valores[0]))
-    print(type(valores[1]))
-    print(type(valores[2]))
-    print(type(valores[3]))
-    print(valores)
- """
