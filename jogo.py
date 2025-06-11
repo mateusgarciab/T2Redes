@@ -109,6 +109,7 @@ class JogoCopas:
         self.cartas_na_mesa = []
         self.jogador_iniciante = 0
         self.copas_quebradas = False
+        print("\n===== Nova Mesa =====")
 
         mensagem = Mensagem(2, 1, 1, 0)
         mensagem.enviaMensagem(ipEnvio, portaEnvio)
