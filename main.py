@@ -45,8 +45,6 @@ if maquina == 1:
                 mensagem = Mensagem(4, 1, jogo.jogador_iniciante, 0)
             mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
-
-            
             while len(jogo.cartas_na_mesa) < 4: 
                 mensagem = recebeMensagem(ipChegada, portaChegada)
                 if mensagem.tipo == 5:
@@ -132,8 +130,6 @@ else: # Joga o Jogo
         elif mensagem.tipo == 4:
             if mensagem.destino == maquina:
                 print("Você tem o bastão")
-                """ print("Suas cartas")
-                imprimeMao(jogador.mao) """
                 id = jogador.jogadorJoga(cartas_na_mesa, rodada, copas_quebradas)
                 mensagem = Mensagem(5, maquina, maquina, id)
                 mensagem.enviaMensagem(ipEnvio, portaEnvio)

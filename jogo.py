@@ -139,7 +139,6 @@ class JogoCopas:
     def determinar_vencedor_rodada(self, ipEnvio, portaEnvio, ipChegada, portaChegada):
         naipe_inicial = self.cartas_na_mesa[0].naipe
         print("\n---Fim de rodada---")
-        """print(naipe_inicial)"""
 
         cartas_do_naipe = [c for c in self.cartas_na_mesa if c.naipe == naipe_inicial]
 

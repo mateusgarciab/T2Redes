@@ -1,8 +1,20 @@
 import socket
 import pickle
-import copy
 from baralho import *
         
+""" 
+Tipos
+0 - Começo de Jogo
+1 - Distribuição de Carta 
+2 - Começo Mesa/Vaza
+3 - Começo de Rodada
+4 - Passagem de bastão
+5 - Mensagem de jogo
+6 - Fim de Rodada
+7 - Fim da Mesa/Vaza
+8 - Fim de Jogo
+"""
+
 class Mensagem():
     def __init__(self, tipo, origem, destino, cartaId):
         self.tipo = tipo
