@@ -1,23 +1,23 @@
 maquina 1
-ip ip1
-ipEnvio ip2
+ip 10.254.223.38
+ipEnvio 10.254.223.40
 portaRecebe 51841
 portaEnvia 51842
 
 maquina 2
-ip ip2
-ipEnvio ip3
+ip 10.254.223.40
+ipEnvio 10.254.223.41
 portaRecebe 51842
 portaEnvia 51843
 
 maquina 3
-ip ip3
-ipEnvio ip4
+ip 10.254.223.41
+ipEnvio 10.254.223.44
 portaRecebe 51843
 portaEnvia 51844
 
 maquina 4
-ip ip4
-ipEnvio ip1
+ip 10.254.223.44
+ipEnvio 10.254.223.38
 portaRecebe 51844
 portaEnvia 51841

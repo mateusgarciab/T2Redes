@@ -26,7 +26,7 @@ if maquina == 1:
         jogo.distribuir_cartas(ipEnvio, portaEnvio, ipChegada, portaChegada)
         jogo.jogador_iniciante = jogo.encontraDoisCopas()
         
-        # Jogo principal
+        # Jogo controle
         while not jogo.verificaFimMesa():
             jogo.iniciar_rodada(ipEnvio, portaEnvio, ipChegada, portaChegada) 
             imprimeMao(jogo.jogadores[0].mao)
@@ -52,7 +52,7 @@ if maquina == 1:
                     jogo.jogar_rodada(mensagem.origem-1, mensagem.cartaID)
                     mensagem.enviaMensagem(ipEnvio, portaEnvio)
 
-                    jogo.jogadores[mensagem.origem-1].mao = [carta for carta in jogo.jogadores[mensagem.origem-1].mao if carta.identificador != mensagem.cartaID] # Remove cartas jogadas da mao dos jogadores
+                    jogo.jogadores[mensagem.origem-1].mao = [carta for carta in jogo.jogadores[mensagem.origem-1].mao if carta.identificador != mensagem.cartaID] # Remove carta jogadas da mao dos jogadores
                     if len(jogo.cartas_na_mesa) == 4:
                         mensagem = recebeMensagem(ipChegada, portaChegada) # Ainda precisa espera passarem o bastao para o 1
 
@@ -79,7 +79,7 @@ if maquina == 1:
         for i in jogo.jogadores:
             print(i.pontosTotais)
         print("Fim da Mesa")
-        print(f"Pontos Totais {mensagem.cartaID}")
+        print(f"Pontos Totais {jogo.jogadores[0].pontosTotais}")
         
         for i in range(3):  
             mensagem = Mensagem(7, 1, i+2, jogo.jogadores[i+1].pontosTotais)
